@@ -1,5 +1,6 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
+using EMR.Application.Contracts.TeamBuilding;
+using EMR.Domain.TeamBuilding;
 
 namespace EMR.Application
 {
@@ -7,6 +8,7 @@ namespace EMR.Application
     {
         public EMRAutoMapperProfile()
         {
+            CreateMap<Team, TeamDto>();
         }
     }
 }

@@ -30,6 +30,8 @@ namespace EMR.EntityFrameworkCore
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<TeamWow> TeamWows { get; set; }
+
         public EMRDbContext(DbContextOptions<EMRDbContext> options) : base(options)
         {
         }

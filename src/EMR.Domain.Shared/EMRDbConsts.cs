@@ -23,6 +23,7 @@ namespace EMR.Domain.Shared
             public const string SalesQuota = "SalesQuotas";
 
             public const string Team = "Teams";
+            public const string TeamWow = "TeamWows";
 
             public const string User = "Users";
         }

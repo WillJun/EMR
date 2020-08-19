@@ -10,11 +10,10 @@
   <ItemGroup>
     <ProjectReference Include="..\EMR.Domain\EMR.Domain.csproj" />
     <ProjectReference Include="..\EMR.Application.Contracts\EMR.Application.Contracts.csproj" />
+    <ProjectReference Include="..\EMR.ToolKits\EMR.ToolKits.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Identity.Application" Version="3.0.5" />
-
   </ItemGroup>
-
 </Project>

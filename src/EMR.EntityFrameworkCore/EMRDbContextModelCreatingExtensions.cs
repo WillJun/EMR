@@ -85,6 +85,15 @@ namespace EMR.EntityFrameworkCore
                 b.Property(x => x.CreateTime).HasColumnType("datetime");
                 b.Property(x => x.Comment).HasMaxLength(500);
             });
+
+            builder.Entity<TeamWow>(b =>
+            {
+                b.ToTable(EMRConsts.DbTablePrefix + DbTableName.TeamWow);
+                b.HasKey(x => x.Id);
+                b.Property(x => x.TeamId).HasColumnType("char(36)").IsRequired();
+                b.Property(x => x.UserId).HasColumnType("char(36)").IsRequired();
+                b.Property(x => x.IsWow).HasColumnType("tinyint(1)");
+            });
         }
     }
 }

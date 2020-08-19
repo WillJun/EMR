@@ -9,6 +9,7 @@
 //
 //
 //========================================================================
+using System;
 using EMR.ToolKits.Base.Enum;
 
 namespace EMR.ToolKits.Base
@@ -34,6 +35,11 @@ namespace EMR.ToolKits.Base
             Message = message;
             Code = ServiceResultCode.Succeed;
             Result = result;
+        }
+
+        public void IsFailed(object p)
+        {
+            throw new NotImplementedException();
         }
     }
 }
