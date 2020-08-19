@@ -93,6 +93,7 @@ namespace EMR.EntityFrameworkCore
                 b.Property(x => x.TeamId).HasColumnType("char(36)").IsRequired();
                 b.Property(x => x.UserId).HasColumnType("char(36)").IsRequired();
                 b.Property(x => x.IsWow).HasColumnType("tinyint(1)");
+                b.Property(x => x.WowTime).HasColumnType("datetime");
             });
         }
     }

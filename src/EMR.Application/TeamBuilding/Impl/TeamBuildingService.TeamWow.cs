@@ -27,11 +27,13 @@ namespace EMR.Application.TeamBuilding.Impl
 
                         on u.Id equals s.UserId into lj
                         from ls in lj.DefaultIfEmpty()
+                        where ls.IsWow == true
                         group (ls, u) by u.TeamName into g
                         select new TeamWowCountDto
                         {
-                            Count = g.Count(p => p.ls.IsWow == true),
-                            TeamName = g.Key
+                            Count = g.Count(),
+                            TeamName = g.Key,
+                            LastDateTime = g.Max(p => p.ls.WowTime)
                         });
             result.IsSuccess(list);
             return result;
@@ -45,12 +47,14 @@ namespace EMR.Application.TeamBuilding.Impl
 
                         on u.Id equals s.UserId into lj
                         from ls in lj.DefaultIfEmpty()
-                        where u.TeamName == teamname
+                        where u.TeamName == teamname &&
+                 ls.IsWow == true
                         group (ls, u) by u.TeamName into g
                         select new TeamWowCountDto
                         {
-                            Count = g.Count(p => p.ls.IsWow == true),
-                            TeamName = g.Key
+                            Count = g.Count(),
+                            TeamName = g.Key,
+                            LastDateTime = g.Max(p => p.ls.WowTime)
                         }).FirstOrDefault();
             result.IsSuccess(data);
             return result;
@@ -64,11 +68,12 @@ namespace EMR.Application.TeamBuilding.Impl
 
                         on u.Id equals s.UserId into lj
                         from ls in lj.DefaultIfEmpty()
-                        where u.Account == account
+                        where u.Account == account &&
+                 ls.IsWow == true
                         group (ls, u) by u.UserName into g
                         select new UserWowCountDto
                         {
-                            Count = g.Count(p => p.ls.IsWow == true),
+                            Count = g.Count(),
                             UserName = g.Key
                         }).FirstOrDefault();
             result.IsSuccess(data);

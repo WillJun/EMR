@@ -21,5 +21,7 @@ namespace EMR.Domain.TeamBuilding
         public Guid UserId { get; set; }
 
         public bool IsWow { get; set; }
+
+        public DateTime WowTime { get; set; }
     }
 }

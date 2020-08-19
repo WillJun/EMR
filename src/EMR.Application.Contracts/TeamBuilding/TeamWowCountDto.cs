@@ -10,11 +10,15 @@
 //
 //========================================================================
 
+using System;
+
 namespace EMR.Application.Contracts.TeamBuilding
 {
     public class TeamWowCountDto
     {
         public string TeamName { get; set; }
         public int Count { get; set; }
+
+        public DateTime LastDateTime { get; set; }
     }
 }
