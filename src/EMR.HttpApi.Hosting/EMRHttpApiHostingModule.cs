@@ -11,7 +11,7 @@ namespace EMR.HttpApi.Hosting
 {
     [DependsOn(
 typeof(AbpAspNetCoreMvcModule),
-typeof(AbpAutofacModule)
+typeof(AbpAutofacModule), typeof(EMRHttpApiModule)
 )]
     public class EMRHttpApiHostingModule : AbpModule
     {
