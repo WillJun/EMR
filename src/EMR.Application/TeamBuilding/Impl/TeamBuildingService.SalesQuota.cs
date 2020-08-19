@@ -34,7 +34,7 @@ namespace EMR.Application.TeamBuilding.Impl
                         select new SalesQuotaDto
                         {
                             Comment = s.Comment,
-                            Operator = u.UserName,
+                            Operator = u.UserEnName,
                             CreateTime = s.CreateTime,
                             Income = s.Income,
                             SerialNumber = s.SerialNumber,
@@ -59,7 +59,7 @@ namespace EMR.Application.TeamBuilding.Impl
                         select new SalesQuotaDto
                         {
                             Comment = s.Comment,
-                            Operator = u.UserName,
+                            Operator = u.UserEnName,
                             CreateTime = s.CreateTime,
                             Income = s.Income,
                             SerialNumber = s.SerialNumber,
@@ -113,11 +113,11 @@ namespace EMR.Application.TeamBuilding.Impl
                         join u in await _userRepository.GetListAsync()
                         on s.Operator equals u.Id
                         where u.Account == account
-                        group (s, u) by u.UserName into g
+                        group (s, u) by u.Account into g
                         select new UserSalesQuotaTotalDto
                         {
                             TotalIncome = g.Sum(p => p.s.Income),
-                            UserName = g.Key
+                            Account = g.Key
                         }).FirstOrDefault();
             result.IsSuccess(data);
             return result;

@@ -19,13 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMR.Application.Contracts",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMR.HttpApi", "src\EMR.HttpApi\EMR.HttpApi.csproj", "{4164BDF7-F527-4E85-9CE6-E3C2D7426A27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMR.Swagger", "src\EMR.Swagger\EMR.Swagger.csproj", "{8760EB30-254F-45DE-BD4F-6BA7F7D35944}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMR.Swagger", "src\EMR.Swagger\EMR.Swagger.csproj", "{8760EB30-254F-45DE-BD4F-6BA7F7D35944}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMR.Application.Caching", "src\EMR.Application.Caching\EMR.Application.Caching.csproj", "{62A0EB9E-0ECF-46D9-B90E-41E04585D55E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMR.ToolKits", "src\EMR.ToolKits\EMR.ToolKits.csproj", "{63AF4AB5-D229-4D2A-848B-EA106C7F920F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMR.ToolKits", "src\EMR.ToolKits\EMR.ToolKits.csproj", "{63AF4AB5-D229-4D2A-848B-EA106C7F920F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMR.HttpApi.Hosting", "src\EMR.HttpApi.Hosting\EMR.HttpApi.Hosting.csproj", "{1C4AD865-8107-4627-8895-1DA1314503AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMR.HttpApi.Hosting", "src\EMR.HttpApi.Hosting\EMR.HttpApi.Hosting.csproj", "{1C4AD865-8107-4627-8895-1DA1314503AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

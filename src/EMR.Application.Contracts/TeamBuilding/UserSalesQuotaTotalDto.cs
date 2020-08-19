@@ -14,7 +14,7 @@ namespace EMR.Application.Contracts.TeamBuilding
 {
     public class UserSalesQuotaTotalDto
     {
-        public string UserName { get; set; }
+        public string Account { get; set; }
         public double TotalIncome { get; set; }
     }
 }

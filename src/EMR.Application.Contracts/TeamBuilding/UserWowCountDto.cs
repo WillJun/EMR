@@ -14,7 +14,8 @@ namespace EMR.Application.Contracts.TeamBuilding
 {
     public class UserWowCountDto
     {
-        public string UserName { get; set; }
+        public string Account { get; set; }
+
         public int Count { get; set; }
     }
 }

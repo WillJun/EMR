@@ -70,11 +70,11 @@ namespace EMR.Application.TeamBuilding.Impl
                         from ls in lj.DefaultIfEmpty()
                         where u.Account == account &&
                  ls.IsWow == true
-                        group (ls, u) by u.UserName into g
+                        group (ls, u) by u.Account into g
                         select new UserWowCountDto
                         {
                             Count = g.Count(),
-                            UserName = g.Key
+                            Account = g.Key
                         }).FirstOrDefault();
             result.IsSuccess(data);
             return result;
