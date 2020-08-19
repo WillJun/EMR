@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMR.HttpApi", "src\EMR.Http
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMR.Swagger", "src\EMR.Swagger\EMR.Swagger.csproj", "{8760EB30-254F-45DE-BD4F-6BA7F7D35944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMR.Application.Caching", "src\EMR.Application.Caching\EMR.Application.Caching.csproj", "{62A0EB9E-0ECF-46D9-B90E-41E04585D55E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMR.Application.Caching", "src\EMR.Application.Caching\EMR.Application.Caching.csproj", "{62A0EB9E-0ECF-46D9-B90E-41E04585D55E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMR.ToolKits", "src\EMR.ToolKits\EMR.ToolKits.csproj", "{63AF4AB5-D229-4D2A-848B-EA106C7F920F}"
 EndProject

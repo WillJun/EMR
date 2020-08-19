@@ -12,9 +12,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using EMR.Application.Contracts.TeamBuilding;
+using EMR.Domain.TeamBuilding;
 using EMR.ToolKits.Base;
 using EMR.ToolKits.Extensions;
+
 using static EMR.Domain.Shared.EMRConsts;
 
 namespace EMR.Application.TeamBuilding.Impl
@@ -115,6 +118,12 @@ namespace EMR.Application.TeamBuilding.Impl
                         });
             result.IsSuccess(list);
             return result;
+        }
+
+
+        public async Task UserBulkInsertAsync(IEnumerable<User> users)
+        {
+            await _userRepository.BulkInsertAsync(users);
         }
     }
 }

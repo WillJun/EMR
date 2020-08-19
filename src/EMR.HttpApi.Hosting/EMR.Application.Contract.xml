@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EMR.Application.Contracts</name>
+    </assembly>
+    <members>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalExpenditureDto.SerialNumber">
+            <summary>
+            流水号
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -11,6 +11,7 @@
 //========================================================================
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using EMR.Application.Contracts.TeamBuilding;
 using EMR.Domain.TeamBuilding;
 using EMR.ToolKits.Base;
@@ -26,6 +27,11 @@ namespace EMR.Application.TeamBuilding.Impl
             var teams = ObjectMapper.Map<IEnumerable<Team>, IEnumerable<TeamDto>>(lists);
             result.IsSuccess(teams);
             return result;
+        }
+
+        public async Task TeamBulkInsertAsync(IEnumerable<Team> teams)
+        {
+            await _teamRepository.BulkInsertAsync(teams);
         }
     }
 }

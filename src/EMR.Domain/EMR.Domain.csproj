@@ -7,6 +7,10 @@
     <RootNamespace>EMR.Domain</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>..\EMR.HttpApi.Hosting\EMR.Domain.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\EMR.Domain.Shared\EMR.Domain.Shared.csproj" />
   </ItemGroup>

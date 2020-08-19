@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
@@ -7,12 +7,22 @@
     <RootNamespace>EMR.HttpApi</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>..\EMR.HttpApi.Hosting\EMR.HttpApi.xml</DocumentationFile>
+  </PropertyGroup>
+
   
 
   <ItemGroup>
    
     <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="3.0.5" />
   
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
+    <ProjectReference Include="..\EMR.Application\EMR.Application.csproj" />
   </ItemGroup>
 
 </Project>
