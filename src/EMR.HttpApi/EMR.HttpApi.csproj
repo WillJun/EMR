@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>EMR.HttpApi</RootNamespace>
+  </PropertyGroup>
+
+  
+
+  <ItemGroup>
+   
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="3.0.5" />
+  
+  </ItemGroup>
+
+</Project>
