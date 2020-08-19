@@ -15,7 +15,7 @@ namespace EMR.Domain.Shared
     public class EMRConsts
     { /// <summary>
       /// 数据库表前缀 </summary>
-        public const string DbTablePrefix = "wqh_";
+        public const string DbTablePrefix = "emr_";
 
         /// <summary>
         /// 分组

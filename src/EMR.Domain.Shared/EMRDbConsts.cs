@@ -16,7 +16,15 @@ namespace EMR.Domain.Shared
     {
         public static class DbTableName
         {
+            public const string PersonalExpenditure = "PersonalExpenditures";
 
+            public const string PersonalRecharge = "PersonalRecharges";
+
+            public const string SalesQuota = "SalesQuotas";
+
+            public const string Team = "Teams";
+
+            public const string User = "Users";
         }
     }
 }

@@ -9,6 +9,7 @@
 //
 //
 //========================================================================
+using EMR.Domain.TeamBuilding;
 using Microsoft.EntityFrameworkCore;
 
 using Volo.Abp.Data;
@@ -19,6 +20,16 @@ namespace EMR.EntityFrameworkCore
     [ConnectionStringName("MySql")]
     public class EMRDbContext : AbpDbContext<EMRDbContext>
     {
+        public DbSet<PersonalExpenditure> PersonalExpenditures { get; set; }
+
+        public DbSet<PersonalRecharge> PersonalRecharges { get; set; }
+
+        public DbSet<SalesQuota> SalesQuotas { get; set; }
+
+        public DbSet<Team> Teams { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
         public EMRDbContext(DbContextOptions<EMRDbContext> options) : base(options)
         {
         }
@@ -29,7 +40,5 @@ namespace EMR.EntityFrameworkCore
 
             modelBuilder.Configure();
         }
-
-
     }
 }
