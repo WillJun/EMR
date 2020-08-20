@@ -16,6 +16,14 @@ namespace EMR.Domain.TeamBuilding
 {
     public class User : Entity<Guid>
     {
+        public User()
+        {
+        }
+
+        public User(Guid id) : base(id)
+        {
+        }
+
         public string Account { get; set; }
         public string UserName { get; set; }
         public string UserEnName { get; set; }

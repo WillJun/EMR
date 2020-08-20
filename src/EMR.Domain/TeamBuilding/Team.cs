@@ -16,6 +16,14 @@ namespace EMR.Domain.TeamBuilding
 {
     public class Team : Entity<Guid>
     {
+        public Team()
+        {
+        }
+
+        public Team(Guid id) : base(id)
+        {
+        }
+
         public string TeamName { get; set; }
 
         public string TeamLeader { get; set; }

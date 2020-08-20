@@ -16,6 +16,14 @@ namespace EMR.Domain.TeamBuilding
 {
     public class SalesQuota : Entity<Guid>
     {
+        public SalesQuota()
+        {
+        }
+
+        public SalesQuota(Guid id) : base(id)
+        {
+        }
+
         /// <summary>
         /// 流水号
         /// </summary>

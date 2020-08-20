@@ -23,3 +23,4 @@ obj/*
 /src/EMR.Swagger/bin/Debug/netcoreapp3.1
 /src/EMR.ToolKits/obj
 /src/EMR.ToolKits/bin/Debug/netcoreapp3.1
+/src/EMR.HttpApi.Hosting/log4net

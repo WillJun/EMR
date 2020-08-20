@@ -10,6 +10,8 @@
 //
 //========================================================================
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using EMR.Domain.TeamBuilding;
 using EMR.Domain.TeamBuilding.Repositories;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
@@ -21,6 +23,12 @@ namespace EMR.EntityFrameworkCore.Repositories.TeamBuilding
     {
         public PersonalRechargeRepository(IDbContextProvider<EMRDbContext> dbContextProvider) : base(dbContextProvider)
         {
+        }
+
+        public async Task BulkInsertAsync(IEnumerable<PersonalRecharge> personalRecharges)
+        {
+            await DbContext.Set<PersonalRecharge>().AddRangeAsync(personalRecharges);
+            await DbContext.SaveChangesAsync();
         }
     }
 }

@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\EMR.HttpApi.Hosting\EMR.Application.Contract.xml</DocumentationFile>
+    <DocumentationFile>..\EMR.HttpApi.Hosting\EMR.Application.Contracts.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

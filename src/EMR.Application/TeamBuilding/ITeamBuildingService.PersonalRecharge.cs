@@ -12,6 +12,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using EMR.Application.Contracts.TeamBuilding;
+using EMR.Domain.TeamBuilding;
 using EMR.ToolKits.Base;
 
 namespace EMR.Application.TeamBuilding
@@ -19,5 +20,7 @@ namespace EMR.Application.TeamBuilding
     public partial interface ITeamBuildingService
     {
         Task<ServiceResult<IEnumerable<PersonalRechargeDto>>> QueryPersonalRechargesByUserAsync(string account);
+
+        Task PersonalRechargeBulkInsertAsync(IEnumerable<PersonalRecharge> personalRecharges);
     }
 }

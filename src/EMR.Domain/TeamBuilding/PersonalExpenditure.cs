@@ -16,6 +16,14 @@ namespace EMR.Domain.TeamBuilding
 {
     public class PersonalExpenditure : Entity<Guid>
     {
+        public PersonalExpenditure()
+        {
+        }
+
+        public PersonalExpenditure(Guid id) : base(id)
+        {
+        }
+
         public Guid ExpenditureTeamId { get; set; }
         public Guid UserId { get; set; }
         public double Expend { get; set; }

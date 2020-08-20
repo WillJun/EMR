@@ -16,6 +16,14 @@ namespace EMR.Domain.TeamBuilding
 {
     public class TeamWow : Entity<Guid>
     {
+        public TeamWow()
+        {
+        }
+
+        public TeamWow(Guid id) : base(id)
+        {
+        }
+
         public Guid TeamId { get; set; }
 
         public Guid UserId { get; set; }

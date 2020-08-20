@@ -36,7 +36,7 @@ namespace EMR.Swagger
         /// <summary>
         /// Swagger描述信息
         /// </summary>
-        private static readonly string description = @"<b>Blog</b><code>Powered by .NET Core 3.1 on Windows 10 Pro</code>";
+        private static readonly string description = @"<b>EMR</b><code>Powered by .NET Core 3.1 on Windows 10 Pro</code>";
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
@@ -92,7 +92,7 @@ namespace EMR.Swagger
                 // API前缀设置为空
                 options.RoutePrefix = string.Empty;
                 // API页面Title
-                options.DocumentTitle = "接口文档 - WQH";
+                options.DocumentTitle = "接口文档 - EMR";
                 //options.SwaggerEndpoint($"/swagger/v1/swagger.json", "默认接口");
             });
         }
@@ -105,44 +105,32 @@ namespace EMR.Swagger
              new SwaggerApiInfo
             {
                 UrlPrefix = Grouping.GroupName_v1,
-                Name = "博客前台接口",
+                Name = "初始化接口",
                 OpenApiInfo = new OpenApiInfo
                 {
                     Version = version,
-                    Title = "WQH - 博客前台接口",
+                    Title = "EMR - Team Building",
                     Description = description
                 }
             },
-            new SwaggerApiInfo
+               new SwaggerApiInfo
             {
                 UrlPrefix = Grouping.GroupName_v2,
-                Name = "博客后台接口",
+                Name = "前台接口",
                 OpenApiInfo = new OpenApiInfo
                 {
                     Version = version,
-                    Title = "WQH - 博客后台接口",
+                    Title = "EMR - Team Building",
                     Description = description
                 }
-            },
-            new SwaggerApiInfo
+            },  new SwaggerApiInfo
             {
                 UrlPrefix = Grouping.GroupName_v3,
-                Name = "通用公共接口",
+                Name = "后台接口",
                 OpenApiInfo = new OpenApiInfo
                 {
                     Version = version,
-                    Title = "WQH - 通用公共接口",
-                    Description = description
-                }
-            },
-            new SwaggerApiInfo
-            {
-                UrlPrefix = Grouping.GroupName_v4,
-                Name = "JWT授权接口",
-                OpenApiInfo = new OpenApiInfo
-                {
-                    Version = version,
-                    Title = "WQH - JWT授权接口",
+                    Title = "EMR - Team Building",
                     Description = description
                 }
             }

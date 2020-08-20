@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EMR.Application.Contracts.TeamBuilding;
+using EMR.Domain.TeamBuilding;
 using EMR.ToolKits.Base;
 
 namespace EMR.Application.TeamBuilding.Impl
@@ -41,6 +42,11 @@ namespace EMR.Application.TeamBuilding.Impl
                         });
             result.IsSuccess(list);
             return result;
+        }
+
+        public async Task PersonalRechargeBulkInsertAsync(IEnumerable<PersonalRecharge> personalRecharges)
+        {
+            await _personalrechargeRepository.BulkInsertAsync(personalRecharges);
         }
     }
 }

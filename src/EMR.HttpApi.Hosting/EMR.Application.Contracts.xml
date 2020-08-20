@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EMR.Application.Contracts</name>
+    </assembly>
+    <members>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalExpenditureDto.ExpenditureName">
+            <summary>
+            Gets or sets the name of the expenditure.
+            </summary>
+            <value> The name of the expenditure. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalExpenditureDto.Expend">
+            <summary>
+            Gets or sets the expend.
+            </summary>
+            <value> The expend. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalExpenditureDto.SerialNumber">
+            <summary>
+            流水号
+            </summary>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalExpenditureDto.Comment">
+            <summary>
+            Gets or sets the comment.
+            </summary>
+            <value> The comment. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalExpenditureDto.CreateTime">
+            <summary>
+            Gets or sets the create time.
+            </summary>
+            <value> The create time. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalRechargeDto.SerialNumber">
+            <summary>
+            Gets or sets the serial number.
+            </summary>
+            <value> The serial number. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalRechargeDto.SourceName">
+            <summary>
+            Gets or sets the name of the source.
+            </summary>
+            <value> The name of the source. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalRechargeDto.Amount">
+            <summary>
+            Gets or sets the amount.
+            </summary>
+            <value> The amount. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalRechargeDto.Comment">
+            <summary>
+            Gets or sets the comment.
+            </summary>
+            <value> The comment. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalRechargeDto.CreateTime">
+            <summary>
+            Gets or sets the create time.
+            </summary>
+            <value> The create time. </value>
+        </member>
+    </members>
+</doc>

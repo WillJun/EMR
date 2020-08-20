@@ -17,6 +17,14 @@ namespace EMR.Domain.TeamBuilding
 {
     public class PersonalRecharge : Entity<Guid>
     {
+        public PersonalRecharge()
+        {
+        }
+
+        public PersonalRecharge(Guid id) : base(id)
+        {
+        }
+
         /// <summary>
         /// 流水号
         /// </summary>

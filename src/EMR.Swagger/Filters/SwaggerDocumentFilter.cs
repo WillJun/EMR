@@ -29,19 +29,15 @@ namespace EMR.Swagger.Filters
             var tags = new List<OpenApiTag>
             {
                 new OpenApiTag {
-                    Name = "Blog",
-                    Description = "个人博客相关接口",
-                    ExternalDocs = new OpenApiExternalDocs { Description = "包含：文章/标签/分类/友链" }
+                    Name = "TeamBuildingInit",
+                    Description = "初始化接口",
+                    ExternalDocs = new OpenApiExternalDocs { Description = "包含：初始化Team/User/Charge" }
                 },
                 new OpenApiTag {
-                    Name = "HelloWorld",
-                    Description = "通用公共接口",
-                    ExternalDocs = new OpenApiExternalDocs { Description = "这里是一些通用的公共接口" }
-                },new OpenApiTag {
-    Name = "Auth",
-    Description = "JWT模式认证授权",
-    ExternalDocs = new OpenApiExternalDocs { Description = "JSON Web Token" }
-}
+                    Name = "TeamBuilding",
+                    Description = "TeamBuilding接口",
+                    ExternalDocs = new OpenApiExternalDocs { Description = "包含：团队，人员，账单，充值，点赞，流水" }
+                },
             };
 
             #region 实现添加自定义描述时过滤不属于同一个分组的API
