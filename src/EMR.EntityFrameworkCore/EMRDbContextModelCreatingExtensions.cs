@@ -12,9 +12,11 @@
 
 using EMR.Domain.Shared;
 using EMR.Domain.TeamBuilding;
+
 using Microsoft.EntityFrameworkCore;
 
 using Volo.Abp;
+
 using static EMR.Domain.Shared.EMRDbConsts;
 
 namespace EMR.EntityFrameworkCore

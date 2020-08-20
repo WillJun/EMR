@@ -19,6 +19,6 @@ namespace EMR.Application.Contracts.TeamBuilding
         public string TeamName { get; set; }
         public int Count { get; set; }
 
-        public DateTime LastDateTime { get; set; }
+        public DateTime? LastDateTime { get; set; }
     }
 }

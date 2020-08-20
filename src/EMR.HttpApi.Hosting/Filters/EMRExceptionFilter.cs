@@ -1,4 +1,5 @@
 ﻿using log4net;
+
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace EMR.HttpApi.Hosting.Filters

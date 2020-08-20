@@ -1,7 +1,10 @@
 using System.Threading.Tasks;
+
 using EMR.ToolKits.Extensions;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+
 using Serilog;
 
 namespace EMR.HttpApi.Hosting

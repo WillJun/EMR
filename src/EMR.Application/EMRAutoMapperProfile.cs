@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+
 using EMR.Application.Contracts.TeamBuilding;
 using EMR.Domain.TeamBuilding;
 

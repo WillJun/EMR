@@ -12,9 +12,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.OpenApi.Models;
+
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace EMR.Swagger.Filters

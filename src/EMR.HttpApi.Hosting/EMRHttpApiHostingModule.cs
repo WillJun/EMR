@@ -1,7 +1,9 @@
 ﻿using System.Linq;
+
 using EMR.EntityFrameworkCore;
 using EMR.HttpApi.Hosting.Filters;
 using EMR.Swagger;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;

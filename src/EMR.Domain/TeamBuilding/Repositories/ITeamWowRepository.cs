@@ -10,6 +10,7 @@
 //
 //========================================================================
 using System;
+
 using Volo.Abp.Domain.Repositories;
 
 namespace EMR.Domain.TeamBuilding.Repositories

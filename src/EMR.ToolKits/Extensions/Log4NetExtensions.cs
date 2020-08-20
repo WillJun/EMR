@@ -1,8 +1,10 @@
-﻿using log4net;
-using log4net.Config;
-using Microsoft.Extensions.Hosting;
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
+
+using log4net;
+using log4net.Config;
+
+using Microsoft.Extensions.Hosting;
 
 namespace EMR.ToolKits.Extensions
 {

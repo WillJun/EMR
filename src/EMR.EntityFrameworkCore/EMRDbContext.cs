@@ -10,6 +10,7 @@
 //
 //========================================================================
 using EMR.Domain.TeamBuilding;
+
 using Microsoft.EntityFrameworkCore;
 
 using Volo.Abp.Data;

@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Linq;
+﻿using System.Linq;
+
+using Microsoft.AspNetCore.Http;
 
 namespace EMR.ToolKits.Extensions
 {

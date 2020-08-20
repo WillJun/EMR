@@ -10,6 +10,7 @@
 //
 //========================================================================
 using System;
+
 using Volo.Abp.Domain.Entities;
 
 namespace EMR.Domain.TeamBuilding

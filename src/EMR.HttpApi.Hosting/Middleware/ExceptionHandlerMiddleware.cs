@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+
 using EMR.ToolKits.Base;
 using EMR.ToolKits.Extensions;
+
 using Microsoft.AspNetCore.Http;
 
 namespace EMR.HttpApi.Hosting.Middleware

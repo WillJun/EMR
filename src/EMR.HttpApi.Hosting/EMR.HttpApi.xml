@@ -4,5 +4,80 @@
         <name>EMR.HttpApi</name>
     </assembly>
     <members>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryTeamsAsync">
+            <summary>
+            查询Teams列表
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryUsersByTeamAsync(System.String)">
+            <summary>
+            根据团队名称获取成员
+            </summary>
+            <param name="teamname"> 团队名称 </param>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryTeamWowCountsByTeamAsync(System.String)">
+            <summary>
+            根据团队名获取点赞数.
+            </summary>
+            <param name="teamname"> The teamname. </param>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryUserWowCountsByUserAsync(System.String)">
+            <summary>
+            根据工号获取点赞数
+            </summary>
+            <param name="account"> The account. </param>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryPersonalExpendituresByUserAsync(System.String)">
+            <summary>
+            根据工号获取消费清单
+            </summary>
+            <param name="account"> </param>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryPersonalRechargesByUserAsync(System.String)">
+            <summary>
+            根据工号获取充值记录
+            </summary>
+            <param name="account"> </param>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QuerySalesQuotasByTeamAsync(System.String)">
+            <summary>
+            根据团队名获取流水
+            </summary>
+            <param name="teamname"> </param>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QuerySalesQuotasByUserAsync(System.String)">
+            <summary>
+            根据工号获取流水
+            </summary>
+            <param name="account"> </param>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryTeamSalesQuotasAsync(System.String)">
+            <summary>
+            根据团队名获取流水总额
+            </summary>
+            <param name="teamname"> </param>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryUserSalesQuotasByUserAsync(System.String)">
+            <summary>
+            根据工号获取流水总额
+            </summary>
+            <param name="account"> </param>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryTeamSalesQuotasAsync">
+            <summary>
+            获取所有团队流水总额
+            </summary>
+            <returns> </returns>
+        </member>
     </members>
 </doc>

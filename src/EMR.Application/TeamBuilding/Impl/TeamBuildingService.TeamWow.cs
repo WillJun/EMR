@@ -12,6 +12,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using EMR.Application.Contracts.TeamBuilding;
 using EMR.ToolKits.Base;
 
@@ -27,13 +28,12 @@ namespace EMR.Application.TeamBuilding.Impl
 
                         on u.Id equals s.UserId into lj
                         from ls in lj.DefaultIfEmpty()
-                        where ls.IsWow == true
                         group (ls, u) by u.TeamName into g
                         select new TeamWowCountDto
                         {
                             Count = g.Count(),
                             TeamName = g.Key,
-                            LastDateTime = g.Max(p => p.ls.WowTime)
+                            LastDateTime = g?.Max(p => p.ls.WowTime)
                         });
             result.IsSuccess(list);
             return result;
@@ -47,14 +47,13 @@ namespace EMR.Application.TeamBuilding.Impl
 
                         on u.Id equals s.UserId into lj
                         from ls in lj.DefaultIfEmpty()
-                        where u.TeamName == teamname &&
-                 ls.IsWow == true
+                        where u.TeamName == teamname
                         group (ls, u) by u.TeamName into g
                         select new TeamWowCountDto
                         {
                             Count = g.Count(),
                             TeamName = g.Key,
-                            LastDateTime = g.Max(p => p.ls.WowTime)
+                            LastDateTime = g?.Max(p => p.ls.WowTime)
                         }).FirstOrDefault();
             result.IsSuccess(data);
             return result;
@@ -68,8 +67,7 @@ namespace EMR.Application.TeamBuilding.Impl
 
                         on u.Id equals s.UserId into lj
                         from ls in lj.DefaultIfEmpty()
-                        where u.Account == account &&
-                 ls.IsWow == true
+                        where u.Account == account
                         group (ls, u) by u.Account into g
                         select new UserWowCountDto
                         {
