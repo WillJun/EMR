@@ -9,6 +9,7 @@
 //
 //
 //========================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,40 +27,41 @@ namespace EMR.Application.TeamBuilding.Impl
             var list = (from u in await _teamRepository.GetListAsync()
                         join s in await _teamwowRepository.GetListAsync()
 
-                        on u.Id equals s.UserId into lj
+                        on u.Id equals s.TeamId into lj
                         from ls in lj.DefaultIfEmpty()
+                        where u.IsOrganiser == false
                         group (ls, u) by u.TeamName into g
                         select new TeamWowCountDto
                         {
-                            Count = g.Count(),
+                            Count = g.Where(p => p.ls != null).Count(),
                             TeamName = g.Key,
-                            LastDateTime = g?.Max(p => p.ls.WowTime)
+                            LastDateTime = g.Where(p => p.ls != null).Count() == 0 ? DateTime.Now : g.Max(p => p.ls.WowTime)
                         });
             result.IsSuccess(list);
             return result;
         }
 
-        public async Task<ServiceResult<TeamWowCountDto>> QueryTeamWowCountsByTeamAsync(string teamname)
+        public async Task<ServiceResult<TeamWowCountDto>> QueryTeamWowCountsByTeamAsync(Guid id)
         {
             var result = new ServiceResult<TeamWowCountDto>();
             var data = (from u in await _teamRepository.GetListAsync()
                         join s in await _teamwowRepository.GetListAsync()
 
-                        on u.Id equals s.UserId into lj
+                        on u.Id equals s.TeamId into lj
                         from ls in lj.DefaultIfEmpty()
-                        where u.TeamName == teamname
+                        where u.Id == id
                         group (ls, u) by u.TeamName into g
                         select new TeamWowCountDto
                         {
-                            Count = g.Count(),
+                            Count = g.Where(p => p.ls != null).Count(),
                             TeamName = g.Key,
-                            LastDateTime = g?.Max(p => p.ls.WowTime)
+                            LastDateTime = g.Where(p => p.ls != null).Count() == 0 ? DateTime.Now : g.Max(p => p.ls.WowTime)
                         }).FirstOrDefault();
             result.IsSuccess(data);
             return result;
         }
 
-        public async Task<ServiceResult<UserWowCountDto>> QueryUserWowCountsByUserAsync(string account)
+        public async Task<ServiceResult<UserWowCountDto>> QueryUserWowCountsByUserAsync(Guid id)
         {
             var result = new ServiceResult<UserWowCountDto>();
             var data = (from u in await _userRepository.GetListAsync()
@@ -67,11 +69,11 @@ namespace EMR.Application.TeamBuilding.Impl
 
                         on u.Id equals s.UserId into lj
                         from ls in lj.DefaultIfEmpty()
-                        where u.Account == account
+                        where u.Id == id
                         group (ls, u) by u.Account into g
                         select new UserWowCountDto
                         {
-                            Count = g.Count(),
+                            Count = g.Where(p => p.ls != null).Count(),
                             Account = g.Key
                         }).FirstOrDefault();
             result.IsSuccess(data);

@@ -9,6 +9,7 @@
 //
 //
 //========================================================================
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,13 +20,13 @@ namespace EMR.Application.TeamBuilding
 {
     public partial interface ITeamBuildingService
     {
-        Task<ServiceResult<IEnumerable<SalesQuotaDto>>> QuerySalesQuotasByTeamAsync(string teamname);
+        Task<ServiceResult<IEnumerable<SalesQuotaDto>>> QuerySalesQuotasByTeamAsync(Guid id);
 
-        Task<ServiceResult<IEnumerable<SalesQuotaDto>>> QuerySalesQuotasByUserAsync(string account);
+        Task<ServiceResult<IEnumerable<SalesQuotaDto>>> QuerySalesQuotasByUserAsync(Guid id);
 
-        Task<ServiceResult<TeamSalesQuotaTotalDto>> QueryTeamSalesQuotasByTeamAsync(string teamname);
+        Task<ServiceResult<TeamSalesQuotaTotalDto>> QueryTeamSalesQuotasByTeamAsync(Guid id);
 
-        Task<ServiceResult<UserSalesQuotaTotalDto>> QueryUserSalesQuotasByUserAsync(string account);
+        Task<ServiceResult<UserSalesQuotaTotalDto>> QueryUserSalesQuotasByUserAsync(Guid id);
 
         Task<ServiceResult<IEnumerable<TeamSalesQuotaTotalDto>>> QueryTeamSalesQuotasAsync();
     }

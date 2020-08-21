@@ -9,6 +9,7 @@
 //
 //
 //========================================================================
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace EMR.Application.TeamBuilding
 {
     public partial interface ITeamBuildingService
     {
-        Task<ServiceResult<IEnumerable<PersonalRechargeDto>>> QueryPersonalRechargesByUserAsync(string account);
+        Task<ServiceResult<IEnumerable<PersonalRechargeDto>>> QueryPersonalRechargesByUserAsync(Guid id);
 
         Task PersonalRechargeBulkInsertAsync(IEnumerable<PersonalRecharge> personalRecharges);
     }

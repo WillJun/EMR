@@ -9,6 +9,7 @@
 //
 //
 //========================================================================
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@ namespace EMR.Application.TeamBuilding
         /// </summary>
         /// <param name="teamname"> The teamname. </param>
         /// <returns> </returns>
-        Task<ServiceResult<IEnumerable<QueryUserDto>>> QueryUsersByTeamAsync(string teamname);
+        Task<ServiceResult<IEnumerable<QueryUserDto>>> QueryUsersByTeamAsync(Guid id);
 
         Task UserBulkInsertAsync(IEnumerable<User> users);
     }

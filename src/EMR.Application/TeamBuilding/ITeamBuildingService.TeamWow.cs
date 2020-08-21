@@ -9,6 +9,7 @@
 //
 //
 //========================================================================
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,9 +20,9 @@ namespace EMR.Application.TeamBuilding
 {
     public partial interface ITeamBuildingService
     {
-        Task<ServiceResult<TeamWowCountDto>> QueryTeamWowCountsByTeamAsync(string teamname);
+        Task<ServiceResult<TeamWowCountDto>> QueryTeamWowCountsByTeamAsync(Guid id);
 
-        Task<ServiceResult<UserWowCountDto>> QueryUserWowCountsByUserAsync(string account);
+        Task<ServiceResult<UserWowCountDto>> QueryUserWowCountsByUserAsync(Guid id);
 
         Task<ServiceResult<IEnumerable<TeamWowCountDto>>> QueryTeamWowCountsAsync();
     }

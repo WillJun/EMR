@@ -9,6 +9,7 @@
 //
 //
 //========================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -97,13 +98,14 @@ namespace EMR.Application.TeamBuilding.Impl
         /// </summary>
         /// <param name="teamname"> The teamname. </param>
         /// <returns> </returns>
-        public async Task<ServiceResult<IEnumerable<QueryUserDto>>> QueryUsersByTeamAsync(string teamname)
+        public async Task<ServiceResult<IEnumerable<QueryUserDto>>> QueryUsersByTeamAsync(Guid
+            id)
         {
             var result = new ServiceResult<IEnumerable<QueryUserDto>>();
             var list = (from u in await _userRepository.GetListAsync()
                         join t in await _teamRepository.GetListAsync()
                         on u.TeamId equals t.Id
-                        where t.TeamName == teamname
+                        where t.Id == id
                         orderby u.IsLeader ascending
                         select new QueryUserDto
                         {
@@ -119,7 +121,6 @@ namespace EMR.Application.TeamBuilding.Impl
             result.IsSuccess(list);
             return result;
         }
-
 
         public async Task UserBulkInsertAsync(IEnumerable<User> users)
         {

@@ -9,6 +9,7 @@
 //
 //
 //========================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace EMR.Application.TeamBuilding.Impl
 {
     public partial class TeamBuildingService
     {
-        public async Task<ServiceResult<IEnumerable<PersonalExpenditureDto>>> QueryPersonalExpendituresByUserAsync(string account)
+        public async Task<ServiceResult<IEnumerable<PersonalExpenditureDto>>> QueryPersonalExpendituresByUserAsync(Guid id)
         {
             var result = new ServiceResult<IEnumerable<PersonalExpenditureDto>>();
             var list = (from pe in await _personalexpenditureRepository.GetListAsync()
@@ -30,7 +31,7 @@ namespace EMR.Application.TeamBuilding.Impl
                         join u in await _userRepository.GetListAsync()
                         on pe.UserId equals u.Id
 
-                        where u.Account == account
+                        where u.Id == id
                         orderby pe.CreateTime ascending
                         select new PersonalExpenditureDto
                         {

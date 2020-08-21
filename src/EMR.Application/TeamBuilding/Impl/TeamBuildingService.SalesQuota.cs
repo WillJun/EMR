@@ -9,6 +9,7 @@
 //
 //
 //========================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace EMR.Application.TeamBuilding.Impl
 {
     public partial class TeamBuildingService
     {
-        public async Task<ServiceResult<IEnumerable<SalesQuotaDto>>> QuerySalesQuotasByTeamAsync(string teamname)
+        public async Task<ServiceResult<IEnumerable<SalesQuotaDto>>> QuerySalesQuotasByTeamAsync(Guid id)
         {
             var result = new ServiceResult<IEnumerable<SalesQuotaDto>>();
             var list = (from s in await _salesquotaRepository.GetListAsync()
@@ -30,7 +31,7 @@ namespace EMR.Application.TeamBuilding.Impl
                         join u in await _userRepository.GetListAsync()
                         on s.Operator equals u.Id
 
-                        where t.TeamName == teamname
+                        where t.Id == id
                         orderby s.CreateTime ascending
                         select new SalesQuotaDto
                         {
@@ -45,7 +46,7 @@ namespace EMR.Application.TeamBuilding.Impl
             return result;
         }
 
-        public async Task<ServiceResult<IEnumerable<SalesQuotaDto>>> QuerySalesQuotasByUserAsync(string account)
+        public async Task<ServiceResult<IEnumerable<SalesQuotaDto>>> QuerySalesQuotasByUserAsync(Guid id)
         {
             var result = new ServiceResult<IEnumerable<SalesQuotaDto>>();
             var list = (from s in await _salesquotaRepository.GetListAsync()
@@ -55,7 +56,7 @@ namespace EMR.Application.TeamBuilding.Impl
                         join u in await _userRepository.GetListAsync()
                         on s.Operator equals u.Id
 
-                        where u.Account == account
+                        where u.Id == id
                         orderby s.CreateTime ascending
                         select new SalesQuotaDto
                         {
@@ -73,51 +74,53 @@ namespace EMR.Application.TeamBuilding.Impl
         public async Task<ServiceResult<IEnumerable<TeamSalesQuotaTotalDto>>> QueryTeamSalesQuotasAsync()
         {
             var result = new ServiceResult<IEnumerable<TeamSalesQuotaTotalDto>>();
-            var list = (from s in await _salesquotaRepository.GetListAsync()
-                        join t in await _teamRepository.GetListAsync()
+            var list = (from t in await _teamRepository.GetListAsync()
+                        join s in await _salesquotaRepository.GetListAsync()
 
-                        on s.TeamId equals t.Id
+                        on t.Id equals s.TeamId into lj
+                        from ls in lj.DefaultIfEmpty(new Domain.TeamBuilding.SalesQuota())
                         where t.IsOrganiser == false
-                        group (s, t) by t.TeamName into g
+                        group (ls, t) by t.TeamName into g
                         select new TeamSalesQuotaTotalDto
                         {
-                            TotalIncome = g.Sum(p => p.s.Income),
+                            TotalIncome = g.Where(p => p.ls != null).Count() == 0 ? 0 : g.Sum(p => p.ls.Income),
                             TeamName = g.Key
                         });
             result.IsSuccess(list);
             return result;
         }
 
-        public async Task<ServiceResult<TeamSalesQuotaTotalDto>> QueryTeamSalesQuotasByTeamAsync(string teamname)
+        public async Task<ServiceResult<TeamSalesQuotaTotalDto>> QueryTeamSalesQuotasByTeamAsync(Guid id)
         {
             var result = new ServiceResult<TeamSalesQuotaTotalDto>();
-            var data = (from s in await _salesquotaRepository.GetListAsync()
-                        join t in await _teamRepository.GetListAsync()
+            var data = (from t in await _teamRepository.GetListAsync()
+                        join s in await _salesquotaRepository.GetListAsync()
 
-                        on s.TeamId equals t.Id
-
-                        where t.TeamName == teamname
-                        group (s, t) by t.TeamName into g
+                        on t.Id equals s.TeamId into lj
+                        from ls in lj.DefaultIfEmpty(new Domain.TeamBuilding.SalesQuota())
+                        where t.Id == id
+                        group (ls, t) by t.TeamName into g
                         select new TeamSalesQuotaTotalDto
                         {
-                            TotalIncome = g.Sum(p => p.s.Income),
+                            TotalIncome = g.Where(p => p.ls != null).Count() == 0 ? 0 : g.Sum(p => p.ls.Income),
                             TeamName = g.Key
                         }).FirstOrDefault();
             result.IsSuccess(data);
             return result;
         }
 
-        public async Task<ServiceResult<UserSalesQuotaTotalDto>> QueryUserSalesQuotasByUserAsync(string account)
+        public async Task<ServiceResult<UserSalesQuotaTotalDto>> QueryUserSalesQuotasByUserAsync(Guid id)
         {
             var result = new ServiceResult<UserSalesQuotaTotalDto>();
-            var data = (from s in await _salesquotaRepository.GetListAsync()
-                        join u in await _userRepository.GetListAsync()
-                        on s.Operator equals u.Id
-                        where u.Account == account
-                        group (s, u) by u.Account into g
+            var data = (from u in await _userRepository.GetListAsync()
+                        join s in await _salesquotaRepository.GetListAsync()
+                        on u.Id equals s.Operator into lj
+                        from ls in lj.DefaultIfEmpty(new Domain.TeamBuilding.SalesQuota())
+                        where u.Id == id
+                        group (ls, u) by u.Account into g
                         select new UserSalesQuotaTotalDto
                         {
-                            TotalIncome = g.Sum(p => p.s.Income),
+                            TotalIncome = g.Where(p => p.ls != null).Count() == 0 ? 0 : g.Sum(p => p.ls.Income),
                             Account = g.Key
                         }).FirstOrDefault();
             result.IsSuccess(data);

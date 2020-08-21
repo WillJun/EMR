@@ -9,6 +9,7 @@
 //
 //
 //========================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace EMR.Application.TeamBuilding.Impl
 {
     public partial class TeamBuildingService
     {
-        public async Task<ServiceResult<IEnumerable<PersonalRechargeDto>>> QueryPersonalRechargesByUserAsync(string account)
+        public async Task<ServiceResult<IEnumerable<PersonalRechargeDto>>> QueryPersonalRechargesByUserAsync(Guid id)
         {
             var result = new ServiceResult<IEnumerable<PersonalRechargeDto>>();
             var list = (from pr in await _personalrechargeRepository.GetListAsync()
@@ -31,7 +32,7 @@ namespace EMR.Application.TeamBuilding.Impl
                         join u in await _userRepository.GetListAsync()
                         on pr.UserId equals u.Id
 
-                        where u.Account == account
+                        where u.Id == id
                         orderby pr.CreateTime ascending
                         select new PersonalRechargeDto
                         {
