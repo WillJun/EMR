@@ -29,7 +29,7 @@ namespace EMR.HttpApi.Controllers
     [ApiController]
     [Route("[controller]")]
     [ApiExplorerSettings(GroupName = Grouping.GroupName_v2)]
-    public class TeamBuildingController : AbpController
+    public partial class TeamBuildingController : AbpController
     {
         private readonly ITeamBuildingService _tbService;
 

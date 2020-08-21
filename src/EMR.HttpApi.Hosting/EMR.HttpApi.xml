@@ -6,7 +6,7 @@
     <members>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.GetUserDetailAsync(System.String)">
             <summary>
-            查询User列表
+            查询User信息
             </summary>
             <returns> </returns>
         </member>
