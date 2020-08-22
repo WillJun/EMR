@@ -32,9 +32,9 @@ namespace EMR.Application.TeamBuilding.Impl
         {
             var result = new ServiceResult();
 
-            var post = ObjectMapper.Map<EditTeamWowInput, TeamWow>(input);
+            var tw = ObjectMapper.Map<EditTeamWowInput, TeamWow>(input);
 
-            await _teamwowRepository.InsertAsync(post, true);
+            await _teamwowRepository.InsertAsync(tw, true);
 
             result.IsSuccess(ResponseText.INSERT_SUCCESS);
             return result;
@@ -49,8 +49,8 @@ namespace EMR.Application.TeamBuilding.Impl
         {
             var result = new ServiceResult();
 
-            var post = await _teamwowRepository.FindAsync(id);
-            if (null == post)
+            var tw = await _teamwowRepository.FindAsync(id);
+            if (null == tw)
             {
                 result.IsFailed(ResponseText.WHAT_NOT_EXIST.FormatWith("Id", id));
                 return result;
@@ -59,6 +59,57 @@ namespace EMR.Application.TeamBuilding.Impl
             await _teamwowRepository.DeleteAsync(id);
 
             result.IsSuccess(ResponseText.DELETE_SUCCESS);
+            return result;
+        }
+
+        /// <summary>
+        /// 新增个人充值
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        public async Task<ServiceResult> InsertPersonalRechargeAsync(EditPersonalRechargeInput input)
+        {
+            var result = new ServiceResult();
+
+            var pr = ObjectMapper.Map<EditPersonalRechargeInput, PersonalRecharge>(input);
+
+            await _personalrechargeRepository.InsertAsync(pr, true);
+
+            result.IsSuccess(ResponseText.INSERT_SUCCESS);
+            return result;
+        }
+
+        /// <summary>
+        /// 新增个人账单
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        public async Task<ServiceResult> InsertPersonalExpenditureAsync(EditPersonalExpenditureInput input)
+        {
+            var result = new ServiceResult();
+
+            var pe = ObjectMapper.Map<EditPersonalExpenditureInput, PersonalExpenditure>(input);
+
+            await _personalexpenditureRepository.InsertAsync(pe, true);
+
+            result.IsSuccess(ResponseText.INSERT_SUCCESS);
+            return result;
+        }
+
+        /// <summary>
+        /// 新增流水
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        public async Task<ServiceResult> InsertSalesQuotaAsync(EditSalesQuotaInput input)
+        {
+            var result = new ServiceResult();
+
+            var sq = ObjectMapper.Map<EditSalesQuotaInput, SalesQuota>(input);
+
+            await _salesquotaRepository.InsertAsync(sq, true);
+
+            result.IsSuccess(ResponseText.INSERT_SUCCESS);
             return result;
         }
     }

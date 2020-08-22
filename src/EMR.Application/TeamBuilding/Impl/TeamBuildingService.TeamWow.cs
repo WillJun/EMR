@@ -30,11 +30,12 @@ namespace EMR.Application.TeamBuilding.Impl
                         on u.Id equals s.TeamId into lj
                         from ls in lj.DefaultIfEmpty()
                         where u.IsOrganiser == false
-                        group (ls, u) by u.TeamName into g
+                        group (ls, u) by new { u.TeamName, u.Id } into g
                         select new TeamWowCountDto
                         {
                             Count = g.Where(p => p.ls != null).Count(),
-                            TeamName = g.Key,
+                            TeamName = g.Key.TeamName,
+                            Id = g.Key.Id,
                             LastDateTime = g.Where(p => p.ls != null).Count() == 0 ? DateTime.Now : g.Max(p => p.ls.WowTime)
                         });
             result.IsSuccess(list);
@@ -50,11 +51,12 @@ namespace EMR.Application.TeamBuilding.Impl
                         on u.Id equals s.TeamId into lj
                         from ls in lj.DefaultIfEmpty()
                         where u.Id == id
-                        group (ls, u) by u.TeamName into g
+                        group (ls, u) by new { u.TeamName, u.Id } into g
                         select new TeamWowCountDto
                         {
                             Count = g.Where(p => p.ls != null).Count(),
-                            TeamName = g.Key,
+                            TeamName = g.Key.TeamName,
+                            Id = g.Key.Id,
                             LastDateTime = g.Where(p => p.ls != null).Count() == 0 ? DateTime.Now : g.Max(p => p.ls.WowTime)
                         }).FirstOrDefault();
             result.IsSuccess(data);
@@ -76,6 +78,18 @@ namespace EMR.Application.TeamBuilding.Impl
                             Count = g.Where(p => p.ls != null).Count(),
                             Account = g.Key
                         }).FirstOrDefault();
+
+            var wows = (from tw in await _teamwowRepository.GetListAsync()
+                        where tw.UserId == id
+                        select new TeamWowDto
+                        {
+                            TeamId = tw.TeamId,
+                            UserId = tw.UserId,
+                            IsWow = tw.IsWow,
+                            WowTime = tw.WowTime
+                        }
+                        ).ToList();
+            data.Wows = wows;
             result.IsSuccess(data);
             return result;
         }

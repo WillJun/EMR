@@ -4,6 +4,75 @@
         <name>EMR.Application.Contracts</name>
     </assembly>
     <members>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalExpenditureInput.ExpendId">
+            <summary>
+            Gets or sets the id of the expenditure.
+            </summary>
+            <value> The id of the expenditure. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalExpenditureInput.UserId">
+            <summary>
+            Gets or sets the id of the expenditure.
+            </summary>
+            <value> The id of the expenditure. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalExpenditureInput.Expend">
+            <summary>
+            Gets or sets the expend.
+            </summary>
+            <value> The expend. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalExpenditureInput.SerialNumber">
+            <summary>
+            流水号
+            </summary>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalExpenditureInput.Comment">
+            <summary>
+            Gets or sets the comment.
+            </summary>
+            <value> The comment. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalExpenditureInput.CreateTime">
+            <summary>
+            Gets or sets the create time.
+            </summary>
+            <value> The create time. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalRechargeInput.SerialNumber">
+            <summary>
+            Gets or sets the serial number.
+            </summary>
+            <value> The serial number. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalRechargeInput.SourceId">
+            <summary>
+            Gets or sets the SourceId.
+            </summary>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalRechargeInput.UserId">
+            <summary>
+            Gets or sets the SourceId.
+            </summary>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalRechargeInput.Amount">
+            <summary>
+            Gets or sets the amount.
+            </summary>
+            <value> The amount. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalRechargeInput.Comment">
+            <summary>
+            Gets or sets the comment.
+            </summary>
+            <value> The comment. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalRechargeInput.CreateTime">
+            <summary>
+            Gets or sets the create time.
+            </summary>
+            <value> The create time. </value>
+        </member>
         <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalExpenditureDto.ExpenditureName">
             <summary>
             Gets or sets the name of the expenditure.

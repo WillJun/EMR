@@ -4,6 +4,36 @@
         <name>EMR.HttpApi</name>
     </assembly>
     <members>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertWowAsync(EMR.Application.Contracts.TeamBuilding.Input.EditTeamWowInput)">
+            <summary>
+            点赞
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.DeleteWowAsync(System.Guid)">
+            <summary>
+            取消点赞
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertPersonalRechargeAsync(EMR.Application.Contracts.TeamBuilding.Input.EditPersonalRechargeInput)">
+            <summary>
+            充值
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertPersonalExpenditureAsync(EMR.Application.Contracts.TeamBuilding.Input.EditPersonalExpenditureInput)">
+            <summary>
+            新增消费
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertSalesQuotaAsync(EMR.Application.Contracts.TeamBuilding.Input.EditSalesQuotaInput)">
+            <summary>
+            新增店铺流水
+            </summary>
+            <returns> </returns>
+        </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.GetUserDetailAsync(System.String)">
             <summary>
             查询User信息

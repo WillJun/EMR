@@ -28,6 +28,11 @@ namespace EMR.Application.Contracts.TeamBuilding.Input
         public Guid SourceId { get; set; }
 
         /// <summary>
+        /// Gets or sets the SourceId.
+        /// </summary>
+        public Guid UserId { get; set; }
+
+        /// <summary>
         /// Gets or sets the amount.
         /// </summary>
         /// <value> The amount. </value>

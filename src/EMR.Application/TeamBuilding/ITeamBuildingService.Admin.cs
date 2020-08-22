@@ -33,5 +33,26 @@ namespace EMR.Application.TeamBuilding
         /// <param name="id"> </param>
         /// <returns> </returns>
         Task<ServiceResult> DeleteWowAsync(Guid id);
+
+        /// <summary>
+        /// 新增个人充值
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        Task<ServiceResult> InsertPersonalRechargeAsync(EditPersonalRechargeInput input);
+
+        /// <summary>
+        /// 新增个人账单
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        Task<ServiceResult> InsertPersonalExpenditureAsync(EditPersonalExpenditureInput input);
+
+        /// <summary>
+        /// 新增流水
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        Task<ServiceResult> InsertSalesQuotaAsync(EditSalesQuotaInput input);
     }
 }

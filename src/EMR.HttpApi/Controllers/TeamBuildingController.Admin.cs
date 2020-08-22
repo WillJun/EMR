@@ -9,6 +9,8 @@
 //
 //
 //========================================================================
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 using EMR.Application.Contracts.TeamBuilding.Input;
@@ -34,6 +36,54 @@ namespace EMR.HttpApi.Controllers
         public async Task<ServiceResult> InsertWowAsync([FromBody] EditTeamWowInput input)
         {
             return await _tbService.InsertWowAsync(input);
+        }
+
+        /// <summary>
+        /// 取消点赞
+        /// </summary>
+        /// <returns> </returns>
+        [HttpPost]
+        [Route("teamwow/remove")]
+        [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
+        public async Task<ServiceResult> DeleteWowAsync([Required] Guid id)
+        {
+            return await _tbService.DeleteWowAsync(id);
+        }
+
+        /// <summary>
+        /// 充值
+        /// </summary>
+        /// <returns> </returns>
+        [HttpPost]
+        [Route("personalrecharge/add")]
+        [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
+        public async Task<ServiceResult> InsertPersonalRechargeAsync([FromBody] EditPersonalRechargeInput input)
+        {
+            return await _tbService.InsertPersonalRechargeAsync(input);
+        }
+
+        /// <summary>
+        /// 新增消费
+        /// </summary>
+        /// <returns> </returns>
+        [HttpPost]
+        [Route("personalexpend/add")]
+        [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
+        public async Task<ServiceResult> InsertPersonalExpenditureAsync([FromBody] EditPersonalExpenditureInput input)
+        {
+            return await _tbService.InsertPersonalExpenditureAsync(input);
+        }
+
+        /// <summary>
+        /// 新增店铺流水
+        /// </summary>
+        /// <returns> </returns>
+        [HttpPost]
+        [Route("salesquota/add")]
+        [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
+        public async Task<ServiceResult> InsertSalesQuotaAsync([FromBody] EditSalesQuotaInput input)
+        {
+            return await _tbService.InsertSalesQuotaAsync(input);
         }
     }
 }

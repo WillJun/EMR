@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EMR.Domain.Shared\EMR.Domain.Shared.csproj" />
+    <ProjectReference Include="..\EMR.EntityFrameworkCore.DbMigrations\EMR.EntityFrameworkCore.DbMigrations.csproj" />
   </ItemGroup>
 
   <ItemGroup>

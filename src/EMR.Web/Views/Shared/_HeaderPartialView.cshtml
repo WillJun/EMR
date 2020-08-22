@@ -1,0 +1,46 @@
+﻿<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo">
+                <a href="/">Emerson</a>
+            </div>
+            <div class="menu navbar-right">
+                <a class="menu-item" href="/wow/index">Wows</a>
+                <a class="menu-item" href="/">Excharge</a>
+                <a class="menu-item" href="/">My Team</a>
+            
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <img src="~/img/lgog.jpg" style="height:80px"/>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                 <a class="menu-item" href="/wow/index">Wows</a>
+                <a class="menu-item" href="/">Excharge</a>
+                <a class="menu-item" href="/">My Team</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<script>
+    
+function mobileBtn() {
+    var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+    var mobileMenu = document.getElementById("mobile-menu");
+    if (toggleMenu.classList.contains("active")) {
+        toggleMenu.classList.remove("active")
+        mobileMenu.classList.remove("active")
+    } else {
+        toggleMenu.classList.add("active")
+        mobileMenu.classList.add("active")
+    }
+}
+
+</script>

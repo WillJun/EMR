@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="wows" style="width: 100%; height: 100%; margin-top: 80px;">
+    <script id="wows_tmpl" type="text/template">
+        {{each result}}
+       <div> <label style="width:80%">{{$value.teamName}}</label><span id="{{$value.id}}" style="width:80%"><i class="fa fa-star-o" aria-hidden="true"></i></span></div>
+        {{/each}}
+    </script>
+</div>
+
+ <script>
+     $(function(){
+         axios.get(api_domain+'/TeamBuilding/wows').then(function (response) {
+                if (response.data.success) {
+                     var data = { "result": response.data.result };
+                    var html = template("wows_tmpl", data);
+                    document.querySelector('.wows').innerHTML = html;
+                }
+            })//.catch(x => location.href = "/");
+        })
+    </script>

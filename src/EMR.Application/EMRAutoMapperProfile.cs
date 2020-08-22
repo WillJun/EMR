@@ -11,8 +11,12 @@ namespace EMR.Application
         public EMRAutoMapperProfile()
         {
             CreateMap<Team, TeamDto>();
+            CreateMap<TeamWow, TeamWowDto>();
 
             CreateMap<EditTeamWowInput, TeamWow>().ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<EditPersonalExpenditureInput, PersonalExpenditure>().ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<EditPersonalRechargeInput, PersonalRecharge>().ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<EditSalesQuotaInput, SalesQuota>().ForMember(x => x.Id, opt => opt.Ignore());
         }
     }
 }

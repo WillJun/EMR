@@ -10,6 +10,8 @@
 //
 //========================================================================
 
+using System.Collections.Generic;
+
 namespace EMR.Application.Contracts.TeamBuilding
 {
     public class UserWowCountDto
@@ -17,5 +19,7 @@ namespace EMR.Application.Contracts.TeamBuilding
         public string Account { get; set; }
 
         public int Count { get; set; }
+
+        public IEnumerable<TeamWowDto> Wows { get; set; }
     }
 }
