@@ -26,3 +26,14 @@ obj/*
 /src/EMR.HttpApi.Hosting/log4net
 /src/EMR.Web/obj
 /src/EMR.Web/bin/Debug/netcoreapp3.1
+/src/EMR.Domain.Shared/bin/Release/netcoreapp3.1
+/src/EMR.Domain/bin/Release/netcoreapp3.1
+/src/EMR.Application.Contracts/bin/Release/netcoreapp3.1
+/src/EMR.Application/bin/Release/netcoreapp3.1
+/src/EMR.EntityFrameworkCore.DbMigrations/bin/Release/netcoreapp3.1
+/src/EMR.EntityFrameworkCore/bin/Release/netcoreapp3.1
+/src/EMR.HttpApi/bin/Release/netcoreapp3.1
+/src/EMR.HttpApi.Hosting/Properties/PublishProfiles
+/src/EMR.HttpApi.Hosting/bin/Release/netcoreapp3.1
+/src/EMR.Swagger/bin/Release/netcoreapp3.1
+/src/EMR.ToolKits/bin/Release/netcoreapp3.1

@@ -54,5 +54,14 @@ namespace EMR.Application.TeamBuilding
         /// <param name="input"> </param>
         /// <returns> </returns>
         Task<ServiceResult> InsertSalesQuotaAsync(EditSalesQuotaInput input);
+
+        /// <summary>
+        /// 新增消费记录
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        Task<ServiceResult> InsertCostAsync(EditCostInput input);
+
+        Task<ServiceResult> UpdateUserAsync(EditUserInput input);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace EMR.Web.Controllers
 {
-    public class WowController : Controller
+    public class ExchargeController : BaseController
     {
         public IActionResult Index()
         {

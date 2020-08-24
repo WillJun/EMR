@@ -37,7 +37,7 @@ namespace EMR.Domain.TeamBuilding
         public bool IsLeader { get; set; }
 
         /// <summary>
-        /// 余额
+        /// 总经费
         /// </summary>
         public double Balance { get; set; }
 

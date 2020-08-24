@@ -71,6 +71,7 @@ namespace EMR.Application.TeamBuilding.Impl
 
             var userDetail = new UserDetailDto
             {
+                Id = user.Id,
                 Account = user.Account,
                 Balance = user.Balance,
                 Dept = user.Dept,
@@ -81,6 +82,7 @@ namespace EMR.Application.TeamBuilding.Impl
                 UserName = user.UserName,
                 TeamInfo = new TeamDto
                 {
+                    Id = teaminfo.Id,
                     TeamName = teaminfo.TeamName,
                     CreateTime = teaminfo.CreateTime,
                     IsOrganiser = teaminfo.IsOrganiser,

@@ -10,12 +10,14 @@
 //
 //========================================================================
 
+using System;
 using System.Collections.Generic;
 
 namespace EMR.Application.Contracts.TeamBuilding
 {
     public class UserDetailDto
     {
+        public Guid Id { get; set; }
         public string Account { get; set; }
         public string UserName { get; set; }
         public string UserEnName { get; set; }

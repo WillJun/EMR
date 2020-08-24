@@ -3,4 +3,4 @@
 
 // Write your JavaScript code.
 
-var api_domain = 'https://localhost:44313'
+var api_domain = 'http://localhost/emrapi/'

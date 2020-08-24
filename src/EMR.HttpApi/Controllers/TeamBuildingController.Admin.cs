@@ -85,5 +85,17 @@ namespace EMR.HttpApi.Controllers
         {
             return await _tbService.InsertSalesQuotaAsync(input);
         }
+
+        /// <summary>
+        /// 新增交易
+        /// </summary>
+        /// <returns> </returns>
+        [HttpPost]
+        [Route("cost")]
+        [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
+        public async Task<ServiceResult> InsertCostAsync([FromBody] EditCostInput input)
+        {
+            return await _tbService.InsertCostAsync(input);
+        }
     }
 }

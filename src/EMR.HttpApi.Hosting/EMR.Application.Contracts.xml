@@ -4,7 +4,31 @@
         <name>EMR.Application.Contracts</name>
     </assembly>
     <members>
-        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalExpenditureInput.ExpendId">
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditCostInput.TeamId">
+            <summary>
+            Gets or sets the id of the expenditure.
+            </summary>
+            <value> The id of the expenditure. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditCostInput.OperatorId">
+            <summary>
+            Gets or sets the id of the expenditure.
+            </summary>
+            <value> The id of the expenditure. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditCostInput.Account">
+            <summary>
+            Gets or sets the id of the expenditure.
+            </summary>
+            <value> The id of the expenditure. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditCostInput.Amount">
+            <summary>
+            Gets or sets the expend.
+            </summary>
+            <value> The Amount. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditPersonalExpenditureInput.ExpenditureTeamId">
             <summary>
             Gets or sets the id of the expenditure.
             </summary>
@@ -72,6 +96,12 @@
             Gets or sets the create time.
             </summary>
             <value> The create time. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditUserInput.Id">
+            <summary>
+            Gets or sets the id of the expenditure.
+            </summary>
+            <value> The id of the expenditure. </value>
         </member>
         <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalExpenditureDto.ExpenditureName">
             <summary>

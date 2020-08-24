@@ -215,7 +215,7 @@
         </member>
         <member name="P:EMR.Domain.TeamBuilding.User.Balance">
             <summary>
-            余额
+            总经费
             </summary>
         </member>
         <member name="P:EMR.Domain.TeamBuilding.User.IsOverspend">

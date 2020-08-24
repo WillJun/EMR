@@ -34,6 +34,12 @@
             </summary>
             <returns> </returns>
         </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertCostAsync(EMR.Application.Contracts.TeamBuilding.Input.EditCostInput)">
+            <summary>
+            新增交易
+            </summary>
+            <returns> </returns>
+        </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.GetUserDetailAsync(System.String)">
             <summary>
             查询User信息

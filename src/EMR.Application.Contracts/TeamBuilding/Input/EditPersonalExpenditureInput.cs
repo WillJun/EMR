@@ -20,7 +20,7 @@ namespace EMR.Application.Contracts.TeamBuilding.Input
         /// Gets or sets the id of the expenditure.
         /// </summary>
         /// <value> The id of the expenditure. </value>
-        public Guid ExpendId { get; set; }
+        public Guid ExpenditureTeamId { get; set; }
 
         /// <summary>
         /// Gets or sets the id of the expenditure.

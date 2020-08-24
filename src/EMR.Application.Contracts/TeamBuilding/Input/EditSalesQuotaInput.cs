@@ -17,7 +17,7 @@ namespace EMR.Application.Contracts.TeamBuilding.Input
     {
         public string SerialNumber { get; set; }
         public Guid TeamId { get; set; }
-        public Guid OperId { get; set; }
+        public Guid Operator { get; set; }
         public double Income { get; set; }
         public string Comment { get; set; }
         public DateTime CreateTime { get; set; }

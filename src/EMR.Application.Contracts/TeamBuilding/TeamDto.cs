@@ -15,6 +15,7 @@ namespace EMR.Application.Contracts.TeamBuilding
 {
     public class TeamDto
     {
+        public Guid Id { get; set; }
         public string TeamName { get; set; }
 
         public string TeamLeader { get; set; }

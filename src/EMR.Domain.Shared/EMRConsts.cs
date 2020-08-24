@@ -144,6 +144,16 @@ namespace EMR.Domain.Shared
             public const string DATA_IS_NONE = "数据为空";
 
             /// <summary>
+            /// 余额不足
+            /// </summary>
+            public const string BALANCE_IS_NONE = "余额不足";
+
+            /// <summary>
+            /// 不许本店消费
+            /// </summary>
+            public const string DONOT_COST_IN_OWNER_SHOP = "不许本店消费";
+
+            /// <summary>
             /// IP地址格式错误
             /// </summary>
             public const string IP_IS_WRONG = "IP地址格式错误";
