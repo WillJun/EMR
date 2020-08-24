@@ -44,5 +44,29 @@ namespace EMR.Application.TeamBuilding.Impl
             result.IsSuccess(list);
             return result;
         }
+
+        public async Task<ServiceResult<IEnumerable<TeamExpenditureTotalDto>>> QueryTeamExpendituresAsync()
+        {
+            var result = new ServiceResult<IEnumerable<TeamExpenditureTotalDto>>();
+
+            var list = (from team in await _teamRepository.GetListAsync()
+                        join user in await _userRepository.GetListAsync() on team.Id equals user.TeamId
+
+                        join pe in await _personalexpenditureRepository.GetListAsync()
+
+                        on user.Id equals pe.UserId
+                        into lj
+                        from ls in lj.DefaultIfEmpty()
+                        group (ls, team) by new { team.TeamName } into g
+                        select new TeamExpenditureTotalDto
+                        {
+                            TeamName = g.Key.TeamName,
+                            TotalExpend = g.Where(p => p.ls != null).Count() == 0 ? 0 : g.Sum(p => p.ls.Expend)
+                        });
+
+            result.IsSuccess(list);
+
+            return result;
+        }
     }
 }

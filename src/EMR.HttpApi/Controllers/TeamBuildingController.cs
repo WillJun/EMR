@@ -182,13 +182,23 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 获取所有团队流水总额
         /// </summary>
-
         /// <returns> </returns>
         [HttpGet]
         [Route("salesquotas")]
         public async Task<ServiceResult<IEnumerable<TeamSalesQuotaTotalDto>>> QueryTeamSalesQuotasAsync()
         {
             return await _tbService.QueryTeamSalesQuotasAsync();
+        }
+
+        /// <summary>
+        /// 获取所有团队消费总额
+        /// </summary>
+        /// <returns> </returns>
+        [HttpGet]
+        [Route("teamexpends")]
+        public async Task<ServiceResult<IEnumerable<TeamExpenditureTotalDto>>> QueryTeamExpendituresAsync()
+        {
+            return await _tbService.QueryTeamExpendituresAsync();
         }
     }
 }

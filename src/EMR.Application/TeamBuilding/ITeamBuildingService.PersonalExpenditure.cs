@@ -21,5 +21,7 @@ namespace EMR.Application.TeamBuilding
     public partial interface ITeamBuildingService
     {
         Task<ServiceResult<IEnumerable<PersonalExpenditureDto>>> QueryPersonalExpendituresByUserAsync(Guid id);
+
+        Task<ServiceResult<IEnumerable<TeamExpenditureTotalDto>>> QueryTeamExpendituresAsync();
     }
 }

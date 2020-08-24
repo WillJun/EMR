@@ -160,6 +160,18 @@ namespace EMR.Application.TeamBuilding.Impl
                 return result;
             }
 
+            double cost = 0;
+            var result1 = userResult.Result.PersonalExpenditures;
+            if (result1 != null)
+            {
+                cost = result1.Sum(p => p.Expend);
+                if (userResult.Result.Balance - cost < input.Amount)
+                {
+                    result.IsFailed(ResponseText.BALANCE_IS_NONE);
+                    return result;
+                }
+            }
+
             Random rd = new Random();
             DateTime time = DateTime.Now;
             var SerialNumber = time.ToString("yyyyMMddHHmmss") + rd.Next(0, 9999).ToString("0000");
@@ -172,25 +184,14 @@ namespace EMR.Application.TeamBuilding.Impl
             editPersonalExpenditureInput.SerialNumber = SerialNumber;
             editPersonalExpenditureInput.CreateTime = time;
 
-            var result1 = userResult.Result.PersonalExpenditures;
-
             EditSalesQuotaInput editSalesQuotaInput = new EditSalesQuotaInput();
             editSalesQuotaInput.Income = input.Amount;
             editSalesQuotaInput.TeamId = input.TeamId;
             editSalesQuotaInput.Operator = input.OperatorId;
             editSalesQuotaInput.SerialNumber = SerialNumber;
             editSalesQuotaInput.CreateTime = time;
-            double cost = 0;
-            if (result1 != null)
-            {
-                cost = result1.Sum(p => p.Expend);
-                if (userResult.Result.Balance - cost < input.Amount)
-                {
-                    editPersonalExpenditureInput.Comment = "有余额，但不足消费";
-                    editSalesQuotaInput.Comment = "客户余额不足消费,收款不足";
-                    editSalesQuotaInput.Income = userResult.Result.Balance - cost;
-                }
-            }
+            editSalesQuotaInput.Income = input.Amount;
+
             var pe = ObjectMapper.Map<EditPersonalExpenditureInput, PersonalExpenditure>(editPersonalExpenditureInput);
 
             await _personalexpenditureRepository.InsertAsync(pe, true);
