@@ -138,7 +138,7 @@ namespace EMR.HttpApi.Controllers
         /// <returns> </returns>
         [HttpGet]
         [Route("salesquotas/team")]
-        public async Task<ServiceResult<IEnumerable<SalesQuotaDto>>> QuerySalesQuotasByTeamAsync([Required] Guid id)
+        public async Task<ServiceResult<IEnumerable<SalesQuotaWithUserDto>>> QuerySalesQuotasByTeamAsync([Required] Guid id)
         {
             return await _tbService.QuerySalesQuotasByTeamAsync(id);
         }
@@ -150,7 +150,7 @@ namespace EMR.HttpApi.Controllers
         /// <returns> </returns>
         [HttpGet]
         [Route("salesquotas/user")]
-        public async Task<ServiceResult<IEnumerable<SalesQuotaDto>>> QuerySalesQuotasByUserAsync([Required] Guid id)
+        public async Task<ServiceResult<IEnumerable<SalesQuotaWithUserDto>>> QuerySalesQuotasByUserAsync([Required] Guid id)
         {
             return await _tbService.QuerySalesQuotasByUserAsync(id);
         }

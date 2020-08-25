@@ -21,9 +21,9 @@ namespace EMR.Application.TeamBuilding.Impl
 {
     public partial class TeamBuildingService
     {
-        public async Task<ServiceResult<IEnumerable<SalesQuotaDto>>> QuerySalesQuotasByTeamAsync(Guid id)
+        public async Task<ServiceResult<IEnumerable<SalesQuotaWithUserDto>>> QuerySalesQuotasByTeamAsync(Guid id)
         {
-            var result = new ServiceResult<IEnumerable<SalesQuotaDto>>();
+            var result = new ServiceResult<IEnumerable<SalesQuotaWithUserDto>>();
             var list = (from s in await _salesquotaRepository.GetListAsync()
                         join t in await _teamRepository.GetListAsync()
 
@@ -31,24 +31,31 @@ namespace EMR.Application.TeamBuilding.Impl
                         join u in await _userRepository.GetListAsync()
                         on s.Operator equals u.Id
 
+                        join pr in await _personalexpenditureRepository.GetListAsync()
+                      on new { s.SerialNumber, s.TeamId } equals new { pr.SerialNumber, TeamId = pr.ExpenditureTeamId }
+                        join u2 in await _userRepository.GetListAsync()
+                        on pr.UserId equals u2.Id
+
                         where t.Id == id
                         orderby s.CreateTime ascending
-                        select new SalesQuotaDto
+                        select new SalesQuotaWithUserDto
                         {
                             Comment = s.Comment,
                             Operator = u.UserEnName,
                             CreateTime = s.CreateTime,
                             Income = s.Income,
                             SerialNumber = s.SerialNumber,
-                            TeamName = t.TeamName
+                            TeamName = t.TeamName,
+                            UserName = u2.UserName,
+                            UserAccount = u2.Account
                         });
             result.IsSuccess(list);
             return result;
         }
 
-        public async Task<ServiceResult<IEnumerable<SalesQuotaDto>>> QuerySalesQuotasByUserAsync(Guid id)
+        public async Task<ServiceResult<IEnumerable<SalesQuotaWithUserDto>>> QuerySalesQuotasByUserAsync(Guid id)
         {
-            var result = new ServiceResult<IEnumerable<SalesQuotaDto>>();
+            var result = new ServiceResult<IEnumerable<SalesQuotaWithUserDto>>();
             var list = (from s in await _salesquotaRepository.GetListAsync()
                         join t in await _teamRepository.GetListAsync()
 
@@ -56,16 +63,23 @@ namespace EMR.Application.TeamBuilding.Impl
                         join u in await _userRepository.GetListAsync()
                         on s.Operator equals u.Id
 
+                        join pr in await _personalexpenditureRepository.GetListAsync()
+                     on new { s.SerialNumber, s.TeamId } equals new { pr.SerialNumber, TeamId = pr.ExpenditureTeamId }
+                        join u2 in await _userRepository.GetListAsync()
+                        on pr.UserId equals u2.Id
+
                         where u.Id == id
                         orderby s.CreateTime ascending
-                        select new SalesQuotaDto
+                        select new SalesQuotaWithUserDto
                         {
                             Comment = s.Comment,
                             Operator = u.UserEnName,
                             CreateTime = s.CreateTime,
                             Income = s.Income,
                             SerialNumber = s.SerialNumber,
-                            TeamName = t.TeamName
+                            TeamName = t.TeamName,
+                            UserName = u2.UserName,
+                            UserAccount = u2.Account
                         });
             result.IsSuccess(list);
             return result;

@@ -127,5 +127,11 @@
             </summary>
             <returns> </returns>
         </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryTeamExpendituresAsync">
+            <summary>
+            获取所有团队消费总额
+            </summary>
+            <returns> </returns>
+        </member>
     </members>
 </doc>
