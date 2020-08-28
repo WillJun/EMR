@@ -37,3 +37,5 @@ obj/*
 /src/EMR.HttpApi.Hosting/bin/Release/netcoreapp3.1
 /src/EMR.Swagger/bin/Release/netcoreapp3.1
 /src/EMR.ToolKits/bin/Release/netcoreapp3.1
+/src/EMR.Web/Properties/PublishProfiles
+/src/EMR.Web/bin/Release/netcoreapp3.1
