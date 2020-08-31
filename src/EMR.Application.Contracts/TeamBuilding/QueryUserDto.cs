@@ -10,10 +10,13 @@
 //
 //========================================================================
 
+using System;
+
 namespace EMR.Application.Contracts.TeamBuilding
 {
     public class QueryUserDto
     {
+        public Guid Id { get; set; }
         public string Account { get; set; }
         public string UserName { get; set; }
         public string UserEnName { get; set; }

@@ -138,6 +138,68 @@ namespace EMR.EntityFrameworkCore.DbMigrations.Migrations
                     b.ToTable("emr_Teams");
                 });
 
+            modelBuilder.Entity("EMR.Domain.TeamBuilding.TeamDiscount", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<double>("Discount")
+                        .HasColumnType("double");
+
+                    b.Property<string>("Discription")
+                        .HasColumnType("varchar(500) CHARACTER SET utf8mb4")
+                        .HasMaxLength(500);
+
+                    b.Property<double>("FullAmount")
+                        .HasColumnType("double");
+
+                    b.Property<bool>("IsDisable")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Operation")
+                        .HasColumnType("varchar(500) CHARACTER SET utf8mb4")
+                        .HasMaxLength(500);
+
+                    b.Property<Guid>("TeamId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("emr_TeamDiscount");
+                });
+
+            modelBuilder.Entity("EMR.Domain.TeamBuilding.TeamExpend", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("varchar(500) CHARACTER SET utf8mb4")
+                        .HasMaxLength(500);
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime");
+
+                    b.Property<double>("Expend")
+                        .HasColumnType("double");
+
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
+                        .HasMaxLength(200);
+
+                    b.Property<Guid>("TeamId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("emr_TeamExpend");
+                });
+
             modelBuilder.Entity("EMR.Domain.TeamBuilding.TeamWow", b =>
                 {
                     b.Property<Guid>("Id")

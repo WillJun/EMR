@@ -4,6 +4,7 @@ namespace EMR.Application.Contracts.TeamBuilding
 {
     public class TeamDiscountDto
     {
+        public Guid Id { get; set; }
         public Guid TeamId { get; set; }
         public bool IsDisable { get; set; }
 

@@ -3,22 +3,94 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="wows" style=" margin: 50px 10px;">
+<div class="wows" style=" margin: 10px 0px;">
     <script id="wows_tmpl" type="text/template">
         {{each result}}
-       <div style="line-height: 40px;"> <label style="width:80%">{{$value.teamName}}</label><span id="{{$value.id}}" style="width:80%"><i class="fa fa-star-o" aria-hidden="true"></i></span></div>
+       <div style="line-height: 40px;background-color: blueviolet;
+        padding: 0px 10px;
+    margin: 10px 0px;"> <label style="width:80%">{{$value.teamName}}({{$value.count}})</label><span id="{{$value.id}}" class="dowows" style="font-size: 30px;
+    color: aliceblue;
+    text-align: center;" onclick="dowow(this)"><i class="fa fa-star-o" aria-hidden="true"></i></span></div>
         {{/each}}
     </script>
 </div>
-
+<div class="spinnerdiv justify-content-center" style="top: 40%;
+    position: absolute;
+    left: 45%;">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
  <script>
+     var userid=$.cookie("userid");
+     var teamid=$.cookie("teamid");
+
+
+
      $(function(){
+         if(userid==""){
+              location.href = "/Acount/Index";
+          }
          axios.get(api_domain+'/TeamBuilding/wows').then(function (response) {
                 if (response.data.success) {
                      var data = { "result": response.data.result };
                     var html = template("wows_tmpl", data);
                     document.querySelector('.wows').innerHTML = html;
-                }
-            })//.catch(x => location.href = "/");
+                     
+                    axios.get(api_domain+'/TeamBuilding/wow/user?id='+userid).then(function (rp2) {
+                        if (rp2.data.success) {
+
+                            $(".wows").find("span").find('i').removeClass("fa-star").addClass("fa-star-o");
+                           $.each(rp2.data.result.wows,function(index,item){
+
+                           $(".wows").find("span#"+item.teamId).find('i').removeClass("fa-star-o").addClass("fa-star");
+                            $(".wows").find("span#"+item.teamId).attr("wowid",item.id)
+                          
+                           });
+                       }
+                        $(".spinnerdiv").hide();
+                   });
+               }
+           })//.catch(x => location.href = "/");
+         
+
+
         })
+
+        function dowow(o){
+              event.stopPropagation();
+              $(".spinnerdiv").show();
+              var teamid=$(o).attr("id");
+              if($(o).find('i').hasClass("fa-star-o")){
+
+                       var data = {
+                            "teamId": teamid,
+                            "userId": userid,
+                            "isWow":true,
+                            "wowTime": moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+                        };
+
+                        axios.post(api_domain+"/TeamBuilding/teamwow/add", data,).then(function (response) {
+                            if (response.data.success) {
+                               location.reload();
+                            } else {
+                                alert(response.data.message);
+                            }
+                            $(".spinnerdiv").hide();
+                        });
+                    }
+                    else
+                    {
+                        var wowid=$(o).attr("wowid");
+                        if(wowid!=""&&wowid!=undefined){
+                          axios.post(api_domain+"/TeamBuilding/teamwow/remove?id="+wowid).then(function (response) {
+                            if (response.data.success) {
+                               location.reload();
+                            } else {
+                                alert(response.data.message);
+                            }
+                            $(".spinnerdiv").hide();
+                        });  }
+                    }
+           }
     </script>

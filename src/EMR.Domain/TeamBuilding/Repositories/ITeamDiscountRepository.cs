@@ -22,7 +22,7 @@ namespace EMR.Domain.TeamBuilding.Repositories
         /// <summary>
         /// 批量插入
         /// </summary>
-        /// <param name="teams"> </param>
+        /// <param name="teamdiscounts"> </param>
         /// <returns> </returns>
         Task BulkInsertAsync(IEnumerable<TeamDiscount> teamdiscounts);
     }

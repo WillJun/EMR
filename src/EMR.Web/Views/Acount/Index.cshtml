@@ -3,7 +3,64 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_NoMenuLayout.cshtml";
 }
-<div style="height:100%;min-height: 100vh;text-align: center;">
-<input id="account" name="account" />
-<button value="Go"></button>
-</div>
+<div class="wrapper wrapper-content animated fadeInRight" style="padding: 40% 20px 20px 20px">
+            <div class="row">
+                   <div class="col">
+                    <div class="ibox float-e-margins">
+                    
+                        <div class="ibox-content">
+                            <form class="form-horizontal" style="text-align: center;">
+                                <p>911 Team Building</p>
+                                <div class="form-group row">
+                                <label class="col-3 control-label">Account</label>
+
+                                    <div class="col-9"><input id="account" type="text" class="form-control">
+                                    </div>
+                                </div>
+                             
+                              
+                                <div class="form-group ">
+                                    <div class="col align-self-center">
+                                        <input type="button" class="btn btn-sm btn-primary" id="btnlogin" value="Login"></input>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+           </div>
+       </div>
+
+
+       <script>
+
+            var userid=$.cookie("userid");
+            var teamid=$.cookie("teamid");
+            $(function(){
+                $("#btnlogin").click(function(){
+                    if(  $("#account").val()=="")
+                    {
+                        alert("请输入工号")
+                    }
+                    else
+                    {
+                         axios.get(api_domain+'/TeamBuilding/user/info?account='+$("#account").val()).then(function (response) {
+                             if (response.data.success) 
+                             {
+                                 userid=response.data.result.id;
+                                  teamid=response.data.result.teamInfo.id;
+                                  $.cookie("userid",userid,{ expires: 7, path: '/' });
+                                  $.cookie("teamid",teamid,{ expires: 7, path: '/' });
+                                  location.href="/Wow/Index";
+                             }
+                             else{
+                                  alert("工号错误");
+                             }
+                         }).catch(x => console.log("error"));;
+                    }
+                });
+            })
+
+
+       </script>
+   

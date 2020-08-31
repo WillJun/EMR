@@ -97,6 +97,17 @@
             </summary>
             <value> The create time. </value>
         </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditTeamExpendInput.TeamId">
+            <summary>
+            Gets or sets the id of the expenditure.
+            </summary>
+            <value> The id of the expenditure. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditTeamExpendInput.SerialNumber">
+            <summary>
+            流水号
+            </summary>
+        </member>
         <member name="P:EMR.Application.Contracts.TeamBuilding.Input.EditUserInput.Id">
             <summary>
             Gets or sets the id of the expenditure.
@@ -157,6 +168,35 @@
             <value> The comment. </value>
         </member>
         <member name="P:EMR.Application.Contracts.TeamBuilding.PersonalRechargeDto.CreateTime">
+            <summary>
+            Gets or sets the create time.
+            </summary>
+            <value> The create time. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.TeamExpendDto.TeamName">
+            <summary>
+            Gets or sets the name of the expend.
+            </summary>
+            <value> The name of the expend. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.TeamExpendDto.Expend">
+            <summary>
+            Gets or sets the expend.
+            </summary>
+            <value> The expend. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.TeamExpendDto.SerialNumber">
+            <summary>
+            流水号
+            </summary>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.TeamExpendDto.Comment">
+            <summary>
+            Gets or sets the comment.
+            </summary>
+            <value> The comment. </value>
+        </member>
+        <member name="P:EMR.Application.Contracts.TeamBuilding.TeamExpendDto.CreateTime">
             <summary>
             Gets or sets the create time.
             </summary>

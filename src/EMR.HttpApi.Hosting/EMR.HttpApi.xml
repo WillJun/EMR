@@ -40,6 +40,18 @@
             </summary>
             <returns> </returns>
         </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.TeamExpendToUserAsync(EMR.Application.Contracts.TeamBuilding.Input.EditTeamExpendInput)">
+            <summary>
+            分钱
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.UpdateTeamDiscountAsync(EMR.Application.Contracts.TeamBuilding.Input.EditTeamDiscountInput)">
+            <summary>
+            折扣
+            </summary>
+            <returns> </returns>
+        </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.GetUserDetailAsync(System.String)">
             <summary>
             查询User信息

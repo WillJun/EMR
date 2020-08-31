@@ -16,6 +16,8 @@ namespace EMR.Application.Contracts.TeamBuilding
 {
     public class TeamWowDto
     {
+        public Guid Id { get; set; }
+
         public Guid TeamId { get; set; }
 
         public Guid UserId { get; set; }

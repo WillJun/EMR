@@ -63,5 +63,19 @@ namespace EMR.Application.TeamBuilding
         Task<ServiceResult> InsertCostAsync(EditCostInput input);
 
         Task<ServiceResult> UpdateUserAsync(EditUserInput input);
+
+        /// <summary>
+        /// 团队分钱
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        Task<ServiceResult> TeamExpendToUserAsync(EditTeamExpendInput input);
+
+        /// <summary>
+        /// 折扣
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        Task<ServiceResult> UpdateTeamDiscountAsync(EditTeamDiscountInput input);
     }
 }

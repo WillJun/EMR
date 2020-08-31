@@ -37,7 +37,7 @@ namespace EMR.Application.TeamBuilding.Impl
                             TeamName = g.Key.TeamName,
                             Id = g.Key.Id,
                             LastDateTime = g.Where(p => p.ls != null).Count() == 0 ? DateTime.Now : g.Max(p => p.ls.WowTime)
-                        });
+                        }).OrderByDescending(p => p.Count).ThenBy(p => p.LastDateTime).ToList(); ;
             result.IsSuccess(list);
             return result;
         }
@@ -83,6 +83,7 @@ namespace EMR.Application.TeamBuilding.Impl
                         where tw.UserId == id
                         select new TeamWowDto
                         {
+                            Id = tw.Id,
                             TeamId = tw.TeamId,
                             UserId = tw.UserId,
                             IsWow = tw.IsWow,

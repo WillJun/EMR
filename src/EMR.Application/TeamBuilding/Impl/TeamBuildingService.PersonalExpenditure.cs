@@ -40,7 +40,7 @@ namespace EMR.Application.TeamBuilding.Impl
                             CreateTime = pe.CreateTime,
                             SerialNumber = pe.SerialNumber,
                             ExpenditureName = t.TeamName
-                        });
+                        }).OrderByDescending(p => p.CreateTime).ToList();
             result.IsSuccess(list);
             return result;
         }
@@ -62,7 +62,7 @@ namespace EMR.Application.TeamBuilding.Impl
                         {
                             TeamName = g.Key.TeamName,
                             TotalExpend = g.Where(p => p.ls != null).Count() == 0 ? 0 : g.Sum(p => p.ls.Expend)
-                        });
+                        }).OrderByDescending(p => p.TotalExpend).ToList();
 
             result.IsSuccess(list);
 

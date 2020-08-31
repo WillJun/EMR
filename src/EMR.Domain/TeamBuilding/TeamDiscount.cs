@@ -25,6 +25,7 @@ namespace EMR.Domain.TeamBuilding
         public TeamDiscount(Guid id) : base(id)
         {
         }
+
         public Guid TeamId { get; set; }
         public bool IsDisable { get; set; }
 

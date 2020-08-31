@@ -99,7 +99,29 @@ namespace EMR.Application.TeamBuilding.Impl
                         {
                             TotalIncome = g.Where(p => p.ls != null).Count() == 0 ? 0 : g.Sum(p => p.ls.Income),
                             TeamName = g.Key
-                        });
+                        }).ToList();
+
+            var list2 = (from t in await _teamRepository.GetListAsync()
+                         join s in await _teamexpendRepository.GetListAsync()
+
+                         on t.Id equals s.TeamId
+
+                         group (s, t) by t.TeamName into g
+                         select new TeamExpendTotalDto
+                         {
+                             TotalExpend = g.Sum(p => p.s.Expend),
+                             TeamName = g.Key
+                         }).ToList();
+
+            foreach (var item in list2)
+            {
+                var obj = list.Where(p => p.TeamName == item.TeamName).FirstOrDefault();
+                if (obj != null)
+                {
+                    obj.TotalIncome = obj.TotalIncome - item.TotalExpend;
+                }
+            }
+            list = list.OrderByDescending(p => p.TotalIncome).ToList();
             result.IsSuccess(list);
             return result;
         }
@@ -119,6 +141,24 @@ namespace EMR.Application.TeamBuilding.Impl
                             TotalIncome = g.Where(p => p.ls != null).Count() == 0 ? 0 : g.Sum(p => p.ls.Income),
                             TeamName = g.Key
                         }).FirstOrDefault();
+
+            var obj = (from t in await _teamRepository.GetListAsync()
+                       join s in await _teamexpendRepository.GetListAsync()
+
+                       on t.Id equals s.TeamId
+
+                       where t.Id == id
+                       group (s, t) by t.TeamName into g
+                       select new TeamExpendTotalDto
+                       {
+                           TotalExpend = g.Sum(p => p.s.Expend),
+                           TeamName = g.Key
+                       }).FirstOrDefault();
+            if (obj != null)
+            {
+                data.TotalIncome = data.TotalIncome - obj.TotalExpend;
+            }
+
             result.IsSuccess(data);
             return result;
         }

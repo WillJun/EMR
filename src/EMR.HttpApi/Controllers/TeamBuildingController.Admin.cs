@@ -97,5 +97,29 @@ namespace EMR.HttpApi.Controllers
         {
             return await _tbService.InsertCostAsync(input);
         }
+
+        /// <summary>
+        /// 分钱
+        /// </summary>
+        /// <returns> </returns>
+        [HttpPost]
+        [Route("team/expend")]
+        [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
+        public async Task<ServiceResult> TeamExpendToUserAsync([FromBody] EditTeamExpendInput input)
+        {
+            return await _tbService.TeamExpendToUserAsync(input);
+        }
+
+        /// <summary>
+        /// 折扣
+        /// </summary>
+        /// <returns> </returns>
+        [HttpPost]
+        [Route("team/discount")]
+        [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
+        public async Task<ServiceResult> UpdateTeamDiscountAsync([FromBody] EditTeamDiscountInput input)
+        {
+            return await _tbService.UpdateTeamDiscountAsync(input);
+        }
     }
 }

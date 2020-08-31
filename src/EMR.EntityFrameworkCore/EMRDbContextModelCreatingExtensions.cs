@@ -97,6 +97,29 @@ namespace EMR.EntityFrameworkCore
                 b.Property(x => x.IsWow).HasColumnType("tinyint(1)");
                 b.Property(x => x.WowTime).HasColumnType("datetime");
             });
+            builder.Entity<TeamDiscount>(b =>
+            {
+                b.ToTable(EMRConsts.DbTablePrefix + DbTableName.TeamDiscount);
+                b.HasKey(x => x.Id);
+                b.Property(x => x.TeamId).HasColumnType("char(36)").IsRequired();
+                b.Property(x => x.Discount).HasColumnType("double");
+                b.Property(x => x.IsDisable).HasColumnType("tinyint(1)");
+                b.Property(x => x.FullAmount).HasColumnType("double");
+                b.Property(x => x.Discription).HasMaxLength(500);
+                b.Property(x => x.Operation).HasMaxLength(500);
+            });
+            builder.Entity<TeamExpend>(b =>
+            {
+                b.ToTable(EMRConsts.DbTablePrefix + DbTableName.TeamExpend);
+                b.HasKey(x => x.Id);
+                b.Property(x => x.TeamId).HasColumnType("char(36)").IsRequired();
+                b.Property(x => x.UserId).HasColumnType("char(36)").IsRequired();
+                b.Property(x => x.SerialNumber).HasMaxLength(200);
+                b.Property(x => x.Expend).HasColumnType("double");
+
+                b.Property(x => x.CreateTime).HasColumnType("datetime");
+                b.Property(x => x.Comment).HasMaxLength(500);
+            });
         }
     }
 }

@@ -24,6 +24,8 @@ namespace EMR.Domain.Shared
 
             public const string Team = "Teams";
             public const string TeamWow = "TeamWows";
+            public const string TeamDiscount = "TeamDiscount";
+            public const string TeamExpend = "TeamExpend";
 
             public const string User = "Users";
         }

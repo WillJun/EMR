@@ -3,5 +3,56 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<style>
+    .alert-warning  {
+    
+    border-radius: 20px;
+}
+</style>
+<div class="excharges" style=" margin: 10px 0px;">
+    <script id="excharges_tmpl" type="text/template">
+        {{each result}}
 
+     <div class="alert alert-warning " role="alert">
+          <h4 class="alert-heading">￥{{$value.amount}}</h4>
+          <hr>
+          <p><span style="font-weight: bold">{{$value.sourceName}}</span>[{{$value.comment}}]</p>
+          <hr>
+          <p>{{$value.serialNumber}}</p>
+          <hr>
+          <p class="mb-0">{{$value.createTime}}</p>
+    </div>
+
+        {{/each}}
+    </script>
+
+   
+
+</div>
+<div class="spinnerdiv justify-content-center" style="top: 40%;
+    position: absolute;
+    left: 45%;">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+ <script>
+     var userid=$.cookie("userid");
+     var teamid=$.cookie("teamid");
+     $(function(){
+         if(userid==""){
+              location.href = "/Acount/Index";
+          }
+         axios.get(api_domain+'/TeamBuilding/personalrecharge/user?id='+userid).then(function (response) {
+                if (response.data.success) {
+                     var data = { "result": response.data.result };
+                    var html = template("excharges_tmpl", data);
+                    document.querySelector('.excharges').innerHTML = html;
+                     $(".spinnerdiv").hide();
+               }
+           })
+         
+
+
+        })
+    </script>

@@ -23,7 +23,11 @@ namespace EMR.Application.TeamBuilding.Impl
 
         private readonly ITeamWowRepository _teamwowRepository;
 
-        public TeamBuildingService(IUserRepository userRepository, ITeamRepository teamRepository, ISalesQuotaRepository salesquotaRepository, IPersonalRechargeRepository personalrechargeRepository, IPersonalExpenditureRepository personalexpenditureRepository, ITeamWowRepository teamwowRepository)
+        private readonly ITeamExpendRepository _teamexpendRepository;
+
+        private readonly ITeamDiscountRepository _teamdiscountRepository;
+
+        public TeamBuildingService(IUserRepository userRepository, ITeamRepository teamRepository, ISalesQuotaRepository salesquotaRepository, IPersonalRechargeRepository personalrechargeRepository, IPersonalExpenditureRepository personalexpenditureRepository, ITeamWowRepository teamwowRepository, ITeamExpendRepository teamexpendRepository, ITeamDiscountRepository teamdiscountRepository)
         {
             _userRepository = userRepository;
             _teamRepository = teamRepository;
@@ -31,6 +35,8 @@ namespace EMR.Application.TeamBuilding.Impl
             _personalrechargeRepository = personalrechargeRepository;
             _personalexpenditureRepository = personalexpenditureRepository;
             _teamwowRepository = teamwowRepository;
+            _teamexpendRepository = teamexpendRepository;
+            _teamdiscountRepository = teamdiscountRepository;
         }
     }
 }

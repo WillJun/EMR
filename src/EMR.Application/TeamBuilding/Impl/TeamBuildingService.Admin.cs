@@ -33,6 +33,13 @@ namespace EMR.Application.TeamBuilding.Impl
         {
             var result = new ServiceResult();
 
+            var countReult = await QueryUserWowCountsByUserAsync(input.UserId);
+            if (countReult.Result.Count >= 3)
+            {
+                result.IsFailed(ResponseText.WOW_TIMES_LIMIT);
+                return result;
+            }
+
             var tw = ObjectMapper.Map<EditTeamWowInput, TeamWow>(input);
 
             await _teamwowRepository.InsertAsync(tw, true);
@@ -82,7 +89,33 @@ namespace EMR.Application.TeamBuilding.Impl
             tw.Balance = input.Balance;
             tw.IsOverspend = input.IsOverspend;
             await _userRepository.UpdateAsync(tw, true);
-            result.IsSuccess(ResponseText.DELETE_SUCCESS);
+            result.IsSuccess(ResponseText.UPDATE_SUCCESS);
+            return result;
+        }
+
+        /// <summary>
+        /// 更新折扣状态
+        /// </summary>
+        /// <param name="id"> </param>
+        /// <returns> </returns>
+        public async Task<ServiceResult> UpdateTeamDiscountAsync(EditTeamDiscountInput input)
+        {
+            var result = new ServiceResult();
+
+            var tw = await _teamdiscountRepository.FindAsync(input.Id);
+            if (null == tw)
+            {
+                result.IsFailed(ResponseText.WHAT_NOT_EXIST.FormatWith("Id", input.Id));
+                return result;
+            }
+
+            tw.IsDisable = input.IsDisable;
+            tw.Discount = input.Discount;
+            tw.FullAmount = input.FullAmount;
+            tw.Discription = input.Discription;
+
+            await _teamdiscountRepository.UpdateAsync(tw, true);
+            result.IsSuccess(ResponseText.UPDATE_SUCCESS);
             return result;
         }
 
@@ -228,6 +261,69 @@ namespace EMR.Application.TeamBuilding.Impl
             }
 
             await UpdateUserAsync(ui);
+
+            result.IsSuccess(ResponseText.INSERT_SUCCESS);
+            return result;
+        }
+
+        public async Task<ServiceResult> TeamExpendToUserAsync(EditTeamExpendInput input)
+        {
+            var result = new ServiceResult();
+
+            var obj = await QueryTeamSalesQuotasByTeamAsync(input.TeamId);
+            double totalincome = obj.Result.TotalIncome;
+            if (totalincome < input.Expend)
+            {
+                result.IsFailed(ResponseText.BALANCE_IS_NONE);
+                return result;
+            }
+
+            var userresult = await QueryUsersByTeamAsync(input.TeamId);
+
+            var users = userresult.Result;
+
+            var opuser = users.Where(p => p.Id == input.UserId).FirstOrDefault();
+            if (opuser == null)
+            {
+                result.IsFailed(ResponseText.USER_ERROR);
+                return result;
+            }
+            if (!opuser.IsLeader)
+            {
+                result.IsFailed(ResponseText.RIGHT_LIMIT);
+                return result;
+            }
+            Random rd = new Random();
+            DateTime time = DateTime.Now;
+            var SerialNumber = time.ToString("yyyyMMddHHmmss") + rd.Next(0, 9999).ToString("0000");
+
+            input.SerialNumber = SerialNumber;
+            input.Comment = "团队分钱";
+            input.CreateTime = DateTime.Now;
+            double amount = input.Expend / users.Count();
+            foreach (var item in users)
+            {
+                EditUserInput ui = new EditUserInput();
+                ui.Id = item.Id;
+                ui.Balance = item.Balance;
+
+                EditPersonalRechargeInput editPersonalRechargeInput = new EditPersonalRechargeInput();
+                editPersonalRechargeInput.Amount = amount;
+                editPersonalRechargeInput.SerialNumber = SerialNumber;
+                editPersonalRechargeInput.Comment = "团队分钱";
+                editPersonalRechargeInput.CreateTime = time;
+                editPersonalRechargeInput.UserId = item.Id;
+
+                editPersonalRechargeInput.SourceId = input.TeamId;
+                var pr = ObjectMapper.Map<EditPersonalRechargeInput, PersonalRecharge>(editPersonalRechargeInput);
+                await _personalrechargeRepository.InsertAsync(pr);
+                ui.Balance += amount;
+                ui.IsOverspend = false;
+                await UpdateUserAsync(ui);
+            }
+
+            var te = ObjectMapper.Map<EditTeamExpendInput, TeamExpend>(input);
+            await _teamexpendRepository.InsertAsync(te);
 
             result.IsSuccess(ResponseText.INSERT_SUCCESS);
             return result;

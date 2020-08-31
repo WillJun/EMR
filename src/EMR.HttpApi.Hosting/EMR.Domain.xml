@@ -194,6 +194,13 @@
             流水号
             </summary>
         </member>
+        <member name="M:EMR.Domain.TeamBuilding.Repositories.ITeamDiscountRepository.BulkInsertAsync(System.Collections.Generic.IEnumerable{EMR.Domain.TeamBuilding.TeamDiscount})">
+            <summary>
+            批量插入
+            </summary>
+            <param name="teamdiscounts"> </param>
+            <returns> </returns>
+        </member>
         <member name="M:EMR.Domain.TeamBuilding.Repositories.ITeamRepository.BulkInsertAsync(System.Collections.Generic.IEnumerable{EMR.Domain.TeamBuilding.Team})">
             <summary>
             批量插入
@@ -209,6 +216,11 @@
             <returns> </returns>
         </member>
         <member name="P:EMR.Domain.TeamBuilding.SalesQuota.SerialNumber">
+            <summary>
+            流水号
+            </summary>
+        </member>
+        <member name="P:EMR.Domain.TeamBuilding.TeamExpend.SerialNumber">
             <summary>
             流水号
             </summary>

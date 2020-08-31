@@ -17,6 +17,7 @@ namespace EMR.Application
             CreateMap<EditPersonalExpenditureInput, PersonalExpenditure>().ForMember(x => x.Id, opt => opt.Ignore());
             CreateMap<EditPersonalRechargeInput, PersonalRecharge>().ForMember(x => x.Id, opt => opt.Ignore());
             CreateMap<EditSalesQuotaInput, SalesQuota>().ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<EditTeamExpendInput, TeamExpend>().ForMember(x => x.Id, opt => opt.Ignore());
         }
     }
 }

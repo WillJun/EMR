@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "SalesQuota";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 style="    text-align: center;
+    color: white;">团队收入排行榜</h1>
+<div class="salesquotas" style=" margin: 10px 0px;">
+    <script id="salesquotas_tmpl" type="text/template">
+        {{each result}}
+       <div style="line-height: 40px;background-color: blueviolet;
+        padding: 0px 10px;
+    margin: 10px 0px;"> <label style="width:70%">{{$value.teamName}}</label><span id="{{$value.id}}"  style="font-size: 30px;
+    color: aliceblue;
+    text-align: center;"">￥{{$value.totalIncome}}</div>
+        {{/each}}
+    </script>
+</div>
+<div class="spinnerdiv justify-content-center" style="top: 40%;
+    position: absolute;
+    left: 45%;">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+ <script>
+     var userid=$.cookie("userid");
+     var teamid=$.cookie("teamid");
+
+
+
+     $(function(){
+         if(userid==""){
+              location.href = "/Acount/Index";
+          }
+         axios.get(api_domain+'/TeamBuilding/salesquotas').then(function (response) {
+                if (response.data.success) {
+                     var data = { "result": response.data.result };
+                    var html = template("salesquotas_tmpl", data);
+                    document.querySelector('.salesquotas').innerHTML = html;
+                    $(".spinnerdiv").hide();
+               }
+           })//.catch(x => location.href = "/");
+         
+
+
+        }) 
+    </script>

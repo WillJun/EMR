@@ -111,6 +111,7 @@ namespace EMR.Application.TeamBuilding.Impl
                         orderby u.IsLeader ascending
                         select new QueryUserDto
                         {
+                            Id = u.Id,
                             Account = u.Account,
                             IsLeader = u.IsLeader,
                             Balance = u.Balance,

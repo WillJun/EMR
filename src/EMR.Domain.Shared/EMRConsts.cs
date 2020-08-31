@@ -124,6 +124,11 @@ namespace EMR.Domain.Shared
             public const string INSERT_SUCCESS = "新增成功";
 
             /// <summary>
+            /// 3ic
+            /// </summary>
+            public const string WOW_TIMES_LIMIT = "点赞次数每人限3次";
+
+            /// <summary>
             /// 更新成功
             /// </summary>
             public const string UPDATE_SUCCESS = "更新成功";
@@ -172,6 +177,16 @@ namespace EMR.Domain.Shared
             /// 参数错误
             /// </summary>
             public const string PARAMETER_ERROR = "参数错误";
+
+            /// <summary>
+            /// 没有权限
+            /// </summary>
+            public const string RIGHT_LIMIT = "没有权限";
+
+            /// <summary>
+            /// 用户错误
+            /// </summary>
+            public const string USER_ERROR = "用户错误";
         }
     }
 }

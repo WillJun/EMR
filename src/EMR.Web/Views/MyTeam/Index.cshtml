@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight" style="padding: 40% 20px 20px 20px">
+            <div class="row">
+                   <div class="col">
+                    <div class="ibox float-e-margins">
+                    <div class="form-group row" style="color:white;font-size: xxx-large;">
+                             <label for="" class="col-6 col-form-label" id="TeamName" style="text-align: center;"></label>
+                                    <div class="col-6">
+                                      ￥<label class="col-form-label" id="Amount"  />
+                                    </div>
+
+                                </div>
+                        <div class="ibox-content">
+                            <form>
+                                  <div class="form-group row">
+                                    <label for="amount" class="col-3 col-form-label">金额</label>
+                                    <div class="col-9">
+                                      <input type="number" class="form-control" id="amount">
+                                    </div>
+                                  </div>
+                              
+                                <div class="form-group row justify-content-center">
+                                    <div class="col-2">
+                                        <input type="button" class="btn btn-sm btn-primary" id="btncommit" value="发钱"></input>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+           </div>
+       </div>
+<div class="spinnerdiv justify-content-center" style="top: 40%;
+    position: absolute;
+    left: 45%;display:none">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+
+<script>
+     var userid=$.cookie("userid");
+     var teamid=$.cookie("teamid");
+     var yyyy=0;
+     $(function(){
+         if(userid==""){
+              location.href = "/Acount/Index";
+          }
+
+           axios.get(api_domain+'/TeamBuilding/salesquota/team?id='+teamid).then(function (response) {
+                             if (response.data.success) 
+                             {
+                             $("#TeamName").html(response.data.result.teamName)
+                              $("#Amount").html(response.data.result.totalIncome)
+                              yyyy=response.data.result.totalIncome;
+                             }
+                             else{
+                                  alert("工号错误");
+                             }
+                         }).catch(x => console.log("error"));;
+
+
+
+
+
+          $("#btncommit").click(function(){
+                  
+                    if(  $("#amount").val()=="")
+                    {
+                        alert("请输入金额");return;
+                    }
+
+                    if(yyyy<$("#amount").val())
+                    {
+                        alert("余额不足");return;
+                    }
+
+                     $(".spinnerdiv").show();
+                     var data = {
+                            "teamId": teamid,
+                            "userId": userid,
+                            "expend":parseFloat($("#amount").val())
+                        };
+
+                        axios.post(api_domain+"/TeamBuilding/team/expend", data,).then(function (response) {
+                            if (response.data.success) {
+                                alert(response.data.message);
+                                location.reload();
+                            } else {
+                                alert(response.data.message);
+                            }
+                            $(".spinnerdiv").hide();
+                        });
+
+          });
+      })
+
+
+     
+
+</script>
