@@ -3,15 +3,16 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="wrapper wrapper-content animated fadeInRight" style="padding: 40% 20px 20px 20px">
+<div class="wrapper wrapper-content animated fadeInRight" style="padding: 5% 20px 20px 20px;color:white">
             <div class="row">
                    <div class="col">
                     <div class="ibox float-e-margins">
-                    <div class="form-group row" style="color:white;font-size: xxx-large;">
-                             <label for="" class="col-6 col-form-label" id="TeamName" style="text-align: center;"></label>
-                                    <div class="col-6">
-                                      ￥<label class="col-form-label" id="Amount"  />
-                                    </div>
+
+                      
+
+                    <div style="color:white;text-align: center; font-size: xx-large;">
+                             <h1 id="TeamName" style="margin: 20px 0px;"> </h1>
+                            <h1 id="TotalAmount" style="margin: 20px 0px;"> </h1>
 
                                 </div>
                         <div class="ibox-content">
@@ -39,7 +40,7 @@
                               
                                 <div class="form-group row justify-content-center">
                                     <div class="col-2">
-                                        <input type="button" class="btn btn-sm btn-primary" id="btnlogin" value="收款"></input>
+                                        <input type="button" class="btn btn-sm btn-primary" id="btnMoney" value="收款"></input>
                                     </div>
                                 </div>
                             </form>
@@ -67,19 +68,16 @@
            axios.get(api_domain+'/TeamBuilding/salesquota/team?id='+teamid).then(function (response) {
                              if (response.data.success) 
                              {
-                             $("#TeamName").html(response.data.result.teamName)
-                              $("#Amount").html(response.data.result.totalIncome)
+                             $("#TeamName").html(response.data.result.teamName);
+                              $("#TotalAmount").html('￥'+response.data.result.totalIncome);
                              }
                              else{
                                   alert("工号错误");
                              }
-                         }).catch(x => console.log("error"));;
+                         }).catch(x => console.log("error"));
 
 
-
-
-
-          $("#btnlogin").click(function(){
+          $("#btnMoney").click(function(){
                    if($("#account").val()=="")
                     {
                         alert("请输入工号");return;
@@ -119,6 +117,9 @@
       function GetUserInfo(o)
       {
           var account=$(o).val();
+
+          if(account!=""){
+
            axios.get(api_domain+'/TeamBuilding/user/info?account='+account).then(function (response) {
                 if (response.data.success) {
                     var total=0;
@@ -135,6 +136,7 @@
                     $("#shengyu").html(yyyy);
                }
            })
+       }
          
       }
 
