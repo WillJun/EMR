@@ -17,31 +17,39 @@
                                 </div>
                         <div class="ibox-content">
                             <form>
-                                
+
 
                                 <div class="form-group row">
                                     <label for="account" class="col-3 col-form-label">工号</label>
                                     <div class="col-9">
-                                      <input type="text"  class="form-control" id="account" onblur="GetUserInfo(this)" required />
+                                        <input type="text" class="form-control" id="account" onblur="GetUserInfo(this)" required />
                                     </div>
                                 </div>
-                                 <div class="form-group row">
-                                    <label   class="col-3 col-form-label">余额</label>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label">余额</label>
                                     <div class="col-9">
-                                      <label  class="col-form-label" id="shengyu" style="color:white;font-size: xxx-large;"/>
+                                        <label class="col-form-label" id="shengyu" style="color:white;font-size: xxx-large;" />
                                     </div>
                                 </div>
-                                  <div class="form-group row">
+                                <div class="form-group row">
                                     <label for="amount" class="col-3 col-form-label">金额</label>
                                     <div class="col-9">
-                                      <input type="number" class="form-control" id="amount">
+                                        <input type="number" class="form-control" id="amount">
                                     </div>
-                                  </div>
-                              
+                                </div>
+
                                 <div class="form-group row justify-content-center">
                                     <div class="col-2">
                                         <input type="button" class="btn btn-sm btn-primary" id="btnMoney" value="收款"></input>
                                     </div>
+                                </div>
+
+
+                                <div class="videoDiv">
+                                    <video id="video-js-player" controls autoplay preload="auto">
+                                        <source src="https://www.drostatic.com/mobile/video/18931.mp4" type="video/mp4">
+                                    </video>
+
                                 </div>
                             </form>
                         </div>
@@ -64,6 +72,10 @@
          if(userid==""){
               location.href = "/Acount/Index";
           }
+         $('video').on('ended', function () {
+             $(this).hide();
+             $(".videoDiv").hide();
+         });
 
            axios.get(api_domain+'/TeamBuilding/salesquota/team?id='+teamid).then(function (response) {
                              if (response.data.success) 
@@ -134,13 +146,46 @@
                     });
                     yyyy=total-huafei;
                     $("#shengyu").html(yyyy);
+
+                    //TODO 首饰店 自动获取生日信息，隐藏销售信息 #TotalAmount
+                    var births = ['369438'
+                        , '295481'
+                        , '367241'
+                        , '362348'
+                        , '295430'
+                        , '361845'
+                        , '359063'
+                        , '295936'
+                        , '303034'
+                        , '363099'
+                        , '367347'
+                        , '295627'
+                        , '295520'
+                        , '295574'
+                        , '295629'
+                        , '300886'
+                        , '346383'
+                        , '350846'
+                        , '295420'
+                        , '295484'
+                    ]
+                    var superBirth = '295545';
+                    if (account == superBirth) {
+                        alert("亲爱的小伙伴，祝你生日快乐！你可以在本店免费带走一件30元以内的商品！");
+                        return;
+                    }
+                    var idx = births.indexOf(account);
+                    if (idx != -1) {
+                        alert("中奖啦！中奖啦！ 恭喜您中奖啦！收银台下小框里的礼物请自取一份！");
+                        return;
+                    }
                }
            })
 
 
-           //TODO 首饰店 自动获取生日信息，隐藏销售信息 #TotalAmount
+
+          }
+
        }
          
-      }
-
 </script>
