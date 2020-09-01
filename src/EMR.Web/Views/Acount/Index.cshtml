@@ -40,7 +40,11 @@
                 $("#btnlogin").click(function(){
                     if(  $("#account").val()=="")
                     {
-                        alert("请输入工号")
+                        swal({
+                            title: "error",
+                            text: "工号错误",
+                            type: "error"
+                            })
                     }
                     else
                     {
@@ -54,7 +58,13 @@
                                   location.href="/Wow/Index";
                              }
                              else{
-                                  alert("工号错误");
+                                 
+                                   swal({
+                                    title: "error",
+                                    text: "工号错误",
+                                    type: "error"
+                                    })
+                                
                              }
                          }).catch(x => console.log("error"));;
                     }

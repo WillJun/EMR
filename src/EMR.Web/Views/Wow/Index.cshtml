@@ -74,7 +74,14 @@
                             if (response.data.success) {
                                location.reload();
                             } else {
-                                alert(response.data.message);
+                               
+                                
+                                swal({
+                                    title: "error",
+                                    text: response.data.message,
+                                    type: "error"
+                                    })
+                                
                             }
                             $(".spinnerdiv").hide();
                         });
@@ -87,7 +94,11 @@
                             if (response.data.success) {
                                location.reload();
                             } else {
-                                alert(response.data.message);
+                                swal({
+                                    title: "error",
+                                    text: response.data.message,
+                                    type: "error"
+                                    })
                             }
                             $(".spinnerdiv").hide();
                         });  }

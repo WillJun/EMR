@@ -73,14 +73,28 @@
                   
                     if(  $("#amount").val()=="")
                     {
-                        alert("请输入金额");return;
+                        swal({
+                            title: "error",
+                            text: "请输入金额",
+                            type: "error"
+                        }
+                        , function () {
+                            return 
+                        });
                     }
 
-                    if(yyyy<$("#amount").val())
+                  else   if(yyyy<$("#amount").val())
                     {
-                        alert("余额不足");return;
+                        swal({
+                            title: "error",
+                            text: "余额不足",
+                            type: "error"
+                        }
+                        , function () {
+                            return
+                        });
                     }
-
+                    else {
                      $(".spinnerdiv").show();
                      var data = {
                             "teamId": teamid,
@@ -90,14 +104,28 @@
 
                         axios.post(api_domain+"/TeamBuilding/team/expend", data,).then(function (response) {
                             if (response.data.success) {
-                                alert(response.data.message);
-                                location.reload();
+
+                                  swal({
+                                        title: "Done",
+                                        text: response.data.message,
+                                        type: "success"
+                                    }
+                                    , function () {
+                                        location.reload();
+                                    });
+
+                                
                             } else {
-                                alert(response.data.message);
+                              
+                                  swal({
+                                    title: "error",
+                                    text: response.data.message,
+                                    type: "error"
+                                    })
                             }
                             $(".spinnerdiv").hide();
                         });
-
+                 }
           });
       })
 

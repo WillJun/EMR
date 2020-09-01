@@ -15,26 +15,32 @@
                             <h1 id="TotalAmount" style="margin: 20px 0px;"> </h1>
 
                                 </div>
-                        <div class="ibox-content">
+                        <div class="ibox-content" style="font-size: x-large;">
                             <form>
 
 
                                 <div class="form-group row">
                                     <label for="account" class="col-3 col-form-label">工号</label>
                                     <div class="col-9">
-                                        <input type="text" class="form-control" id="account" onblur="GetUserInfo(this)" required />
+                                        <input type="text" class="form-control" id="account" onblur="GetUserInfo(this)" style="font-size: x-large;" required />
+                                    </div>
+                                </div>
+                                 <div class="form-group row">
+                                    <label class="col-3 col-form-label">姓名</label>
+                                    <div class="col-9">
+                                        <label class="col-form-label" id="username" style="color:white;" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label">余额</label>
                                     <div class="col-9">
-                                        <label class="col-form-label" id="shengyu" style="color:white;font-size: xxx-large;" />
+                                        <label class="col-form-label" id="shengyu" style="color:red;font-size: x-large;" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="amount" class="col-3 col-form-label">金额</label>
                                     <div class="col-9">
-                                        <input type="number" class="form-control" id="amount">
+                                        <input type="number" class="form-control"  style="font-size: x-large;" id="amount">
                                     </div>
                                 </div>
 
@@ -45,8 +51,8 @@
                                 </div>
 
 
-                                <div class="videoDiv">
-                                    <video id="video-js-player" controls autoplay preload="auto">
+                                <div class="videoDiv" style="display:none;width: 100%;">
+                                    <video id="video-js-player" controls autoplay preload="auto" style="width: 100%;">
                                         <source src="https://www.drostatic.com/mobile/video/18931.mp4" type="video/mp4">
                                     </video>
 
@@ -83,28 +89,41 @@
                              $("#TeamName").html(response.data.result.teamName);
                               $("#TotalAmount").html('￥'+response.data.result.totalIncome);
                              }
-                             else{
-                                  alert("工号错误");
-                             }
+                             
                          }).catch(x => console.log("error"));
 
 
           $("#btnMoney").click(function(){
                    if($("#account").val()=="")
                     {
-                        alert("请输入工号");return;
+                        swal({
+                                    title: "error",
+                                    text: "请输入工号",
+                                    type: "error"
+                                    })
+                        
                     }
-                    if(  $("#amount").val()=="")
+                   else if(  $("#amount").val()=="")
                     {
-                        alert("请输入金额");return;
+                        
+                         swal({
+                                    title: "error",
+                                    text: "请输入金额",
+                                    type: "error"
+                                    })
                     }
 
-                    if(yyyy<$("#amount").val())
+                   else if(yyyy<$("#amount").val())
                     {
-                        alert("余额不足");return;
+                       
+                          swal({
+                                    title: "error",
+                                    text: "余额不足",
+                                    type: "error"
+                                    })
                     }
 
-                     $(".spinnerdiv").show();
+                   else{  $(".spinnerdiv").show();
                      var data = {
                             "teamId": teamid,
                             "operatorId": userid,
@@ -114,13 +133,25 @@
 
                         axios.post(api_domain+"/TeamBuilding/cost", data,).then(function (response) {
                             if (response.data.success) {
-                                alert(response.data.message);
-                                location.reload();
+                                    swal({
+                                        title: "Done",
+                                        text: response.data.message,
+                                        type: "success"
+                                    }
+                                    , function () {
+                                        location.reload();
+                                    });
                             } else {
-                                alert(response.data.message);
+                              
+                                 swal({
+                                    title: "error",
+                                    text: response.data.message,
+                                    type: "error"
+                                    })
                             }
                             $(".spinnerdiv").hide();
                         });
+                    }
 
           });
       })
@@ -137,47 +168,60 @@
                     var total=0;
                     var huafei=0;
                     $.each(response.data.result.personalRecharges,function(index,item){
-                    total=total+item.amount;
+                      total=total+item.amount;
                     
                     });
                      $.each(response.data.result.personalExpenditures,function(index,item){
-                    huafei=huafei+item.expend;
+                        huafei=huafei+item.expend;
                     
                     });
                     yyyy=total-huafei;
-                    $("#shengyu").html(yyyy);
+                    $("#shengyu").html("￥"+yyyy);
+                     $("#username").html(response.data.result.userName);
 
-                    //TODO 首饰店 自动获取生日信息，隐藏销售信息 #TotalAmount
-                    var births = ['369438'
-                        , '295481'
-                        , '367241'
-                        , '362348'
-                        , '295430'
-                        , '361845'
-                        , '359063'
-                        , '295936'
-                        , '303034'
-                        , '363099'
-                        , '367347'
-                        , '295627'
-                        , '295520'
-                        , '295574'
-                        , '295629'
-                        , '300886'
-                        , '346383'
-                        , '350846'
-                        , '295420'
-                        , '295484'
-                    ]
-                    var superBirth = '295545';
-                    if (account == superBirth) {
-                        alert("亲爱的小伙伴，祝你生日快乐！你可以在本店免费带走一件30元以内的商品！");
-                        return;
-                    }
-                    var idx = births.indexOf(account);
-                    if (idx != -1) {
-                        alert("中奖啦！中奖啦！ 恭喜您中奖啦！收银台下小框里的礼物请自取一份！");
-                        return;
+                    if(teamid==""){
+
+                        //TODO 首饰店 自动获取生日信息，隐藏销售信息 #TotalAmount
+                        var births = ['369438'
+                            , '295481'
+                            , '367241'
+                            , '362348'
+                            , '295430'
+                            , '361845'
+                            , '359063'
+                            , '295936'
+                            , '303034'
+                            , '363099'
+                            , '367347'
+                            , '295627'
+                            , '295520'
+                            , '295574'
+                            , '295629'
+                            , '300886'
+                            , '346383'
+                            , '350846'
+                            , '295420'
+                            , '295484'
+                        ]
+                        var superBirth = '295545';
+                        if (account == superBirth) {
+                           
+                              swal({
+                                    title: "Good~",
+                                    text: "亲爱的小伙伴，祝你生日快乐！你可以在本店免费带走一件30元以内的商品！",
+                                    type: "success"
+                                    })
+                        } else{
+                        var idx = births.indexOf(account);
+                        if (idx != -1) {
+                          
+                               swal({
+                                    title: "Good~",
+                                    text: "中奖啦！中奖啦！ 恭喜您中奖啦！收银台下小框里的礼物请自取一份！",
+                                    type: "success"
+                                    })
+                        }
+                      }
                     }
                }
            })
