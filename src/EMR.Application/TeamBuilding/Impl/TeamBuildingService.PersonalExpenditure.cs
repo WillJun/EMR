@@ -57,7 +57,9 @@ namespace EMR.Application.TeamBuilding.Impl
                         on user.Id equals pe.UserId
                         into lj
                         from ls in lj.DefaultIfEmpty(new Domain.TeamBuilding.PersonalExpenditure())
+                        where team.IsOrganiser == false
                         group (ls, team) by new { team.TeamName } into g
+
                         select new TeamExpenditureTotalDto
                         {
                             TeamName = g.Key.TeamName,

@@ -304,7 +304,7 @@ a {
 * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
+/*
 input[type="checkbox"],
 input[type="radio"] {
     display: none;
@@ -339,7 +339,7 @@ input[type="radio"] {
     input[type="radio"]:not(:checked) + label:after {
         transition: all 0.3s ease-in-out;
     }
-
+*/
 .switch_default + label {
     background-color: #e6e6e6;
     border-radius: 7px;

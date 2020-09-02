@@ -111,6 +111,7 @@ namespace EMR.HttpApi.Controllers
         }
 
         /// <summary>
+        /// 发改委发钱
         /// </summary>
         /// <returns> </returns>
         [HttpPost]
@@ -119,6 +120,19 @@ namespace EMR.HttpApi.Controllers
         public async Task<ServiceResult> InsertFGWMoneyAsync([FromBody] EditFGWMoneyInput input)
         {
             return await _tbService.InsertFGWMoneyAsync(input);
+        }
+
+
+        /// <summary>
+        /// 客户自助在线支付
+        /// </summary>
+        /// <returns> </returns>
+        [HttpPost]
+        [Route("custom/pay")]
+        [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
+        public async Task<ServiceResult> InsertCustomPaymentAsync([FromBody] EditCustomPaymentInput input)
+        {
+            return await _tbService.InsertCustomPaymentAsync(input);
         }
 
         /// <summary>

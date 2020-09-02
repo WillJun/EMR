@@ -13,5 +13,10 @@ namespace EMR.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult GiveOut()
+        {
+            return View();
+        }
     }
 }

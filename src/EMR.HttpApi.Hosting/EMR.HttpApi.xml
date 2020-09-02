@@ -46,6 +46,18 @@
             </summary>
             <returns> </returns>
         </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertFGWMoneyAsync(EMR.Application.Contracts.TeamBuilding.Input.EditFGWMoneyInput)">
+            <summary>
+            发改委发钱
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertCustomPaymentAsync(EMR.Application.Contracts.TeamBuilding.Input.EditCustomPaymentInput)">
+            <summary>
+            客户自助在线支付
+            </summary>
+            <returns> </returns>
+        </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.UpdateTeamDiscountAsync(EMR.Application.Contracts.TeamBuilding.Input.EditTeamDiscountInput)">
             <summary>
             折扣

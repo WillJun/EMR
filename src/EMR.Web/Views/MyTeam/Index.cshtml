@@ -5,131 +5,130 @@
 }
 
 <div class="wrapper wrapper-content animated fadeInRight" style="padding: 40% 20px 20px 20px">
-            <div class="row">
-                   <div class="col">
-                    <div class="ibox float-e-margins">
-                    <div class="form-group row" style="color:white;font-size: xxx-large;">
-                             <label for="" class="col-6 col-form-label" id="TeamName" style="text-align: center;"></label>
-                                    <div class="col-6">
-                                      ￥<label class="col-form-label" id="Amount"  />
-                                    </div>
+    <div class="row">
+        <div class="col">
+            <div class="ibox float-e-margins">
+                <div class="ibox float-e-margins">
+                    <div style="        color: white;
+        text-align: center;
+        font-size: 12px
+">
+                        <h1 id="TeamName" style="margin: 20px 0px;"> </h1>
+                        <h1 id="TotalAmount" style="margin: 20px 0px;"> </h1>
 
+                    </div>
+                    <div class="ibox-content">
+                        <form>
+                            <div class="form-group row">
+                                <label for="amount" class="col-3 col-form-label">金额</label>
+                                <div class="col-9">
+                                    <input type="number" class="form-control" id="amount">
                                 </div>
-                        <div class="ibox-content">
-                            <form>
-                                  <div class="form-group row">
-                                    <label for="amount" class="col-3 col-form-label">金额</label>
-                                    <div class="col-9">
-                                      <input type="number" class="form-control" id="amount">
-                                    </div>
-                                  </div>
-                              
-                                <div class="form-group row justify-content-center">
-                                    <div class="col-2">
-                                        <input type="button" class="btn btn-sm btn-primary" id="btncommit" value="发钱"></input>
-                                    </div>
+                            </div>
+
+                            <div class="form-group row justify-content-center">
+                                <div class="col-2">
+                                    <input type="button" class="btn btn-sm btn-primary" id="btncommit" value="发钱"></input>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-           </div>
-       </div>
-<div class="spinnerdiv justify-content-center" style="top: 40%;
+            </div>
+        </div>
+    </div>
+    <div class="spinnerdiv justify-content-center" style="top: 40%;
     position: absolute;
     left: 45%;display:none">
-  <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 
 
-<script>
-     var userid=$.cookie("userid");
-     var teamid=$.cookie("teamid");
-     var yyyy=0;
-     $(function(){
-         if(userid==""){
-              location.href = "/Acount/Index";
-          }
+    <script>
+        var userid = $.cookie("userid");
+        var teamid = $.cookie("teamid");
+        var yyyy = 0;
+        $(function () {
+            if (userid == "") {
+                location.href = "/Acount/Index";
+            }
 
-           axios.get(api_domain+'/TeamBuilding/salesquota/team?id='+teamid).then(function (response) {
-                             if (response.data.success) 
-                             {
-                             $("#TeamName").html(response.data.result.teamName)
-                              $("#Amount").html(response.data.result.totalIncome)
-                              yyyy=response.data.result.totalIncome;
-                             }
-                             else{
-                                  alert("工号错误");
-                             }
-                         }).catch(x => console.log("error"));;
-
-
+            axios.get(api_domain + '/TeamBuilding/salesquota/team?id=' + teamid).then(function (response) {
+                if (response.data.success) {
+                    $("#TeamName").html(response.data.result.teamName)
+                    $("#TotalAmount").html("￥" + response.data.result.totalIncome)
+                    yyyy = response.data.result.totalIncome;
+                }
+                else {
+                    alert("工号错误");
+                }
+            }).catch(x => console.log("error"));;
 
 
 
-          $("#btncommit").click(function(){
-                  
-                    if(  $("#amount").val()=="")
-                    {
-                        swal({
-                            title: "error",
-                            text: "请输入金额",
-                            type: "error"
-                        }
-                        , function () {
-                            return 
-                        });
+
+
+            $("#btncommit").click(function () {
+
+                if ($("#amount").val() == "") {
+                    swal({
+                        title: "error",
+                        text: "请输入金额",
+                        type: "error"
                     }
-
-                  else   if(yyyy<$("#amount").val())
-                    {
-                        swal({
-                            title: "error",
-                            text: "余额不足",
-                            type: "error"
-                        }
                         , function () {
                             return
                         });
+                }
+
+                else if (yyyy < $("#amount").val()) {
+                    swal({
+                        title: "error",
+                        text: "余额不足",
+                        type: "error"
                     }
-                    else {
-                     $(".spinnerdiv").show();
-                     var data = {
-                            "teamId": teamid,
-                            "userId": userid,
-                            "expend":parseFloat($("#amount").val())
-                        };
-
-                        axios.post(api_domain+"/TeamBuilding/team/expend", data,).then(function (response) {
-                            if (response.data.success) {
-
-                                  swal({
-                                        title: "Done",
-                                        text: response.data.message,
-                                        type: "success"
-                                    }
-                                    , function () {
-                                        location.reload();
-                                    });
-
-                                
-                            } else {
-                              
-                                  swal({
-                                    title: "error",
-                                    text: response.data.message,
-                                    type: "error"
-                                    })
-                            }
-                            $(".spinnerdiv").hide();
+                        , function () {
+                            return
                         });
-                 }
-          });
-      })
+                }
+                else {
+                    $(".spinnerdiv").show();
+                    var data = {
+                        "teamId": teamid,
+                        "userId": userid,
+                        "expend": parseFloat($("#amount").val())
+                    };
+
+                    axios.post(api_domain + "/TeamBuilding/team/expend", data,).then(function (response) {
+                        if (response.data.success) {
+
+                            swal({
+                                title: "Done",
+                                text: response.data.message,
+                                type: "success"
+                            }
+                                , function () {
+                                    location.reload();
+                                });
 
 
-     
+                        } else {
 
-</script>
+                            swal({
+                                title: "error",
+                                text: response.data.message,
+                                type: "error"
+                            })
+                        }
+                        $(".spinnerdiv").hide();
+                    });
+                }
+            });
+        })
+
+
+
+
+    </script>

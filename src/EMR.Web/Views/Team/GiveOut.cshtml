@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewData["Title"] = "GiveOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight" style="padding: 5% 20px 20px 20px;color:white">
+    <div class="row">
+        <div class="col">
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-content" style="font-size: x-large;">
+                    <form>
+
+
+                        <label for="name">选择奖励店</label>
+
+                        <div class="teams">
+
+                            <script id="teams_tmpl" type="text/template">
+                                {{each result}}
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="{{$value.id}}" name="team" />{{$value.teamName}}</label>
+                                </div>
+                                {{/each}}
+                            </script>
+                        </div>
+
+
+
+
+                        <div class="form-group row">
+                            <label for="amount" class="col-3 col-form-label">金额</label>
+                            <div class="col-9">
+                                <input type="number" class="form-control" style="font-size: x-large;" id="amount">
+                            </div>
+                        </div>
+
+                        <div class="form-group row justify-content-center">
+                            <div class="col-2">
+                                <input type="button" class="btn btn-sm btn-primary" id="btnMoney" value="付款"></input>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="spinnerdiv justify-content-center" style="top: 40%;
+    position: absolute;
+    left: 45%;display:none">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+
+<script>
+    var userid = $.cookie("userid");
+    var teamid = $.cookie("teamid");
+    var account = $.cookie("account");
+    var yyyy = 0;
+    $(function () {
+        if (userid == "") {
+            location.href = "/Acount/Index";
+        }
+        $('video').on('ended', function () {
+            $(this).hide();
+            $(".videoDiv").hide();
+        });
+
+
+
+        axios.get(api_domain + '/TeamBuilding/teams').then(function (response) {
+            if (response.data.success) {
+                var data = { "result": response.data.result.filter(p => p.isOrganiser == false) };
+                var html = template("teams_tmpl", data);
+                document.querySelector('.teams').innerHTML = html;
+
+
+
+            }
+        })
+
+        $("#btnMoney").click(function () {
+
+            var checkteamids = [];
+            $.each($("input[name='team']:checked"), function () {
+                checkteamids.push($(this).val());
+
+            });
+
+            var ids = checkteamids.join(',');
+
+            if (ids == "") {
+
+                swal({
+                    title: "error",
+                    text: "请选择团队",
+                    type: "error"
+                })
+            }
+            else if ($("#amount").val() == "") {
+
+                swal({
+                    title: "error",
+                    text: "请输入金额",
+                    type: "error"
+                })
+            }
+
+
+
+            else {
+                $(".spinnerdiv").show();
+                var data = {
+                    "sourceId": teamid,
+                    "teamIds": ids,
+                    "amount": parseFloat($("#amount").val())
+                };
+
+                axios.post(api_domain + "/TeamBuilding/fgw/bill", data).then(function (response) {
+                    if (response.data.success) {
+                        swal({
+                            title: "Done",
+                            text: response.data.message,
+                            type: "success"
+                        }
+                            , function () {
+                                location.reload();
+                            });
+                    } else {
+
+                        swal({
+                            title: "error",
+                            text: response.data.message,
+                            type: "error"
+                        })
+                    }
+                    $(".spinnerdiv").hide();
+                });
+            }
+
+        });
+    })
+
+
+</script>

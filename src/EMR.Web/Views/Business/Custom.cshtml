@@ -1,45 +1,46 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Custom";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 <div class="wrapper wrapper-content animated fadeInRight" style="padding: 5% 20px 20px 20px;color:white">
     <div class="row">
         <div class="col">
             <div class="ibox float-e-margins">
 
-
-
-                <div style="        color: white;
-        text-align: center;
-        font-size: 12px
-">
-                    <h1 id="TeamName" style="margin: 20px 0px;"> </h1>
-                    <h1 id="TotalAmount" style="margin: 20px 0px;"> </h1>
+                <div class="form-group row" style="        color: white;
+        font-size: 12px;">
+                    <label for="" class="col-6 col-form-label" id="username" style="text-align: center;"></label>
+                    <div class="col-6">
+                        ￥<label class="col-form-label" id="shengyu" />
+                    </div>
 
                 </div>
+
+
                 <div class="ibox-content" style="font-size: x-large;">
                     <form>
 
 
-                        <div class="form-group row">
-                            <label for="account" class="col-3 col-form-label">工号</label>
-                            <div class="col-9">
-                                <input type="text" class="form-control" id="account" onblur="GetUserInfo(this)" style="font-size: x-large;" required />
-                            </div>
+                        <label for="name">选择消费的店</label>
+
+                        <div class="teams">
+
+                            <script id="teams_tmpl" type="text/template">
+                                {{each result}}
+
+                                <div class="radio">
+                                    <label><input type="radio" value="{{$value.id}}" name="team" />{{$value.teamName}}</label>
+                                </div>
+                                {{/each}}
+                            </script>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-3 col-form-label">姓名</label>
-                            <div class="col-9">
-                                <label class="col-form-label" id="username" style="color:white;" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-3 col-form-label">余额</label>
-                            <div class="col-9">
-                                <label class="col-form-label" id="shengyu" style="color:red;font-size: x-large;" />
-                            </div>
-                        </div>
+
+
+
+
                         <div class="form-group row">
                             <label for="amount" class="col-3 col-form-label">金额</label>
                             <div class="col-9">
@@ -49,17 +50,11 @@
 
                         <div class="form-group row justify-content-center">
                             <div class="col-2">
-                                <input type="button" class="btn btn-sm btn-primary" id="btnMoney" value="收款"></input>
+                                <input type="button" class="btn btn-sm btn-primary" id="btnMoney" value="付款"></input>
                             </div>
                         </div>
 
 
-                        <div class="videoDiv" style="display:none;width: 100%;">
-                            <video id="video-js-player" controls autoplay preload="auto" style="width: 100%;">
-                                <source src="https://www.drostatic.com/mobile/video/18931.mp4" type="video/mp4">
-                            </video>
-
-                        </div>
                     </form>
                 </div>
             </div>
@@ -73,9 +68,12 @@
         <span class="sr-only">Loading...</span>
     </div>
 </div>
+
+
 <script>
     var userid = $.cookie("userid");
     var teamid = $.cookie("teamid");
+    var account = $.cookie("account");
     var yyyy = 0;
     $(function () {
         if (userid == "") {
@@ -86,23 +84,51 @@
             $(".videoDiv").hide();
         });
 
-        axios.get(api_domain + '/TeamBuilding/salesquota/team?id=' + teamid).then(function (response) {
+        axios.get(api_domain + '/TeamBuilding/user/info?account=' + account).then(function (response) {
             if (response.data.success) {
-                $("#TeamName").html(response.data.result.teamName);
-                $("#TotalAmount").html('￥' + response.data.result.totalIncome);
+                var total = 0;
+                var huafei = 0;
+                $.each(response.data.result.personalRecharges, function (index, item) {
+                    total = total + item.amount;
+
+                });
+                $.each(response.data.result.personalExpenditures, function (index, item) {
+                    huafei = huafei + item.expend;
+
+                });
+                yyyy = total - huafei;
+                $("#shengyu").html(yyyy);
+                $("#username").html(response.data.result.userName);
+
+
             }
+        })
 
-        }).catch(x => console.log("error"));
 
+
+        axios.get(api_domain + '/TeamBuilding/teams').then(function (response) {
+            if (response.data.success) {
+                var data = { "result": response.data.result.filter(p => p.isOrganiser == false) };
+                var html = template("teams_tmpl", data);
+                document.querySelector('.teams').innerHTML = html;
+
+
+
+            }
+        })
 
         $("#btnMoney").click(function () {
-            if ($("#account").val() == "") {
+
+
+            var checkteamid = $("input[name='team']:checked").val();
+
+            if (checkteamid == undefined) {
+
                 swal({
                     title: "error",
-                    text: "请输入工号",
+                    text: "请选择团队",
                     type: "error"
                 })
-
             }
             else if ($("#amount").val() == "") {
 
@@ -125,13 +151,13 @@
             else {
                 $(".spinnerdiv").show();
                 var data = {
-                    "teamId": teamid,
-                    "operatorId": userid,
-                    "account": $("#account").val(),
+                    "teamId": checkteamid,
+                    "userid": userid,
+                    "account": account,
                     "amount": parseFloat($("#amount").val())
                 };
 
-                axios.post(api_domain + "/TeamBuilding/cost", data,).then(function (response) {
+                axios.post(api_domain + "/TeamBuilding/custom/pay", data).then(function (response) {
                     if (response.data.success) {
                         swal({
                             title: "Done",

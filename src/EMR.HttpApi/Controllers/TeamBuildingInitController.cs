@@ -75,7 +75,16 @@ namespace EMR.HttpApi.Controllers
                 }
                 u.IsLeader = item.IsLeader.ToString().Trim() == "0" ? false : true;
                 u.IsOverspend = false;
-                u.Balance = 280.00;
+
+                if (teamname == "发改委" || teamname == "评委")
+                {
+                    u.Balance = 700.00;
+                }
+                else
+                {
+                    u.Balance = 280.00;
+                }
+
                 userlist.Add(u);
 
                 PersonalRecharge pr = new PersonalRecharge(_guidGenerator.Create());
@@ -83,7 +92,14 @@ namespace EMR.HttpApi.Controllers
                 pr.SerialNumber = time.ToString("yyyyMMddHHmmss") + rd.Next(0, 9999).ToString("0000");
                 pr.SourceId = SourceId;
                 pr.UserId = u.Id;
-                pr.Amount = 280.00;
+                if (teamname == "发改委" || teamname == "评委")
+                {
+                    pr.Amount = 700.00;
+                }
+                else
+                {
+                    pr.Amount = 280.00;
+                }
                 pr.Comment = "初始金额";
                 pr.CreateTime = time;
                 personalRecharges.Add(pr);
