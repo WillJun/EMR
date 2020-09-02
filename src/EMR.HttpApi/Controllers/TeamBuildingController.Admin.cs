@@ -111,6 +111,17 @@ namespace EMR.HttpApi.Controllers
         }
 
         /// <summary>
+        /// </summary>
+        /// <returns> </returns>
+        [HttpPost]
+        [Route("fgw/bill")]
+        [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
+        public async Task<ServiceResult> InsertFGWMoneyAsync([FromBody] EditFGWMoneyInput input)
+        {
+            return await _tbService.InsertFGWMoneyAsync(input);
+        }
+
+        /// <summary>
         /// 折扣
         /// </summary>
         /// <returns> </returns>

@@ -77,5 +77,12 @@ namespace EMR.Application.TeamBuilding
         /// <param name="input"> </param>
         /// <returns> </returns>
         Task<ServiceResult> UpdateTeamDiscountAsync(EditTeamDiscountInput input);
+
+        /// <summary>
+        /// 发改委给团队发钱
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        Task<ServiceResult> InsertFGWMoneyAsync(EditFGWMoneyInput input);
     }
 }

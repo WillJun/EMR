@@ -187,18 +187,20 @@ namespace EMR.Application.TeamBuilding.Impl
                 return result;
             }
 
-            if (userResult.Result.IsOverspend)
-            {
-                result.IsFailed(ResponseText.BALANCE_IS_NONE);
-                return result;
-            }
+            //if (userResult.Result.IsOverspend)
+            //{
+            //    result.IsFailed(ResponseText.BALANCE_IS_NONE);
+            //    return result;
+            //}
 
             double cost = 0;
             var result1 = userResult.Result.PersonalExpenditures;
+            var result2 = userResult.Result.PersonalRecharges;
+            double Balance = result2.Sum(p => p.Amount);
             if (result1 != null)
             {
                 cost = result1.Sum(p => p.Expend);
-                if (userResult.Result.Balance - cost < input.Amount)
+                if (Balance - cost < input.Amount)
                 {
                     result.IsFailed(ResponseText.BALANCE_IS_NONE);
                     return result;
@@ -240,7 +242,7 @@ namespace EMR.Application.TeamBuilding.Impl
             EditUserInput ui = new EditUserInput();
             ui.Id = userResult.Result.Id;
             ui.Balance = userResult.Result.Balance;
-            if (count == 6 && userResult.Result.Balance == 280)
+            if (count == 6 && !ui.IsOverspend)
             {
                 EditPersonalRechargeInput editPersonalRechargeInput = new EditPersonalRechargeInput();
                 editPersonalRechargeInput.Amount = 50;
@@ -253,10 +255,6 @@ namespace EMR.Application.TeamBuilding.Impl
                 var pr = ObjectMapper.Map<EditPersonalRechargeInput, PersonalRecharge>(editPersonalRechargeInput);
                 await _personalrechargeRepository.InsertAsync(pr);
                 ui.Balance += 50;
-            }
-
-            if (ui.Balance - cost - input.Amount <= 0)
-            {
                 ui.IsOverspend = true;
             }
 
@@ -318,12 +316,70 @@ namespace EMR.Application.TeamBuilding.Impl
                 var pr = ObjectMapper.Map<EditPersonalRechargeInput, PersonalRecharge>(editPersonalRechargeInput);
                 await _personalrechargeRepository.InsertAsync(pr);
                 ui.Balance += amount;
-                ui.IsOverspend = false;
                 await UpdateUserAsync(ui);
             }
 
             var te = ObjectMapper.Map<EditTeamExpendInput, TeamExpend>(input);
             await _teamexpendRepository.InsertAsync(te);
+
+            result.IsSuccess(ResponseText.INSERT_SUCCESS);
+            return result;
+        }
+
+        /// <summary>
+        /// 发改委给团队发钱
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        public async Task<ServiceResult> InsertFGWMoneyAsync(EditFGWMoneyInput input)
+        {
+            var result = new ServiceResult();
+
+            var allteams = await QueryTeamsAsync();
+
+            var sourceteam = allteams.Result.Where(p => p.Id == input.SourceId).FirstOrDefault();
+
+            if (sourceteam == null)
+            {
+                result.IsFailed(ResponseText.RIGHT_LIMIT);
+                return result;
+            }
+            if (sourceteam.TeamName != "发改委")
+            {
+                result.IsFailed(ResponseText.RIGHT_LIMIT);
+                return result;
+            }
+
+            Random rd = new Random();
+            DateTime time = DateTime.Now;
+
+            foreach (string str in input.TeamIds.Split(','))
+            {
+                Guid TeamId = Guid.Parse(str);
+
+                var team = allteams.Result.Where(p => p.Id == TeamId).FirstOrDefault();
+                if (team != null)
+                {
+                    var alluser = await QueryUsersByTeamAsync(team.Id);
+                    var leader = alluser.Result.Where(p => p.IsLeader).FirstOrDefault();
+                    if (leader != null)
+                    {
+                        var SerialNumber = time.ToString("yyyyMMddHHmmss") + rd.Next(0, 9999).ToString("0000");
+                        EditSalesQuotaInput editSalesQuotaInput = new EditSalesQuotaInput()
+                        {
+                            Comment = "发改委奖励团队",
+                            CreateTime = time,
+                            Income = input.Amount,
+                            Operator = leader.Id,
+                            SerialNumber = SerialNumber,
+                            TeamId = TeamId
+                        };
+                        var sq = ObjectMapper.Map<EditSalesQuotaInput, SalesQuota>(editSalesQuotaInput);
+
+                        await _salesquotaRepository.InsertAsync(sq, true);
+                    }
+                }
+            }
 
             result.IsSuccess(ResponseText.INSERT_SUCCESS);
             return result;

@@ -3,12 +3,14 @@
 
 // Write your JavaScript code.
 
-var api_domain = 'https://localhost:44313'
+var api_domain = 'http://ap-flow.emersonnanjing.com:8006/api'
 
 //写Cookie
-function addCookie(objName, objValue, objHours) {
+function addCookie(objName, objValue, objHours)
+{
     var str = objName + "=" + escape(objValue); //编码
-    if (objHours > 0) {//为0时不设定过期时间，浏览器关闭时cookie自动消失
+    if (objHours > 0)
+    {//为0时不设定过期时间，浏览器关闭时cookie自动消失
         var date = new Date();
         var ms = objHours * 3600 * 1000;
         date.setTime(date.getTime() + ms);
@@ -18,9 +20,11 @@ function addCookie(objName, objValue, objHours) {
 }
 
 //读Cookie
-function getCookie(objName) {//获取指定名称的cookie的值
+function getCookie(objName)
+{//获取指定名称的cookie的值
     var arrStr = document.cookie.split("; ");
-    for (var i = 0; i < arrStr.length; i++) {
+    for (var i = 0; i < arrStr.length; i++)
+    {
         var temp = arrStr[i].split("=");
         if (temp[0] == objName) return unescape(temp[1]);  //解码
     }

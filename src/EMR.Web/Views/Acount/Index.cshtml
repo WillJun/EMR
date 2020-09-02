@@ -3,6 +3,15 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_NoMenuLayout.cshtml";
 }
+<style>
+.mycontent {
+        background: url(/img/bg_mobile.png) no-repeat;
+        background-size: 100% 100%;
+        height: 100%;
+        min-height: 100vh;
+      
+    }
+</style>
 <div class="wrapper wrapper-content animated fadeInRight" style="padding: 40% 20px 20px 20px">
             <div class="row">
                    <div class="col">
@@ -55,6 +64,7 @@
                                   teamid=response.data.result.teamInfo.id;
                                   $.cookie("userid",userid,{ expires: 7, path: '/' });
                                   $.cookie("teamid",teamid,{ expires: 7, path: '/' });
+                                  $.cookie("account",$("#account").val(),{ expires: 7, path: '/' });
                                   location.href="/Wow/Index";
                              }
                              else{
