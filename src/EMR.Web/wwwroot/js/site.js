@@ -31,3 +31,31 @@ function getCookie(objName)
     }
     return "";
 }
+
+//// 添加请求拦截器
+//axios.interceptors.request.use(function (config)
+//{
+//    // 在发送请求之前做些什么
+//    config =>
+//    {
+//        if (config.method == 'post')
+//        {
+//            config.data = {
+//                ...config.data,
+//                _t: Date.parse(new Date()) / 1000
+//            }
+//        } else if (config.method == 'get')
+//        {
+//            config.params = {
+//                _t: Date.parse(new Date()) / 1000,
+//                ...config.params
+//            }
+//        }
+
+//        return config
+//    }, function (error)
+//        {
+//            // 对请求错误做些什么
+//            return Promise.reject(error)
+//        }
+//});

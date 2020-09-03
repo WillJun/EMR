@@ -22,6 +22,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.7" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Data.OleDb" Version="4.7.1" />
+    <PackageReference Include="zxing-core" Version="0.14.0.2" />
   </ItemGroup>
 
 </Project>

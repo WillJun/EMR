@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewData["Title"] = "CustomQR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight" style="padding: 5% 20px 20px 20px;color:white">
+    <div class="row">
+        <div class="col">
+            <div class="ibox float-e-margins">
+
+                <div class="form-group row" style="        color: white;
+        font-size: 12px;">
+                    <label for="" class="col-6 col-form-label" id="username" style="text-align: center;"></label>
+                    <div class="col-6">
+                        ￥<label class="col-form-label" id="shengyu" />
+                    </div>
+
+                </div>
+
+
+                <div class="ibox-content" style="font-size: x-large;">
+                    <form>
+                        <div class="videoDiv" style="display:none;width: 100%;">
+                            <video id="video-js-player" controls autoplay preload="auto" style="width: 100%;">
+                                <source src="https://www.drostatic.com/mobile/video/18931.mp4" type="video/mp4">
+                            </video>
+
+                        </div>
+                        <div style="color: white;text-align: center;font-size: 12px">
+                          <h1 id="TeamName" style="margin: 20px 0px;"> </h1>
+                      </div>
+                        <div class="form-group row">
+                            <label for="amount" class="col-3 col-form-label">金额</label>
+                            <div class="col-9">
+                                <input type="number" class="form-control" style="font-size: x-large;" id="amount">
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <div class="col-2">
+                                <input type="button" class="btn btn-sm btn-primary" id="btnMoney" value="付款"></input>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="spinnerdiv justify-content-center" style="top: 40%;
+    position: absolute;
+    left: 45%;display:none">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<script>
+    var userid = $.cookie("userid");
+    var teamid = $.cookie("teamid");
+    var account = $.cookie("account");
+   var TargetId='@ViewBag.TargetId';
+    var yyyy = 0;
+    $(function () {
+        if (userid == "") {
+            location.href = "/Acount/Index?backUrl="+location.href;
+        }
+
+        if (TargetId == "") {
+            swal({
+                    title: "error",
+                    text: "二维码有误",
+                    type: "error"
+                }, , function () {
+                                    location.href = "/Acount/Index";
+                                })
+          
+        }
+        else{
+            axios.get(api_domain + '/TeamBuilding/salesquota/team?id=' + teamid).then(function (response) {
+                if (response.data.success) {
+                    $("#TeamName").html(response.data.result.teamName);
+                }
+
+            }).catch(x => console.log("error"));
+
+        }
+
+        $("#btnMoney").click(function () {
+
+
+           if ($("#amount").val() == "") {
+
+                swal({
+                    title: "error",
+                    text: "请输入金额",
+                    type: "error"
+                })
+            }
+
+            else if (yyyy < $("#amount").val()) {
+
+                swal({
+                    title: "error",
+                    text: "余额不足",
+                    type: "error"
+                })
+            }
+
+            else {
+                $(".spinnerdiv").show();
+                var data = {
+                    "teamId": TargetId,
+                    "userid": userid,
+                    "account": account,
+                    "amount": parseFloat($("#amount").val())
+                };
+
+                axios.post(api_domain + "/TeamBuilding/custom/pay", data).then(function (response) {
+                    if (response.data.success) {
+                        swal({
+                            title: "Done",
+                            text: response.data.message,
+                            type: "success"
+                        }
+                            , function () {
+                                 location.href = "/Expend/Index";
+                            });
+                    } else {
+
+                        swal({
+                            title: "error",
+                            text: response.data.message,
+                            type: "error"
+                        })
+                    }
+                    $(".spinnerdiv").hide();
+                });
+            }
+
+        });
+
+});

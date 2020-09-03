@@ -17,6 +17,7 @@ using EMR.Application.Contracts.TeamBuilding.Input;
 using EMR.Domain.TeamBuilding;
 using EMR.ToolKits.Base;
 using EMR.ToolKits.Extensions;
+using EMR.ToolKits.Helper;
 
 using static EMR.Domain.Shared.EMRConsts;
 
@@ -392,7 +393,6 @@ namespace EMR.Application.TeamBuilding.Impl
         /// <returns> </returns>
         public async Task<ServiceResult> InsertCustomPaymentAsync(EditCustomPaymentInput input)
         {
-
             var result = new ServiceResult();
             var userResult = await GetUserDetailAsync(input.Account);
 
@@ -478,7 +478,22 @@ namespace EMR.Application.TeamBuilding.Impl
 
             result.IsSuccess(ResponseText.INSERT_SUCCESS);
             return result;
+        }
 
+        /// <summary>
+        /// GenerateQRCode
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        public async Task<ServiceResult> GenerateQRCodeAsync(Guid id)
+        {
+            var result = new ServiceResult();
+
+            string url = "https://localhost:44303/Business/CustomQR?targetId=" + id;
+            string qrcode = QRHelper.GetQRCode(url);
+
+            result.IsSuccess(qrcode);
+            return result;
         }
     }
 }

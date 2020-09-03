@@ -85,12 +85,18 @@ namespace EMR.Application.TeamBuilding
         /// <returns> </returns>
         Task<ServiceResult> InsertFGWMoneyAsync(EditFGWMoneyInput input);
 
-
         /// <summary>
         /// 客户线上支付
         /// </summary>
         /// <param name="input"> </param>
         /// <returns> </returns>
         Task<ServiceResult> InsertCustomPaymentAsync(EditCustomPaymentInput input);
+
+        /// <summary>
+        /// GenerateQRCode
+        /// </summary>
+        /// <param name="input"> </param>
+        /// <returns> </returns>
+        Task<ServiceResult> GenerateQRCodeAsync(Guid id);
     }
 }

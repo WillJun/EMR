@@ -22,7 +22,12 @@
 
                 <div class="ibox-content" style="font-size: x-large;">
                     <form>
+                        <div class="videoDiv" style="display:none;width: 100%;">
+                            <video id="video-js-player" controls autoplay preload="auto" style="width: 100%;">
+                                <source src="https://www.drostatic.com/mobile/video/18931.mp4" type="video/mp4">
+                            </video>
 
+                        </div>
 
                         <label for="name">选择消费的店</label>
 
@@ -32,7 +37,7 @@
                                 {{each result}}
 
                                 <div class="radio">
-                                    <label><input type="radio" value="{{$value.id}}" name="team" />{{$value.teamName}}</label>
+                                    <label><input type="radio" value="{{$value.id}}" name="team" onchange="HappyBirthdayCheck();" />{{$value.teamName}}</label>
                                 </div>
                                 {{/each}}
                             </script>
@@ -53,6 +58,7 @@
                                 <input type="button" class="btn btn-sm btn-primary" id="btnMoney" value="付款"></input>
                             </div>
                         </div>
+
 
 
                     </form>
@@ -79,10 +85,13 @@
         if (userid == "") {
             location.href = "/Acount/Index";
         }
+
+        //* add by Lynn for 8th group birthday Surprise 
         $('video').on('ended', function () {
             $(this).hide();
             $(".videoDiv").hide();
         });
+
 
         axios.get(api_domain + '/TeamBuilding/user/info?account=' + account).then(function (response) {
             if (response.data.success) {
@@ -182,6 +191,60 @@
         });
     })
 
+
+    function HappyBirthdayCheck() {
+
+        var checkteamid = $("input[name='team']:checked").val();
+        if (checkteamid != '39f71be7-edc0-131e-85c3-9ed3ff9b82dd') {
+            return;
+        }
+        var births = ['369438'
+            , '295481'
+            , '367241'
+            , '362348'
+            , '295430'
+            , '361845'
+            , '359063'
+            , '295936'
+            , '303034'
+            , '363099'
+            , '367347'
+            , '295627'
+            , '295520'
+            , '295574'
+            , '295629'
+            , '300886'
+            , '346383'
+            , '350846'
+            , '295420'
+            , '295484'
+        ]
+        var superBirth = '295545';
+        if (account == superBirth) {
+
+            swal({
+                title: "Congratulations~",
+                text: "亲爱的小伙伴，祝你生日快乐！你可以在本店免费带走一件30元以内的商品！",
+                type: "success"
+            })
+
+            $(".videoDiv").show();
+            $(".videoDiv").focus();
+        } else {
+            var idx = births.indexOf(account);
+            if (idx != -1) {
+
+                swal({
+                    title: "Congratulations~",
+                    text: "中奖啦！中奖啦！ 恭喜您中奖啦！收银台下小框里的礼物请自取一份！",
+                    type: "success"
+                })
+
+                $(".videoDiv").show();
+                $(".videoDiv").focus();
+            }
+        }
+    }
 
     function GetUserInfo(o) {
         var account = $(o).val();

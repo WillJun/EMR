@@ -50,7 +50,8 @@ namespace EMR.Application.TeamBuilding.Impl
             var result = new ServiceResult<IEnumerable<TeamExpenditureTotalDto>>();
 
             var list = (from team in await _teamRepository.GetListAsync()
-                        join user in await _userRepository.GetListAsync() on team.Id equals user.TeamId
+                        join user in await _userRepository.GetListAsync()
+                        on team.Id equals user.TeamId
 
                         join pe in await _personalexpenditureRepository.GetListAsync()
 

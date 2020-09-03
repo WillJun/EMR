@@ -64,6 +64,12 @@
             </summary>
             <returns> </returns>
         </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.GenerateQRCodeAsync(System.Guid)">
+            <summary>
+            Generate QRCode
+            </summary>
+            <returns> </returns>
+        </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.GetUserDetailAsync(System.String)">
             <summary>
             查询User信息

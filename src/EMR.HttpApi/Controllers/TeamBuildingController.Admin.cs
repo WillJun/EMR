@@ -122,7 +122,6 @@ namespace EMR.HttpApi.Controllers
             return await _tbService.InsertFGWMoneyAsync(input);
         }
 
-
         /// <summary>
         /// 客户自助在线支付
         /// </summary>
@@ -145,6 +144,18 @@ namespace EMR.HttpApi.Controllers
         public async Task<ServiceResult> UpdateTeamDiscountAsync([FromBody] EditTeamDiscountInput input)
         {
             return await _tbService.UpdateTeamDiscountAsync(input);
+        }
+
+        /// <summary>
+        /// Generate QRCode
+        /// </summary>
+        /// <returns> </returns>
+        [HttpPost]
+        [Route("team/generateqr")]
+        [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
+        public async Task<ServiceResult> GenerateQRCodeAsync([Required] Guid id)
+        {
+            return await _tbService.GenerateQRCodeAsync(id);
         }
     }
 }

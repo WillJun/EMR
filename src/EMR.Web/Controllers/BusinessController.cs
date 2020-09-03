@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace EMR.Web.Controllers
 {
@@ -9,7 +8,19 @@ namespace EMR.Web.Controllers
         {
             return View();
         }
+
         public IActionResult Custom()
+        {
+            return View();
+        }
+
+        public IActionResult CustomQR(string targetId)
+        {
+            ViewBag.TargetId = targetId;
+            return View();
+        }
+
+        public IActionResult GenerateQRCode()
         {
             return View();
         }
