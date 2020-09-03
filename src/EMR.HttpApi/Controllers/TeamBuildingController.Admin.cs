@@ -146,16 +146,6 @@ namespace EMR.HttpApi.Controllers
             return await _tbService.UpdateTeamDiscountAsync(input);
         }
 
-        /// <summary>
-        /// Generate QRCode
-        /// </summary>
-        /// <returns> </returns>
-        [HttpPost]
-        [Route("team/generateqr")]
-        [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
-        public async Task<ServiceResult> GenerateQRCodeAsync([Required] Guid id)
-        {
-            return await _tbService.GenerateQRCodeAsync(id);
-        }
+
     }
 }

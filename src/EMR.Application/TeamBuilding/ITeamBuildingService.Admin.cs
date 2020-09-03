@@ -97,6 +97,6 @@ namespace EMR.Application.TeamBuilding
         /// </summary>
         /// <param name="input"> </param>
         /// <returns> </returns>
-        Task<ServiceResult> GenerateQRCodeAsync(Guid id);
+        Task<ServiceResult> GenerateQRCodeAsync(Guid id, string logourl = "");
     }
 }

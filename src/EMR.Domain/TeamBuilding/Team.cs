@@ -31,6 +31,8 @@ namespace EMR.Domain.TeamBuilding
 
         public bool IsOrganiser { get; set; }
 
+        public string Logo { get; set; }
+
         public DateTime CreateTime { get; set; }
     }
 }

@@ -485,12 +485,14 @@ namespace EMR.Application.TeamBuilding.Impl
         /// </summary>
         /// <param name="input"> </param>
         /// <returns> </returns>
-        public async Task<ServiceResult> GenerateQRCodeAsync(Guid id)
+        public async Task<ServiceResult> GenerateQRCodeAsync(Guid id, string logourl = "")
         {
             var result = new ServiceResult();
 
             string url = "https://localhost:44303/Business/CustomQR?targetId=" + id;
-            string qrcode = QRHelper.GetQRCode(url);
+
+            string qrcode = QRHelper.GetQRCode(url, logourl);
+
 
             result.IsSuccess(qrcode);
             return result;

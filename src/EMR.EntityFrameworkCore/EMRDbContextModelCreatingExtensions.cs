@@ -33,6 +33,7 @@ namespace EMR.EntityFrameworkCore
                 b.HasKey(x => x.Id);
                 b.Property(x => x.TeamName).HasMaxLength(200).IsRequired();
                 b.Property(x => x.TeamLeader).HasMaxLength(200);
+                b.Property(x => x.Logo).HasMaxLength(2000);
                 b.Property(x => x.IsOrganiser).HasColumnType("tinyint(1)");
                 b.Property(x => x.CreateTime).HasColumnType("datetime");
             });

@@ -20,6 +20,8 @@ namespace EMR.Application.Contracts.TeamBuilding
 
         public string TeamLeader { get; set; }
 
+        public string Logo { get; set; }
+
         public bool IsOrganiser { get; set; }
 
         public DateTime CreateTime { get; set; }

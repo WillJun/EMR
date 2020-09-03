@@ -12,12 +12,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 
 using EMR.Application.Contracts.TeamBuilding;
 using EMR.Application.TeamBuilding;
 using EMR.ToolKits.Base;
 
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 using Volo.Abp.AspNetCore.Mvc;
@@ -32,10 +34,12 @@ namespace EMR.HttpApi.Controllers
     public partial class TeamBuildingController : AbpController
     {
         private readonly ITeamBuildingService _tbService;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public TeamBuildingController(ITeamBuildingService tbService)
+        public TeamBuildingController(ITeamBuildingService tbService, IHostingEnvironment hostingEnvironment)
         {
             _tbService = tbService;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         /// <summary>
@@ -199,6 +203,33 @@ namespace EMR.HttpApi.Controllers
         public async Task<ServiceResult<IEnumerable<TeamExpenditureTotalDto>>> QueryTeamExpendituresAsync()
         {
             return await _tbService.QueryTeamExpendituresAsync();
+        }
+        /// <summary>
+        /// Generate QRCode
+        /// </summary>
+        /// <returns> </returns>
+        [HttpGet]
+        [Route("team/generateqr")]
+        [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
+        public async Task<ServiceResult> GenerateQRCodeAsync([Required] Guid id)
+        {
+
+            string webRootPath = _hostingEnvironment.WebRootPath;
+
+            var teamsresult = await _tbService.QueryTeamsAsync();
+            var team = teamsresult.Result.Where(p => p.Id == id).FirstOrDefault();
+            if (team != null)
+            {
+                if (!string.IsNullOrWhiteSpace(team.Logo))
+                {
+                    string logourl = webRootPath + team.Logo;
+                    return await _tbService.GenerateQRCodeAsync(id, logourl);
+                }
+                return await _tbService.GenerateQRCodeAsync(id);
+            }
+            var result = new ServiceResult();
+            result.IsFailed("团队不存在");
+            return result;
         }
     }
 }

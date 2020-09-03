@@ -86,7 +86,8 @@ namespace EMR.Application.TeamBuilding.Impl
                     TeamName = teaminfo.TeamName,
                     CreateTime = teaminfo.CreateTime,
                     IsOrganiser = teaminfo.IsOrganiser,
-                    TeamLeader = teaminfo.TeamLeader
+                    TeamLeader = teaminfo.TeamLeader,
+                    Logo = teaminfo.Logo
                 },
                 PersonalExpenditures = personalexpenditures,
                 PersonalRecharges = personalrecharges

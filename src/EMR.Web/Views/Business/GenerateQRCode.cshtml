@@ -12,17 +12,17 @@
 
                 <div class="ibox-content" style="font-size: x-large;">
                     <form>
-                      
+
                         <div style="color: white;text-align: center;font-size: 12px">
-                          <h1 id="TeamName" style="margin: 20px 0px;"> </h1>
-                      </div>
+                            <h1 id="TeamName" style="margin: 20px 0px;"> </h1>
+                        </div>
                         <div class="form-group row">
-                           
-                            <div class="col-12" id="QRCode">
-                               
+
+                            <div class="col-12" id="QRCode" style="text-align: center;">
+
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
@@ -44,29 +44,30 @@
 
     $(function () {
         if (userid == "") {
-            location.href = "/Acount/Index?backUrl="+location.href;
+            location.href = "/Acount/Index?backUrl=" + location.href;
         }
 
-        
-        else{
+
+        else {
             axios.get(api_domain + '/TeamBuilding/salesquota/team?id=' + teamid).then(function (response) {
                 if (response.data.success) {
                     $("#TeamName").html(response.data.result.teamName);
+                    axios.get(api_domain + '/TeamBuilding/team/generateqr?id=' + teamid).then(function (response) {
+                        if (response.data.success) {
+                            var img = '<img style="width: 300px; height: 300px;" src="' + response.data.message + '">'
+                            $("#QRCode").html(img);
+                        }
+
+                    }).catch(x => console.log("error"));
                 }
 
             }).catch(x => console.log("error"));
 
-            axios.get(api_domain + '/TeamBuilding/team/generateqr?id=' + teamid).then(function (response) {
-                if (response.data.success) {
-                    var img='<img src="data:image/png;base64,'+response.data.Message+'">'
-                    $("#QRCode").html(img);
-                }
 
-            }).catch(x => console.log("error"));
 
         }
 
 
-});
+    });
 
 </script>
