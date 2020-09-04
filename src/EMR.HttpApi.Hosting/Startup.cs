@@ -16,6 +16,7 @@ namespace EMR.HttpApi.Hosting
         public void Configure(IApplicationBuilder app)
         {
             app.InitializeApplication();
+            app.UseStaticFiles();
         }
     }
 }

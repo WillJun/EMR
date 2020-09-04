@@ -30,6 +30,16 @@ namespace EMR.Domain.Configurations
         public static string ApiVersion => _config["ApiVersion"];
 
         /// <summary>
+        /// WebHost
+        /// </summary>
+        public static string WebHost => _config["WebHost"];
+
+        /// <summary>
+        /// APIHost
+        /// </summary>
+        public static string APIHost => _config["APIHost"];
+
+        /// <summary>
         /// Constructor
         /// </summary>
         static AppSettings()

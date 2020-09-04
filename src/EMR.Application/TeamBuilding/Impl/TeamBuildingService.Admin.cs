@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using EMR.Application.Contracts.TeamBuilding.Input;
+using EMR.Domain.Configurations;
 using EMR.Domain.TeamBuilding;
 using EMR.ToolKits.Base;
 using EMR.ToolKits.Extensions;
@@ -212,20 +213,23 @@ namespace EMR.Application.TeamBuilding.Impl
             DateTime time = DateTime.Now;
             var SerialNumber = time.ToString("yyyyMMddHHmmss") + rd.Next(0, 9999).ToString("0000");
 
-            EditPersonalExpenditureInput editPersonalExpenditureInput = new EditPersonalExpenditureInput();
+            EditPersonalExpenditureInput editPersonalExpenditureInput = new EditPersonalExpenditureInput
+            {
+                ExpenditureTeamId = input.TeamId,
+                Expend = input.Amount,
+                UserId = userResult.Result.Id,
+                SerialNumber = SerialNumber,
+                CreateTime = time
+            };
 
-            editPersonalExpenditureInput.ExpenditureTeamId = input.TeamId;
-            editPersonalExpenditureInput.Expend = input.Amount;
-            editPersonalExpenditureInput.UserId = userResult.Result.Id;
-            editPersonalExpenditureInput.SerialNumber = SerialNumber;
-            editPersonalExpenditureInput.CreateTime = time;
-
-            EditSalesQuotaInput editSalesQuotaInput = new EditSalesQuotaInput();
-            editSalesQuotaInput.Income = input.Amount;
-            editSalesQuotaInput.TeamId = input.TeamId;
-            editSalesQuotaInput.Operator = input.OperatorId;
-            editSalesQuotaInput.SerialNumber = SerialNumber;
-            editSalesQuotaInput.CreateTime = time;
+            EditSalesQuotaInput editSalesQuotaInput = new EditSalesQuotaInput
+            {
+                Income = input.Amount,
+                TeamId = input.TeamId,
+                Operator = input.OperatorId,
+                SerialNumber = SerialNumber,
+                CreateTime = time
+            };
             editSalesQuotaInput.Income = input.Amount;
 
             var pe = ObjectMapper.Map<EditPersonalExpenditureInput, PersonalExpenditure>(editPersonalExpenditureInput);
@@ -240,17 +244,21 @@ namespace EMR.Application.TeamBuilding.Impl
 
             int count = peResult.Result.Select(p => p.ExpenditureName).Distinct().Count();
 
-            EditUserInput ui = new EditUserInput();
-            ui.Id = userResult.Result.Id;
-            ui.Balance = userResult.Result.Balance;
+            EditUserInput ui = new EditUserInput
+            {
+                Id = userResult.Result.Id,
+                Balance = userResult.Result.Balance
+            };
             if (count == 6 && !ui.IsOverspend)
             {
-                EditPersonalRechargeInput editPersonalRechargeInput = new EditPersonalRechargeInput();
-                editPersonalRechargeInput.Amount = 50;
-                editPersonalRechargeInput.SerialNumber = time.ToString("yyyyMMddHHmmss") + rd.Next(0, 9999).ToString("0000");
-                editPersonalRechargeInput.Comment = "满6家店消费，发改委额外充值50元";
-                editPersonalRechargeInput.CreateTime = time;
-                editPersonalRechargeInput.UserId = userResult.Result.Id;
+                EditPersonalRechargeInput editPersonalRechargeInput = new EditPersonalRechargeInput
+                {
+                    Amount = 50,
+                    SerialNumber = time.ToString("yyyyMMddHHmmss") + rd.Next(0, 9999).ToString("0000"),
+                    Comment = "满6家店消费，发改委额外充值50元",
+                    CreateTime = time,
+                    UserId = userResult.Result.Id
+                };
                 var fgw = await _teamRepository.GetAsync(p => p.TeamName == "发改委");
                 editPersonalRechargeInput.SourceId = fgw.Id;
                 var pr = ObjectMapper.Map<EditPersonalRechargeInput, PersonalRecharge>(editPersonalRechargeInput);
@@ -302,18 +310,22 @@ namespace EMR.Application.TeamBuilding.Impl
             double amount = input.Expend / users.Count();
             foreach (var item in users)
             {
-                EditUserInput ui = new EditUserInput();
-                ui.Id = item.Id;
-                ui.Balance = item.Balance;
+                EditUserInput ui = new EditUserInput
+                {
+                    Id = item.Id,
+                    Balance = item.Balance
+                };
 
-                EditPersonalRechargeInput editPersonalRechargeInput = new EditPersonalRechargeInput();
-                editPersonalRechargeInput.Amount = amount;
-                editPersonalRechargeInput.SerialNumber = SerialNumber;
-                editPersonalRechargeInput.Comment = "团队分钱";
-                editPersonalRechargeInput.CreateTime = time;
-                editPersonalRechargeInput.UserId = item.Id;
+                EditPersonalRechargeInput editPersonalRechargeInput = new EditPersonalRechargeInput
+                {
+                    Amount = amount,
+                    SerialNumber = SerialNumber,
+                    Comment = "团队分钱",
+                    CreateTime = time,
+                    UserId = item.Id,
 
-                editPersonalRechargeInput.SourceId = input.TeamId;
+                    SourceId = input.TeamId
+                };
                 var pr = ObjectMapper.Map<EditPersonalRechargeInput, PersonalRecharge>(editPersonalRechargeInput);
                 await _personalrechargeRepository.InsertAsync(pr);
                 ui.Balance += amount;
@@ -427,20 +439,23 @@ namespace EMR.Application.TeamBuilding.Impl
             DateTime time = DateTime.Now;
             var SerialNumber = time.ToString("yyyyMMddHHmmss") + rd.Next(0, 9999).ToString("0000");
 
-            EditPersonalExpenditureInput editPersonalExpenditureInput = new EditPersonalExpenditureInput();
+            EditPersonalExpenditureInput editPersonalExpenditureInput = new EditPersonalExpenditureInput
+            {
+                ExpenditureTeamId = input.TeamId,
+                Expend = input.Amount,
+                UserId = input.UserId,
+                SerialNumber = SerialNumber,
+                CreateTime = time
+            };
 
-            editPersonalExpenditureInput.ExpenditureTeamId = input.TeamId;
-            editPersonalExpenditureInput.Expend = input.Amount;
-            editPersonalExpenditureInput.UserId = input.UserId;
-            editPersonalExpenditureInput.SerialNumber = SerialNumber;
-            editPersonalExpenditureInput.CreateTime = time;
-
-            EditSalesQuotaInput editSalesQuotaInput = new EditSalesQuotaInput();
-            editSalesQuotaInput.Income = input.Amount;
-            editSalesQuotaInput.TeamId = input.TeamId;
-            editSalesQuotaInput.Operator = leader.Id;
-            editSalesQuotaInput.SerialNumber = SerialNumber;
-            editSalesQuotaInput.CreateTime = time;
+            EditSalesQuotaInput editSalesQuotaInput = new EditSalesQuotaInput
+            {
+                Income = input.Amount,
+                TeamId = input.TeamId,
+                Operator = leader.Id,
+                SerialNumber = SerialNumber,
+                CreateTime = time
+            };
             editSalesQuotaInput.Income = input.Amount;
 
             var pe = ObjectMapper.Map<EditPersonalExpenditureInput, PersonalExpenditure>(editPersonalExpenditureInput);
@@ -455,17 +470,21 @@ namespace EMR.Application.TeamBuilding.Impl
 
             int count = peResult.Result.Select(p => p.ExpenditureName).Distinct().Count();
 
-            EditUserInput ui = new EditUserInput();
-            ui.Id = userResult.Result.Id;
-            ui.Balance = userResult.Result.Balance;
+            EditUserInput ui = new EditUserInput
+            {
+                Id = userResult.Result.Id,
+                Balance = userResult.Result.Balance
+            };
             if (count == 6 && !ui.IsOverspend)
             {
-                EditPersonalRechargeInput editPersonalRechargeInput = new EditPersonalRechargeInput();
-                editPersonalRechargeInput.Amount = 50;
-                editPersonalRechargeInput.SerialNumber = time.ToString("yyyyMMddHHmmss") + rd.Next(0, 9999).ToString("0000");
-                editPersonalRechargeInput.Comment = "满6家店消费，发改委额外充值50元";
-                editPersonalRechargeInput.CreateTime = time;
-                editPersonalRechargeInput.UserId = userResult.Result.Id;
+                EditPersonalRechargeInput editPersonalRechargeInput = new EditPersonalRechargeInput
+                {
+                    Amount = 50,
+                    SerialNumber = time.ToString("yyyyMMddHHmmss") + rd.Next(0, 9999).ToString("0000"),
+                    Comment = "满6家店消费，发改委额外充值50元",
+                    CreateTime = time,
+                    UserId = userResult.Result.Id
+                };
                 var fgw = await _teamRepository.GetAsync(p => p.TeamName == "发改委");
                 editPersonalRechargeInput.SourceId = fgw.Id;
                 var pr = ObjectMapper.Map<EditPersonalRechargeInput, PersonalRecharge>(editPersonalRechargeInput);
@@ -489,11 +508,8 @@ namespace EMR.Application.TeamBuilding.Impl
         {
             var result = new ServiceResult();
 
-            string url = "https://localhost:44303/Business/CustomQR?targetId=" + id;
-
+            string url = AppSettings.WebHost + "/Business/CustomQR?targetId=" + id;
             string qrcode = QRHelper.GetQRCode(url, logourl);
-
-
             result.IsSuccess(qrcode);
             return result;
         }

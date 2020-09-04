@@ -118,7 +118,7 @@ namespace EMR.Application.TeamBuilding.Impl
                 var obj = list.Where(p => p.TeamName == item.TeamName).FirstOrDefault();
                 if (obj != null)
                 {
-                    obj.TotalIncome = obj.TotalIncome - item.TotalExpend;
+                    obj.TotalIncome -= item.TotalExpend;
                 }
             }
             list = list.OrderByDescending(p => p.TotalIncome).ToList();
@@ -156,7 +156,7 @@ namespace EMR.Application.TeamBuilding.Impl
                        }).FirstOrDefault();
             if (obj != null)
             {
-                data.TotalIncome = data.TotalIncome - obj.TotalExpend;
+                data.TotalIncome -= obj.TotalExpend;
             }
 
             result.IsSuccess(data);

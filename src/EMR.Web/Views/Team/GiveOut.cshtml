@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 <div class="wrapper wrapper-content animated fadeInRight" style="padding: 5% 20px 20px 20px;color:white">
     <div class="row">
         <div class="col">
@@ -28,9 +26,6 @@
                                 {{/each}}
                             </script>
                         </div>
-
-
-
 
                         <div class="form-group row">
                             <label for="amount" class="col-3 col-form-label">金额</label>
@@ -67,7 +62,7 @@
     var account = $.cookie("account");
     var yyyy = 0;
     $(function () {
-        if (userid == "") {
+         if (userid == ""||userid==undefined) {
             location.href = "/Acount/Index";
         }
         $('video').on('ended', function () {
@@ -89,62 +84,68 @@
         })
 
         $("#btnMoney").click(function () {
+            if (account=="295420"||account=="295789")
+            {
+                var checkteamids = [];
+                $.each($("input[name='team']:checked"), function () {
+                    checkteamids.push($(this).val());
 
-            var checkteamids = [];
-            $.each($("input[name='team']:checked"), function () {
-                checkteamids.push($(this).val());
-
-            });
-
-            var ids = checkteamids.join(',');
-
-            if (ids == "") {
-
-                swal({
-                    title: "error",
-                    text: "请选择团队",
-                    type: "error"
-                })
-            }
-            else if ($("#amount").val() == "") {
-
-                swal({
-                    title: "error",
-                    text: "请输入金额",
-                    type: "error"
-                })
-            }
-
-
-
-            else {
-                $(".spinnerdiv").show();
-                var data = {
-                    "sourceId": teamid,
-                    "teamIds": ids,
-                    "amount": parseFloat($("#amount").val())
-                };
-
-                axios.post(api_domain + "/TeamBuilding/fgw/bill", data).then(function (response) {
-                    if (response.data.success) {
-                        swal({
-                            title: "Done",
-                            text: response.data.message,
-                            type: "success"
-                        }
-                            , function () {
-                                location.reload();
-                            });
-                    } else {
-
-                        swal({
-                            title: "error",
-                            text: response.data.message,
-                            type: "error"
-                        })
-                    }
-                    $(".spinnerdiv").hide();
                 });
+
+                var ids = checkteamids.join(',');
+
+                if (ids == "") {
+
+                    swal({
+                        title: "error",
+                        text: "请选择团队",
+                        type: "error"
+                    })
+                }
+                else if ($("#amount").val() == "") {
+
+                    swal({
+                        title: "error",
+                        text: "请输入金额",
+                        type: "error"
+                    })
+                }    
+                else {
+                    $(".spinnerdiv").show();
+                    var data = {
+                        "sourceId": teamid,
+                        "teamIds": ids,
+                        "amount": parseFloat($("#amount").val())
+                    };
+
+                    axios.post(api_domain + "/TeamBuilding/fgw/bill", data).then(function (response) {
+                        if (response.data.success) {
+                            swal({
+                                title: "Done",
+                                text: response.data.message,
+                                type: "success"
+                            }
+                                , function () {
+                                    location.reload();
+                                });
+                        } else {
+
+                            swal({
+                                title: "error",
+                                text: response.data.message,
+                                type: "error"
+                            })
+                        }
+                        $(".spinnerdiv").hide();
+                    });
+                }
+            }
+            else{
+                swal({
+                        title: "error",
+                        text: "没有权限",
+                        type: "error"
+                    })
             }
 
         });

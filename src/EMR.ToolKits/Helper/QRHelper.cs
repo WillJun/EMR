@@ -25,7 +25,6 @@ namespace EMR.ToolKits.Helper
             return "data:image/png;base64," + ToBase64(GetQRCodeWithLogo(content, 30, logourl));
         }
 
-
         private static string ToBase64(Bitmap bmp)
         {
             try
@@ -39,7 +38,7 @@ namespace EMR.ToolKits.Helper
                 String strbaser64 = Convert.ToBase64String(arr);
                 return strbaser64;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "";
             }
@@ -56,12 +55,11 @@ namespace EMR.ToolKits.Helper
                 ms.Close();
                 return bmp;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
         }
-
 
         ///// <summary>
         ///// 生成二维码
@@ -124,7 +122,6 @@ namespace EMR.ToolKits.Helper
         ///// <remarks>Will Wu</remarks>
         //private static Bitmap GenerateLogo(string text, Bitmap logo, int width = 200, int height = 200)
         //{
-
         //    if (null == logo)
         //    {
         //        return Generate(text, width, height);
@@ -139,20 +136,15 @@ namespace EMR.ToolKits.Helper
         //    hint.Add(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
         //    //hint.Add(EncodeHintType.MARGIN, 2);//旧版本不起作用，需要手动去除白边
 
-        //    //生成二维码
-        //    BitMatrix bm = writer.encode(text, BarcodeFormat.QR_CODE, width + 30, height + 30, hint);
-        //    bm = deleteWhite(bm);
-        //    BarcodeWriter barcodeWriter = new BarcodeWriter();
-        //    Bitmap map = barcodeWriter.Write(bm);
+        // //生成二维码 BitMatrix bm = writer.encode(text, BarcodeFormat.QR_CODE, width + 30, height +
+        // 30, hint); bm = deleteWhite(bm); BarcodeWriter barcodeWriter = new BarcodeWriter();
+        // Bitmap map = barcodeWriter.Write(bm);
 
-        //    //获取二维码实际尺寸（去掉二维码两边空白后的实际尺寸）
-        //    int[] rectangle = bm.getEnclosingRectangle();
+        // //获取二维码实际尺寸（去掉二维码两边空白后的实际尺寸） int[] rectangle = bm.getEnclosingRectangle();
 
-        //    //计算插入图片的大小和位置
-        //    int middleW = Math.Min((int)(rectangle[2] / 3), logo.Width);
-        //    int middleH = Math.Min((int)(rectangle[3] / 3), logo.Height);
-        //    int middleL = (map.Width - middleW) / 2;
-        //    int middleT = (map.Height - middleH) / 2;
+        // //计算插入图片的大小和位置 int middleW = Math.Min((int)(rectangle[2] / 3), logo.Width); int middleH =
+        // Math.Min((int)(rectangle[3] / 3), logo.Height); int middleL = (map.Width - middleW) / 2;
+        // int middleT = (map.Height - middleH) / 2;
 
         //    Bitmap bmpimg = new Bitmap(map.Width, map.Height, PixelFormat.Format32bppArgb);
         //    using (Graphics g = Graphics.FromImage(bmpimg))
@@ -191,21 +183,19 @@ namespace EMR.ToolKits.Helper
         //    }
         //    return resMatrix;
 
-
-
-
         public static Bitmap GetQRCodeWithLogo(string plainText, int pixel = 30, string logoPath = "")
         {
-
             if (string.IsNullOrWhiteSpace(logoPath))
             {
-                GetQRCode(plainText, pixel);
+                return GetQRCode(plainText, pixel);
             }
 
             var generator = new QRCodeGenerator();
             var qrCodeData = generator.CreateQrCode(plainText, QRCodeGenerator.ECCLevel.H);
             var qrCode = new QRCode(qrCodeData);
+
             #region 参数介绍
+
             //GetGraphic方法参数介绍
             //pixelsPerModule //生成二维码图片的像素大小 ，我这里设置的是5
             //darkColor       //暗色   一般设置为Color.Black 黑色
@@ -214,7 +204,9 @@ namespace EMR.ToolKits.Helper
             //iconSizePercent  //水印图标的大小比例 ，可根据自己的喜好设置
             //iconBorderWidth  // 水印图标的边框
             //drawQuietZones   //静止区，位于二维码某一边的空白边界,用来阻止读者获取与正在浏览的二维码无关的信息 即是否绘画二维码的空白边框区域 默认为true
-            #endregion
+
+            #endregion 参数介绍
+
             var bitmap = qrCode.GetGraphic(pixel, Color.Black, Color.White, (Bitmap)Image.FromFile(logoPath), 15, 8);
 
             return bitmap;
@@ -230,6 +222,5 @@ namespace EMR.ToolKits.Helper
 
             return bitmap;
         }
-
     }
 }

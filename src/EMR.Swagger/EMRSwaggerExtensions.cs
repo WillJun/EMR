@@ -83,7 +83,7 @@ namespace EMR.Swagger
             {
                 ApiInfos.ForEach(x =>
                 {
-                    options.SwaggerEndpoint($"/swagger/{x.UrlPrefix}/swagger.json", x.Name);
+                    options.SwaggerEndpoint($"/api/swagger/{x.UrlPrefix}/swagger.json", x.Name);
                 });
                 // 模型的默认扩展深度，设置为 -1 完全隐藏模型
                 options.DefaultModelsExpandDepth(-1);

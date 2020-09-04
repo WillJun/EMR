@@ -204,6 +204,7 @@ namespace EMR.HttpApi.Controllers
         {
             return await _tbService.QueryTeamExpendituresAsync();
         }
+
         /// <summary>
         /// Generate QRCode
         /// </summary>
@@ -213,13 +214,19 @@ namespace EMR.HttpApi.Controllers
         [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
         public async Task<ServiceResult> GenerateQRCodeAsync([Required] Guid id)
         {
-
             string webRootPath = _hostingEnvironment.WebRootPath;
 
             var teamsresult = await _tbService.QueryTeamsAsync();
             var team = teamsresult.Result.Where(p => p.Id == id).FirstOrDefault();
             if (team != null)
             {
+                if (team.IsOrganiser)
+                {
+                    var result2 = new ServiceResult();
+                    result2.IsFailed("非活动团队无需二维码");
+                    return result2;
+                }
+
                 if (!string.IsNullOrWhiteSpace(team.Logo))
                 {
                     string logourl = webRootPath + team.Logo;

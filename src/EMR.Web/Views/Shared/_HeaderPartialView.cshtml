@@ -30,8 +30,8 @@
                 <a class="menu-item" href="/wow/index">点赞排行榜</a>
                 <a class="menu-item" href="/team/expend">团队成员消费排行榜</a>
                 <a class="menu-item" href="/team/salesquota">团队营收排行榜</a>
-                <a class="menu-item" href="/business/index">店家收款</a>
-                <a class="menu-item" href="/business/generateqrcode">店家收款二维码</a>
+                <a class="menu-item shop" href="/business/index">店家收款</a>
+                <a class="menu-item shop" href="/business/generateqrcode">店家收款二维码</a>
                 <a class="menu-item" href="/business/custom">客户线上付款</a>
                 <a class="menu-item" href="/excharge/index">个人充值记录</a>
                 <a class="menu-item" href="/expend/index">个人消费记录</a>
@@ -71,7 +71,13 @@
                 } else {
                     $(".leader").hide();
                 }
-                if (response.data.result.teamInfo.teamName == "发改委") {
+                if (response.data.result.teamInfo.teamName == "发改委"||response.data.result.teamInfo.teamName == "评委") {
+                     $(".shop").hide();
+                } else {
+                   $(".org").show();
+                }
+
+                 if (account=="295420"||account=="295789") {
                     $(".org").show();
                 } else {
                     $(".org").hide();

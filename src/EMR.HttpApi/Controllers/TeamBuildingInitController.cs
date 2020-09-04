@@ -34,19 +34,20 @@ namespace EMR.HttpApi.Controllers
         public async Task InsertAsync()
         {
             Random rd = new Random();
-            List<tempteam> tempteams = ToolKits.Helper.ImportExcelUtil<tempteam>.InputExcel(@"D:\Git\EMR\Grouping.xlsx", "Team");
+            List<Tempteam> tempteams = ToolKits.Helper.ImportExcelUtil<Tempteam>.InputExcel(@"D:\Git\EMR\Grouping.xlsx", "Team");
 
-            List<tempuser> tempusers = ToolKits.Helper.ImportExcelUtil<tempuser>.InputExcel(@"D:\Git\EMR\Grouping.xlsx", "TeamUser");
+            List<Tempuser> tempusers = ToolKits.Helper.ImportExcelUtil<Tempuser>.InputExcel(@"D:\Git\EMR\Grouping.xlsx", "TeamUser");
             Guid SourceId = Guid.Empty;
             List<Team> teamlist = new List<Team>();
             foreach (var item in tempteams)
             {
-                Team t = new Team(_guidGenerator.Create());
-
-                t.TeamName = item.Name.Trim();
-                t.TeamLeader = string.IsNullOrWhiteSpace(item.Leader) ? "" : item.Leader.Trim();
-                t.IsOrganiser = item.IsOraganiser.Trim() == "0" ? false : true;
-                t.CreateTime = DateTime.Now;
+                Team t = new Team(_guidGenerator.Create())
+                {
+                    TeamName = item.Name.Trim(),
+                    TeamLeader = string.IsNullOrWhiteSpace(item.Leader) ? "" : item.Leader.Trim(),
+                    IsOrganiser = item.IsOraganiser.Trim() != "0",
+                    CreateTime = DateTime.Now
+                };
                 teamlist.Add(t);
 
                 if (item.Name == "发改委")
@@ -73,7 +74,7 @@ namespace EMR.HttpApi.Controllers
                 {
                     u.TeamId = teaminfo.Id;
                 }
-                u.IsLeader = item.IsLeader.ToString().Trim() == "0" ? false : true;
+                u.IsLeader = item.IsLeader.ToString().Trim() != "0";
                 u.IsOverspend = false;
 
                 if (teamname == "发改委" || teamname == "评委")
@@ -111,7 +112,7 @@ namespace EMR.HttpApi.Controllers
         }
     }
 
-    public class tempuser
+    public class Tempuser
     {
         public string Group { get; set; }
         public string Dept { get; set; }
@@ -122,7 +123,7 @@ namespace EMR.HttpApi.Controllers
         public string IsLeader { get; set; }
     }
 
-    public class tempteam
+    public class Tempteam
     {
         public string Name { get; set; }
         public string Leader { get; set; }
