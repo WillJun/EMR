@@ -93,6 +93,15 @@
                             return
                         });
                 }
+                else if ( parseFloat($("#amount").val()) <=0) {
+
+                swal({
+                    title: "error",
+                    text: "金额不能小于等于0",
+                    type: "error"
+                })
+            }
+
                 else {
                     $(".spinnerdiv").show();
                     var data = {

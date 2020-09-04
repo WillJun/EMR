@@ -87,6 +87,9 @@
 
 
         $("#btnMoney").click(function () {
+           
+           
+
             if ($("#account").val() == "") {
                 swal({
                     title: "error",
@@ -100,6 +103,13 @@
                 swal({
                     title: "error",
                     text: "请输入金额",
+                    type: "error"
+                })
+            } else if ( parseFloat($("#amount").val()) <=0) {
+
+                swal({
+                    title: "error",
+                    text: "金额不能小于等于0",
                     type: "error"
                 })
             }

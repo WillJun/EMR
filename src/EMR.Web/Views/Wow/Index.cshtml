@@ -69,11 +69,24 @@
     function dowow(o) {
         event.stopPropagation();
         $(".spinnerdiv").show();
-        var teamid = $(o).attr("id");
-        if ($(o).find('i').hasClass("fa-star-o")) {
+        var wowteamid = $(o).attr("id");
+
+
+         if (wowteamid == teamid) {
+                    swal({
+                        title: "error",
+                        text: "不能点赞自己组",
+                        type: "error"
+                    }
+                        , function () {
+                            return
+                        });
+                }
+
+       else if ($(o).find('i').hasClass("fa-star-o")) {
 
             var data = {
-                "teamId": teamid,
+                "teamId": wowteamid,
                 "userId": userid,
                 "isWow": true,
                 "wowTime": moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
