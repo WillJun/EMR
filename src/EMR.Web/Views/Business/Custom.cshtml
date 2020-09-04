@@ -37,7 +37,7 @@
                                 {{each result}}
 
                                 <div class="radio">
-                                    <label><input type="radio" value="{{$value.id}}" name="team" onchange="HappyBirthdayCheck();" />{{$value.teamName}}</label>
+                                    <label><input type="radio" value="{{$value.id}}" name="team"  />{{$value.teamName}}</label>
                                 </div>
                                 {{/each}}
                             </script>
@@ -186,6 +186,7 @@
                     }
                     $(".spinnerdiv").hide();
                 });
+                HappyBirthdayCheck();
             }
 
         });
@@ -236,12 +237,10 @@
 
                 swal({
                     title: "Congratulations~",
-                    text: "中奖啦！中奖啦！ 恭喜您中奖啦！收银台下小框里的礼物请自取一份！",
+                    text: "中奖啦！中奖啦！ 恭喜您中奖啦！请在收银台小框里的礼物请自取一份！(每人仅限一份)",
                     type: "success"
                 })
-
-                $(".videoDiv").show();
-                $(".videoDiv").focus();
+          
             }
         }
     }
