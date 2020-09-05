@@ -302,38 +302,76 @@ namespace EMR.Application.TeamBuilding.Impl
             }
             Random rd = new Random();
             DateTime time = DateTime.Now;
-            var SerialNumber = time.ToString("yyyyMMddHHmmss") + rd.Next(0, 9999).ToString("0000");
 
-            input.SerialNumber = SerialNumber;
             input.Comment = "团队分钱";
-            input.CreateTime = DateTime.Now;
-            double amount = input.Expend / users.Count();
-            foreach (var item in users)
+            foreach (string str in input.ids.Split(','))
             {
-                EditUserInput ui = new EditUserInput
-                {
-                    Id = item.Id,
-                    Balance = item.Balance
-                };
+                var SerialNumber = time.ToString("yyyyMMddHHmmss") + rd.Next(0, 9999).ToString("0000");
 
-                EditPersonalRechargeInput editPersonalRechargeInput = new EditPersonalRechargeInput
+                Guid userId = Guid.Parse(str);
+                var user = users.Where(p => p.Id == userId).FirstOrDefault();
+                if (user != null)
                 {
-                    Amount = amount,
-                    SerialNumber = SerialNumber,
-                    Comment = "团队分钱",
-                    CreateTime = time,
-                    UserId = item.Id,
+                    EditUserInput ui = new EditUserInput
+                    {
+                        Id = user.Id,
+                        Balance = user.Balance
+                    };
+                    EditPersonalRechargeInput editPersonalRechargeInput = new EditPersonalRechargeInput
+                    {
+                        Amount = input.Expend,
+                        SerialNumber = SerialNumber,
+                        Comment = "团队分钱",
+                        CreateTime = time,
+                        UserId = user.Id,
+                        SourceId = input.TeamId
+                    };
+                    var pr = ObjectMapper.Map<EditPersonalRechargeInput, PersonalRecharge>(editPersonalRechargeInput);
+                    await _personalrechargeRepository.InsertAsync(pr);
+                    ui.Balance += input.Expend;
+                    await UpdateUserAsync(ui);
 
-                    SourceId = input.TeamId
-                };
-                var pr = ObjectMapper.Map<EditPersonalRechargeInput, PersonalRecharge>(editPersonalRechargeInput);
-                await _personalrechargeRepository.InsertAsync(pr);
-                ui.Balance += amount;
-                await UpdateUserAsync(ui);
+                    TeamExpend teamExpend = new TeamExpend(_guidGenerator.Create())
+                    {
+                        Comment = input.Comment,
+                        SerialNumber = SerialNumber,
+                        Expend = input.Expend,
+                        CreateTime = time,
+                        TeamId = input.TeamId,
+                        UserId = input.UserId
+                    };
+                    await _teamexpendRepository.InsertAsync(teamExpend);
+
+                }
+
             }
+            //double amount = input.Expend / users.Count();
+            //foreach (var item in users)
+            //{
+            //    EditUserInput ui = new EditUserInput
+            //    {
+            //        Id = item.Id,
+            //        Balance = item.Balance
+            //    };
 
-            var te = ObjectMapper.Map<EditTeamExpendInput, TeamExpend>(input);
-            await _teamexpendRepository.InsertAsync(te);
+            //    EditPersonalRechargeInput editPersonalRechargeInput = new EditPersonalRechargeInput
+            //    {
+            //        Amount = amount,
+            //        SerialNumber = SerialNumber,
+            //        Comment = "团队分钱",
+            //        CreateTime = time,
+            //        UserId = item.Id,
+
+            //        SourceId = input.TeamId
+            //    };
+            //    var pr = ObjectMapper.Map<EditPersonalRechargeInput, PersonalRecharge>(editPersonalRechargeInput);
+            //    await _personalrechargeRepository.InsertAsync(pr);
+            //    ui.Balance += amount;
+            //    await UpdateUserAsync(ui);
+            //}
+
+            //var te = ObjectMapper.Map<EditTeamExpendInput, TeamExpend>(input);
+            //await _teamexpendRepository.InsertAsync(te);
 
             result.IsSuccess(ResponseText.INSERT_SUCCESS);
             return result;

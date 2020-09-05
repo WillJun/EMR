@@ -3,8 +3,8 @@
 
 // Write your JavaScript code.
 
-var api_domain = 'http://ap-flow.emersonnanjing.com:8006/api'
-//var api_domain = 'https://localhost:44313'
+//var api_domain = 'http://ap-flow.emersonnanjing.com:8006/api'
+var api_domain = 'https://localhost:44313'
 
 //写Cookie
 function addCookie(objName, objValue, objHours)

@@ -41,7 +41,7 @@ namespace EMR.Application.TeamBuilding.Impl
                             CreateTime = pr.CreateTime,
                             SerialNumber = pr.SerialNumber,
                             SourceName = t.TeamName
-                        });
+                        }).OrderByDescending(p => p.CreateTime).ToList();
             result.IsSuccess(list);
             return result;
         }

@@ -72,18 +72,18 @@
         var wowteamid = $(o).attr("id");
 
 
-         if (wowteamid == teamid) {
-                    swal({
-                        title: "error",
-                        text: "不能点赞自己组",
-                        type: "error"
-                    }
-                        , function () {
-                            return
-                        });
-                }
+        if (wowteamid == teamid) {
+            swal({
+                title: "error",
+                text: "不能点赞自己组",
+                type: "error"
+            }
+                , function () {
+                    $(".spinnerdiv").hide();
+                });
+        }
 
-       else if ($(o).find('i').hasClass("fa-star-o")) {
+        else if ($(o).find('i').hasClass("fa-star-o")) {
 
             var data = {
                 "teamId": wowteamid,

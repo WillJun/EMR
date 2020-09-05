@@ -48,7 +48,7 @@ namespace EMR.Application.TeamBuilding.Impl
                             TeamName = t.TeamName,
                             UserName = u2.UserName,
                             UserAccount = u2.Account
-                        });
+                        }).OrderByDescending(p => p.CreateTime).ToList();
             result.IsSuccess(list);
             return result;
         }

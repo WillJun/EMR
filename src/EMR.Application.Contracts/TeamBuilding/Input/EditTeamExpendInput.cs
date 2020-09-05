@@ -22,6 +22,8 @@ namespace EMR.Application.Contracts.TeamBuilding.Input
         public Guid TeamId { get; set; }
 
         public Guid UserId { get; set; }
+
+        public string ids { get; set; }
         public double Expend { get; set; }
 
         /// <summary>

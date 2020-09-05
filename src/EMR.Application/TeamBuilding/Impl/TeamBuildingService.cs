@@ -11,6 +11,8 @@
 //========================================================================
 using EMR.Domain.TeamBuilding.Repositories;
 
+using Volo.Abp.Guids;
+
 namespace EMR.Application.TeamBuilding.Impl
 {
     public partial class TeamBuildingService : ServiceBase, ITeamBuildingService
@@ -26,9 +28,10 @@ namespace EMR.Application.TeamBuilding.Impl
         private readonly ITeamExpendRepository _teamexpendRepository;
 
         private readonly ITeamDiscountRepository _teamdiscountRepository;
-
-        public TeamBuildingService(IUserRepository userRepository, ITeamRepository teamRepository, ISalesQuotaRepository salesquotaRepository, IPersonalRechargeRepository personalrechargeRepository, IPersonalExpenditureRepository personalexpenditureRepository, ITeamWowRepository teamwowRepository, ITeamExpendRepository teamexpendRepository, ITeamDiscountRepository teamdiscountRepository)
+        private readonly IGuidGenerator _guidGenerator;
+        public TeamBuildingService(IUserRepository userRepository, ITeamRepository teamRepository, ISalesQuotaRepository salesquotaRepository, IPersonalRechargeRepository personalrechargeRepository, IPersonalExpenditureRepository personalexpenditureRepository, ITeamWowRepository teamwowRepository, ITeamExpendRepository teamexpendRepository, ITeamDiscountRepository teamdiscountRepository, IGuidGenerator guidGenerator)
         {
+            _guidGenerator = guidGenerator;
             _userRepository = userRepository;
             _teamRepository = teamRepository;
             _salesquotaRepository = salesquotaRepository;
