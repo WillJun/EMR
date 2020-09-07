@@ -20,20 +20,20 @@
                     <div class="ibox-content">
                         <form>
                             <label for="name">选择奖励成员</label>
-                            <div class="users">
+                            <div class="users row">
 
                                 <script id="users_tmpl" type="text/template">
                                     {{each result}}
 
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="{{$value.id}}" name="user" />{{$value.userName}}[{{$value.account}})]</label>
+                                    <div class="checkbox col-6">
+                                        <label><input type="checkbox" value="{{$value.id}}" name="user" />{{$value.userEnName}}[{{$value.account}}]</label>
                                     </div>
                                     {{/each}}
                                 </script>
                             </div>
                             <div class="form-group row">
-                                <label for="amount" class="col-3 col-form-label">金额</label>
-                                <div class="col-9">
+                                <label for="amount" class="col-5 col-form-label">每人分得金额</label>
+                                <div class="col-7">
                                     <input type="number" class="form-control" id="amount">
                                 </div>
                             </div>

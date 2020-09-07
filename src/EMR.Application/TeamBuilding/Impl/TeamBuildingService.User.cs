@@ -109,7 +109,6 @@ namespace EMR.Application.TeamBuilding.Impl
                         join t in await _teamRepository.GetListAsync()
                         on u.TeamId equals t.Id
                         where t.Id == id
-                        orderby u.IsLeader ascending
                         select new QueryUserDto
                         {
                             Id = u.Id,
@@ -121,7 +120,7 @@ namespace EMR.Application.TeamBuilding.Impl
                             IsOverspend = u.IsOverspend,
                             UserEnName = u.UserEnName,
                             UserName = u.UserName
-                        });
+                        }).OrderByDescending(p => p.IsLeader).ThenBy(p => p.UserEnName).ToList();
             result.IsSuccess(list);
             return result;
         }
