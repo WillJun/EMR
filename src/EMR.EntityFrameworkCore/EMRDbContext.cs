@@ -36,6 +36,8 @@ namespace EMR.EntityFrameworkCore
         public DbSet<TeamDiscount> TeamDiscounts { get; set; }
         public DbSet<TeamExpend> TeamExpends { get; set; }
 
+        public DbSet<Activity> Activities { get; set; }
+
         public EMRDbContext(DbContextOptions<EMRDbContext> options) : base(options)
         {
         }

@@ -60,15 +60,33 @@
                          axios.get(api_domain+'/TeamBuilding/user/info?account='+$("#account").val()).then(function (response) {
                              if (response.data.success) 
                              {
-                                 userid=response.data.result.id;
-                                  teamid=response.data.result.teamInfo.id;
-                                  $.cookie("userid",userid,{ expires: 7, path: '/' });
-                                  $.cookie("teamid",teamid,{ expires: 7, path: '/' });
-                                  $.cookie("account",$("#account").val(),{ expires: 7, path: '/' });
-                                  if(backurl!="")
-                                   location.href=backurl;
-                                  else
-                                  location.href="/Wow/Index";
+
+
+
+
+
+                                  swal({
+                                        title: "Welcome "+response.data.result.userEnName,
+                                        text: "",
+                                        type: "success"
+                                    }
+                                    , function () {
+                                         userid=response.data.result.id;
+                                          teamid=response.data.result.teamInfo.id;
+                                          $.cookie("userid",userid,{ expires: 7, path: '/' });
+                                          $.cookie("teamid",teamid,{ expires: 7, path: '/' });
+                                          $.cookie("account",$("#account").val(),{ expires: 7, path: '/' });
+                                          if(backurl!="")
+                                              location.href=backurl;
+                                          else
+                                             location.href="/Wow/Index";
+                                    });
+
+
+
+
+
+                               
                              }
                              else{
                                  

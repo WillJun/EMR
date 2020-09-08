@@ -121,6 +121,15 @@ namespace EMR.EntityFrameworkCore
                 b.Property(x => x.CreateTime).HasColumnType("datetime");
                 b.Property(x => x.Comment).HasMaxLength(500);
             });
+
+            builder.Entity<Activity>(b =>
+            {
+                b.ToTable(EMRConsts.DbTablePrefix + DbTableName.Activity);
+                b.HasKey(x => x.Id);
+                b.Property(x => x.ActivityName).HasMaxLength(500);
+                b.Property(x => x.Start_Time).HasColumnType("datetime");
+                b.Property(x => x.Finish_Time).HasColumnType("datetime");
+            });
         }
     }
 }

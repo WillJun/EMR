@@ -28,6 +28,8 @@ namespace EMR.Domain.Shared
             public const string TeamExpend = "TeamExpend";
 
             public const string User = "Users";
+
+            public const string Activity = "Activities";
         }
     }
 }
