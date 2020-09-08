@@ -1,4 +1,17 @@
-﻿using System.Linq;
+﻿// ***********************************************************************
+// Assembly         : EMR.HttpApi.Hosting
+// Author           : WuJun
+// Created          : 08-19-2020
+//
+// Last Modified By : WuJun
+// Last Modified On : 08-27-2020
+// ***********************************************************************
+// <copyright file="EMRHttpApiHostingModule.cs" company="EMR.HttpApi.Hosting">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System.Linq;
 
 using EMR.EntityFrameworkCore;
 using EMR.HttpApi.Hosting.Filters;
@@ -15,8 +28,18 @@ using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 
+/// <summary>
+/// The Hosting namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.HttpApi.Hosting
 {
+    /// <summary>
+    /// Class EMRHttpApiHostingModule.
+    /// Implements the <see cref="Volo.Abp.Modularity.AbpModule" />
+    /// </summary>
+    /// <seealso cref="Volo.Abp.Modularity.AbpModule" />
+    /// <remarks>Will Wu</remarks>
     [DependsOn(
 typeof(AbpAspNetCoreMvcModule),
 typeof(AbpAutofacModule), typeof(EMRSwaggerModule), typeof(EMRHttpApiModule),
@@ -24,6 +47,11 @@ typeof(AbpAutofacModule), typeof(EMRSwaggerModule), typeof(EMRHttpApiModule),
 )]
     public class EMRHttpApiHostingModule : AbpModule
     {
+        /// <summary>
+        /// Configures the services.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <remarks>Will Wu</remarks>
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             Configure<MvcOptions>(options =>
@@ -56,6 +84,11 @@ typeof(AbpAutofacModule), typeof(EMRSwaggerModule), typeof(EMRHttpApiModule),
             });
         }
 
+        /// <summary>
+        /// Called when [application initialization].
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <remarks>Will Wu</remarks>
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
             var app = context.GetApplicationBuilder();

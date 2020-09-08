@@ -1,17 +1,27 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.Application
+// Author           : WuJun
+// Created          : 08-19-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.Application.TeamBuilding
-// FileName : IUserService
-//
-// Created by : Will.Wu at 2020/8/19 12:49:14
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 09-08-2020
+// ***********************************************************************
+// <copyright file="ITeamBuildingService.cs" company="EMR.Application">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 
+/// <summary>
+/// The TeamBuilding namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.Application.TeamBuilding
 {
+    /// <summary>
+    /// Interface ITeamBuildingService
+    /// </summary>
+    /// <remarks>Will Wu</remarks>
     public partial interface ITeamBuildingService
     {
     }

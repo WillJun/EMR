@@ -1,14 +1,16 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.EntityFrameworkCore
+// Author           : WuJun
+// Created          : 08-19-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.EntityFrameworkCore.EntityFrameworkCore
-// FileName : WQHBlogFrameworkCoreModule
-//
-// Created by : Will.Wu at 2020/7/29 15:43:15
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 08-19-2020
+// ***********************************************************************
+// <copyright file="EMRFrameworkCoreModule.cs" company="EMR.EntityFrameworkCore">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using EMR.Domain;
 using EMR.Domain.Configurations;
 
@@ -21,8 +23,18 @@ using Volo.Abp.EntityFrameworkCore.Sqlite;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Modularity;
 
+/// <summary>
+/// The EntityFrameworkCore namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.EntityFrameworkCore
 {
+    /// <summary>
+    /// Class EMRFrameworkCoreModule.
+    /// Implements the <see cref="Volo.Abp.Modularity.AbpModule" />
+    /// </summary>
+    /// <seealso cref="Volo.Abp.Modularity.AbpModule" />
+    /// <remarks>Will Wu</remarks>
     [DependsOn(
            typeof(EMRDomainModule),
            typeof(AbpEntityFrameworkCoreModule),
@@ -33,6 +45,11 @@ namespace EMR.EntityFrameworkCore
        )]
     public class EMRFrameworkCoreModule : AbpModule
     {
+        /// <summary>
+        /// Configures the services.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <remarks>Will Wu</remarks>
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             context.Services.AddAbpDbContext<EMRDbContext>(options =>

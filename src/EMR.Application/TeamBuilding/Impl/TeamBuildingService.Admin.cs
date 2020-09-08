@@ -1,14 +1,16 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.Application
+// Author           : WuJun
+// Created          : 08-27-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.Application.TeamBuilding.Impl
-// FileName : TeamBuildingService
-//
-// Created by : Will.Wu at 2020/8/21 16:29:24
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 09-08-2020
+// ***********************************************************************
+// <copyright file="TeamBuildingService.Admin.cs" company="EMR.Application">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,20 +22,43 @@ using EMR.ToolKits.Base;
 using EMR.ToolKits.Extensions;
 using EMR.ToolKits.Helper;
 
+using Microsoft.EntityFrameworkCore;
+
 using static EMR.Domain.Shared.EMRConsts;
 
+/// <summary>
+/// The Impl namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.Application.TeamBuilding.Impl
 {
+    /// <summary>
+    /// Class TeamBuildingService.
+    /// Implements the <see cref="EMR.Application.ServiceBase" />
+    /// Implements the <see cref="EMR.Application.TeamBuilding.ITeamBuildingService" />
+    /// </summary>
+    /// <seealso cref="EMR.Application.ServiceBase" />
+    /// <seealso cref="EMR.Application.TeamBuilding.ITeamBuildingService" />
+    /// <remarks>Will Wu</remarks>
     public partial class TeamBuildingService
     {
         /// <summary>
         /// 点赞
         /// </summary>
-        /// <param name="input"> </param>
-        /// <returns> </returns>
+        /// <param name="input">The input.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult> InsertWowAsync(EditTeamWowInput input)
         {
+            var r = await CheckActivityState();
+            if (!r.Success)
+            {
+                return r;
+            }
             var result = new ServiceResult();
+
+
+
 
             var countReult = await QueryUserWowCountsByUserAsync(input.UserId);
             if (countReult.Result.Count >= 3)
@@ -53,10 +78,17 @@ namespace EMR.Application.TeamBuilding.Impl
         /// <summary>
         /// 取消赞
         /// </summary>
-        /// <param name="id"> </param>
-        /// <returns> </returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult> DeleteWowAsync(Guid id)
         {
+
+            var r = await CheckActivityState();
+            if (!r.Success)
+            {
+                return r;
+            }
             var result = new ServiceResult();
 
             var tw = await _teamwowRepository.FindAsync(id);
@@ -75,8 +107,9 @@ namespace EMR.Application.TeamBuilding.Impl
         /// <summary>
         /// 更新个人状态
         /// </summary>
-        /// <param name="id"> </param>
-        /// <returns> </returns>
+        /// <param name="input">The input.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult> UpdateUserAsync(EditUserInput input)
         {
             var result = new ServiceResult();
@@ -98,8 +131,9 @@ namespace EMR.Application.TeamBuilding.Impl
         /// <summary>
         /// 更新折扣状态
         /// </summary>
-        /// <param name="id"> </param>
-        /// <returns> </returns>
+        /// <param name="input">The input.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult> UpdateTeamDiscountAsync(EditTeamDiscountInput input)
         {
             var result = new ServiceResult();
@@ -124,8 +158,9 @@ namespace EMR.Application.TeamBuilding.Impl
         /// <summary>
         /// 新增个人充值
         /// </summary>
-        /// <param name="input"> </param>
-        /// <returns> </returns>
+        /// <param name="input">The input.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult> InsertPersonalRechargeAsync(EditPersonalRechargeInput input)
         {
             var result = new ServiceResult();
@@ -141,8 +176,9 @@ namespace EMR.Application.TeamBuilding.Impl
         /// <summary>
         /// 新增个人账单
         /// </summary>
-        /// <param name="input"> </param>
-        /// <returns> </returns>
+        /// <param name="input">The input.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult> InsertPersonalExpenditureAsync(EditPersonalExpenditureInput input)
         {
             var result = new ServiceResult();
@@ -158,10 +194,17 @@ namespace EMR.Application.TeamBuilding.Impl
         /// <summary>
         /// 新增流水
         /// </summary>
-        /// <param name="input"> </param>
-        /// <returns> </returns>
+        /// <param name="input">The input.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult> InsertSalesQuotaAsync(EditSalesQuotaInput input)
         {
+            var r = await CheckActivityState();
+            if (!r.Success)
+            {
+                return r;
+            }
+
             var result = new ServiceResult();
 
             var sq = ObjectMapper.Map<EditSalesQuotaInput, SalesQuota>(input);
@@ -175,10 +218,16 @@ namespace EMR.Application.TeamBuilding.Impl
         /// <summary>
         /// 新增消费记录
         /// </summary>
-        /// <param name="input"> </param>
-        /// <returns> </returns>
+        /// <param name="input">The input.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult> InsertCostAsync(EditCostInput input)
         {
+            var r = await CheckActivityState();
+            if (!r.Success)
+            {
+                return r;
+            }
             var result = new ServiceResult();
 
             var userResult = await GetUserDetailAsync(input.Account);
@@ -273,8 +322,19 @@ namespace EMR.Application.TeamBuilding.Impl
             return result;
         }
 
+        /// <summary>
+        /// team expend to user as an asynchronous operation.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult> TeamExpendToUserAsync(EditTeamExpendInput input)
         {
+            var r = await CheckActivityState();
+            if (!r.Success)
+            {
+                return r;
+            }
             var result = new ServiceResult();
 
             var obj = await QueryTeamSalesQuotasByTeamAsync(input.TeamId);
@@ -380,10 +440,16 @@ namespace EMR.Application.TeamBuilding.Impl
         /// <summary>
         /// 发改委给团队发钱
         /// </summary>
-        /// <param name="input"> </param>
-        /// <returns> </returns>
+        /// <param name="input">The input.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult> InsertFGWMoneyAsync(EditFGWMoneyInput input)
         {
+            var r = await CheckActivityState();
+            if (!r.Success)
+            {
+                return r;
+            }
             var result = new ServiceResult();
 
             var allteams = await QueryTeamsAsync();
@@ -439,10 +505,16 @@ namespace EMR.Application.TeamBuilding.Impl
         /// <summary>
         /// 客户线上支付
         /// </summary>
-        /// <param name="input"> </param>
-        /// <returns> </returns>
+        /// <param name="input">The input.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult> InsertCustomPaymentAsync(EditCustomPaymentInput input)
         {
+            var r = await CheckActivityState();
+            if (!r.Success)
+            {
+                return r;
+            }
             var result = new ServiceResult();
             var userResult = await GetUserDetailAsync(input.Account);
 
@@ -540,8 +612,10 @@ namespace EMR.Application.TeamBuilding.Impl
         /// <summary>
         /// GenerateQRCode
         /// </summary>
-        /// <param name="input"> </param>
-        /// <returns> </returns>
+        /// <param name="id">The identifier.</param>
+        /// <param name="logourl">The logourl.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult> GenerateQRCodeAsync(Guid id, string logourl = "")
         {
             var result = new ServiceResult();
@@ -549,6 +623,74 @@ namespace EMR.Application.TeamBuilding.Impl
             string url = AppSettings.WebHost + "/Business/CustomQR?targetId=" + id;
             string qrcode = QRHelper.GetQRCode(url, logourl);
             result.IsSuccess(qrcode);
+            return result;
+        }
+
+
+
+
+
+        /// <summary>
+        /// GenerateQRCode
+        /// </summary>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
+        public async Task<ServiceResult> InitActivityAsync()
+        {
+            var result = new ServiceResult();
+
+            var list = await _activityRepository.GetListAsync();
+            foreach (var item in list)
+                await _activityRepository.DeleteAsync(item.Id);
+
+            Activity activity = new Activity(_guidGenerator.Create()) { ActivityName = "Team Building", IsStart = false };
+            await _activityRepository.InsertAsync(activity);
+            return result;
+
+        }
+        /// <summary>
+        /// Starts the activity asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
+        public async Task<ServiceResult> StartActivityAsync()
+        {
+            var result = new ServiceResult();
+            var obj = await _activityRepository.FirstOrDefaultAsync(p => p.IsStart == false);
+
+            if (obj == null)
+            {
+                result.IsFailed("当前无待开始活动");
+                return result;
+            }
+            obj.Start_Time = DateTime.Now;
+            obj.Finish_Time = DateTime.Now.AddHours(3);
+            obj.IsStart = true;
+            await _activityRepository.UpdateAsync(obj);
+            result.IsSuccess("活动开始");
+            return result;
+        }
+        /// <summary>
+        /// Stops the activity asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
+        public async Task<ServiceResult> StopActivityAsync()
+        {
+            var result = new ServiceResult();
+            var obj = await _activityRepository.FirstOrDefaultAsync(p => p.IsStart == true);
+
+            if (obj == null)
+            {
+                result.IsFailed("当前无待结束活动");
+                return result;
+            }
+            obj.Finish_Time = DateTime.Now;
+            obj.IsStart = false;
+            await _activityRepository.UpdateAsync(obj);
+            result.IsSuccess("活动结束");
+
+
             return result;
         }
     }

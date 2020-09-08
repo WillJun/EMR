@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : EMR.HttpApi
+// Author           : WuJun
+// Created          : 08-27-2020
+//
+// Last Modified By : WuJun
+// Last Modified On : 09-08-2020
+// ***********************************************************************
+// <copyright file="TeamBuildingInitController.cs" company="EMR.HttpApi">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,22 +27,49 @@ using Volo.Abp.Guids;
 
 using static EMR.Domain.Shared.EMRConsts;
 
+/// <summary>
+/// The Controllers namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.HttpApi.Controllers
 {
+    /// <summary>
+    /// Class TeamBuildingInitController.
+    /// Implements the <see cref="Volo.Abp.AspNetCore.Mvc.AbpController" />
+    /// </summary>
+    /// <seealso cref="Volo.Abp.AspNetCore.Mvc.AbpController" />
+    /// <remarks>Will Wu</remarks>
     [ApiController]
     [Route("[controller]")]
     [ApiExplorerSettings(GroupName = Grouping.GroupName_v1)]
     public class TeamBuildingInitController : AbpController
     {
+        /// <summary>
+        /// The tb service
+        /// </summary>
         private readonly ITeamBuildingService _tbService;
+        /// <summary>
+        /// The unique identifier generator
+        /// </summary>
         private readonly IGuidGenerator _guidGenerator;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TeamBuildingInitController" /> class.
+        /// </summary>
+        /// <param name="tbService">The tb service.</param>
+        /// <param name="guidGenerator">The unique identifier generator.</param>
+        /// <remarks>Will Wu</remarks>
         public TeamBuildingInitController(ITeamBuildingService tbService, IGuidGenerator guidGenerator)
         {
             _tbService = tbService;
             _guidGenerator = guidGenerator;
         }
 
+        /// <summary>
+        /// insert as an asynchronous operation.
+        /// </summary>
+        /// <returns>Task.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpPost]
         public async Task InsertAsync()
         {
@@ -112,21 +152,79 @@ namespace EMR.HttpApi.Controllers
         }
     }
 
+    /// <summary>
+    /// Class Tempuser.
+    /// </summary>
+    /// <remarks>Will Wu</remarks>
     public class Tempuser
     {
+        /// <summary>
+        /// Gets or sets the group.
+        /// </summary>
+        /// <value>The group.</value>
+        /// <remarks>Will Wu</remarks>
         public string Group { get; set; }
+        /// <summary>
+        /// Gets or sets the dept.
+        /// </summary>
+        /// <value>The dept.</value>
+        /// <remarks>Will Wu</remarks>
         public string Dept { get; set; }
+        /// <summary>
+        /// Gets or sets the account.
+        /// </summary>
+        /// <value>The account.</value>
+        /// <remarks>Will Wu</remarks>
         public string Account { get; set; }
+        /// <summary>
+        /// Gets or sets the name of the user en.
+        /// </summary>
+        /// <value>The name of the user en.</value>
+        /// <remarks>Will Wu</remarks>
         public string UserEnName { get; set; }
+        /// <summary>
+        /// Gets or sets the name of the user.
+        /// </summary>
+        /// <value>The name of the user.</value>
+        /// <remarks>Will Wu</remarks>
         public string UserName { get; set; }
+        /// <summary>
+        /// Gets or sets the email.
+        /// </summary>
+        /// <value>The email.</value>
+        /// <remarks>Will Wu</remarks>
         public string Email { get; set; }
+        /// <summary>
+        /// Gets or sets the is leader.
+        /// </summary>
+        /// <value>The is leader.</value>
+        /// <remarks>Will Wu</remarks>
         public string IsLeader { get; set; }
     }
 
+    /// <summary>
+    /// Class Tempteam.
+    /// </summary>
+    /// <remarks>Will Wu</remarks>
     public class Tempteam
     {
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>The name.</value>
+        /// <remarks>Will Wu</remarks>
         public string Name { get; set; }
+        /// <summary>
+        /// Gets or sets the leader.
+        /// </summary>
+        /// <value>The leader.</value>
+        /// <remarks>Will Wu</remarks>
         public string Leader { get; set; }
+        /// <summary>
+        /// Gets or sets the is oraganiser.
+        /// </summary>
+        /// <value>The is oraganiser.</value>
+        /// <remarks>Will Wu</remarks>
         public string IsOraganiser { get; set; }
     }
 }

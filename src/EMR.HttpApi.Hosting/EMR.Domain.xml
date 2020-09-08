@@ -204,6 +204,13 @@
             流水号
             </summary>
         </member>
+        <member name="M:EMR.Domain.TeamBuilding.Repositories.IActivityRepository.InsertAsync(EMR.Domain.TeamBuilding.Activity)">
+            <summary>
+            批量插入
+            </summary>
+            <param name="activity"> </param>
+            <returns> </returns>
+        </member>
         <member name="M:EMR.Domain.TeamBuilding.Repositories.ITeamDiscountRepository.BulkInsertAsync(System.Collections.Generic.IEnumerable{EMR.Domain.TeamBuilding.TeamDiscount})">
             <summary>
             批量插入

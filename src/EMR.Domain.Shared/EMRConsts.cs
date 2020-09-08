@@ -1,17 +1,27 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.Domain.Shared
+// Author           : WuJun
+// Created          : 08-19-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.Domain.Shared
-// FileName : WQHBlogConsts
-//
-// Created by : Will.Wu at 2020/8/4 15:52:33
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 09-02-2020
+// ***********************************************************************
+// <copyright file="EMRConsts.cs" company="EMR.Domain.Shared">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 
+/// <summary>
+/// The Shared namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.Domain.Shared
 {
+    /// <summary>
+    /// Class EMRConsts.
+    /// </summary>
+    /// <remarks>Will Wu</remarks>
     public class EMRConsts
     { /// <summary>
       /// 数据库表前缀 </summary>
@@ -20,6 +30,7 @@ namespace EMR.Domain.Shared
         /// <summary>
         /// 分组
         /// </summary>
+        /// <remarks>Will Wu</remarks>
         public static class Grouping
         {
             /// <summary>
@@ -46,6 +57,7 @@ namespace EMR.Domain.Shared
         /// <summary>
         /// 缓存过期时间策略
         /// </summary>
+        /// <remarks>Will Wu</remarks>
         public static class CacheStrategy
         {
             /// <summary>
@@ -116,6 +128,7 @@ namespace EMR.Domain.Shared
         /// <summary>
         /// 响应文本
         /// </summary>
+        /// <remarks>Will Wu</remarks>
         public static class ResponseText
         {
             /// <summary>

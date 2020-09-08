@@ -1,14 +1,16 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.Swagger
+// Author           : WuJun
+// Created          : 08-19-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.Swagger
-// FileName : WQHBlogSwaggerExtensions
-//
-// Created by : Will.Wu at 2020/7/29 15:52:20
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 09-05-2020
+// ***********************************************************************
+// <copyright file="EMRSwaggerExtensions.cs" company="EMR.Swagger">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,8 +26,16 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 
 using static EMR.Domain.Shared.EMRConsts;
 
+/// <summary>
+/// The Swagger namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.Swagger
 {
+    /// <summary>
+    /// Class EMRSwaggerExtensions.
+    /// </summary>
+    /// <remarks>Will Wu</remarks>
     public static class EMRSwaggerExtensions
     {
         /// <summary>
@@ -38,6 +48,12 @@ namespace EMR.Swagger
         /// </summary>
         private static readonly string description = @"<b>EMR</b><code>Powered by .NET Core 3.1 on Windows 10 Pro</code>";
 
+        /// <summary>
+        /// Adds the swagger.
+        /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns>IServiceCollection.</returns>
+        /// <remarks>Will Wu</remarks>
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
             return services.AddSwaggerGen(options =>
@@ -77,6 +93,11 @@ namespace EMR.Swagger
             });
         }
 
+        /// <summary>
+        /// Uses the swagger UI.
+        /// </summary>
+        /// <param name="app">The application.</param>
+        /// <remarks>Will Wu</remarks>
         public static void UseSwaggerUI(this IApplicationBuilder app)
         {
             app.UseSwaggerUI(options =>
@@ -136,21 +157,31 @@ namespace EMR.Swagger
             }
         };
 
+        /// <summary>
+        /// Class SwaggerApiInfo.
+        /// </summary>
+        /// <remarks>Will Wu</remarks>
         internal class SwaggerApiInfo
         {
             /// <summary>
             /// URL前缀
             /// </summary>
+            /// <value>The URL prefix.</value>
+            /// <remarks>Will Wu</remarks>
             public string UrlPrefix { get; set; }
 
             /// <summary>
             /// 名称
             /// </summary>
+            /// <value>The name.</value>
+            /// <remarks>Will Wu</remarks>
             public string Name { get; set; }
 
             /// <summary>
             /// <see cref="Microsoft.OpenApi.Models.OpenApiInfo" />
             /// </summary>
+            /// <value>The open API information.</value>
+            /// <remarks>Will Wu</remarks>
             public OpenApiInfo OpenApiInfo { get; set; }
         }
     }

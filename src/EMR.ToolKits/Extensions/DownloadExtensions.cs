@@ -1,8 +1,29 @@
-﻿using System.IO;
+﻿// ***********************************************************************
+// Assembly         : EMR.ToolKits
+// Author           : WuJun
+// Created          : 08-19-2020
+//
+// Last Modified By : WuJun
+// Last Modified On : 08-19-2020
+// ***********************************************************************
+// <copyright file="DownloadExtensions.cs" company="EMR.ToolKits">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System.IO;
 using System.Threading.Tasks;
 
+/// <summary>
+/// The Extensions namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.ToolKits.Extensions
 {
+    /// <summary>
+    /// Class DownloadExtensions.
+    /// </summary>
+    /// <remarks>Will Wu</remarks>
     public static class DownloadExtensions
     {
         /// <summary>

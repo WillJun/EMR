@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="wrapper wrapper-content animated fadeInRight" style="padding: 5% 20px 20px 20px;color:white">
+    <div class="row">
+        <div class="col">
+            <div class="ibox float-e-margins">
+
+
+                <div class="ibox-content" style="font-size: x-large;">
+
+                    <div class="form-group row justify-content-center" style=" padding: 40% 0;">
+                        <div class="col-4">
+                            <input type="button" class="btn btn-lg btn-primary" id="btnStartActivity" value="开启活动" style="display:none"></input>
+                            <input type="button" class="btn btn-lg btn-danger" id="btnStopActivity" value="结束活动" style="display:none"></input>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var userid = $.cookie("userid");
+    var teamid = $.cookie("teamid");
+    var account = $.cookie("account");
+
+    $(function () {
+        if (userid == "") {
+            location.href = "/Acount/Index?backUrl=" + location.href;
+        }
+
+
+        else {
+            axios.get(api_domain + '/TeamBuilding/activity').then(function (response) {
+                if (response.data.success) {
+                    if (response.data.result.isStart) {
+                        $("#btnStartActivity").hide();
+                        $("#btnStopActivity").show();
+                    }
+                    else {
+                        $("#btnStartActivity").show();
+                        $("#btnStopActivity").hide();
+                    }
+                }
+
+            }).catch(x => console.log("error"));
+
+
+
+        }
+        $("#btnStartActivity").click(function () {
+            axios.post(api_domain + "/TeamBuilding/activity/start").then(function (response) {
+                if (response.data.success) {
+
+
+
+                    swal({
+                        title: "Done",
+                        text: response.data.message,
+                        type: "success"
+                    }, function () {
+                        location.reload();
+                    });
+                } else {
+
+                    swal({
+                        title: "error",
+                        text: response.data.message,
+                        type: "error"
+                    })
+                }
+            });
+        });
+        $("#btnStopActivity").click(function () {
+            axios.post(api_domain + "/TeamBuilding/activity/stop").then(function (response) {
+                if (response.data.success) {
+                    swal({
+                        title: "Done",
+                        text: response.data.message,
+                        type: "success"
+                    }, function () {
+                        location.reload();
+                    });
+                } else {
+
+                    swal({
+                        title: "error",
+                        text: response.data.message,
+                        type: "error"
+                    })
+                }
+            });
+        });
+
+    });
+
+</script>

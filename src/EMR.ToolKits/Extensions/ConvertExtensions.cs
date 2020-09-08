@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : EMR.ToolKits
+// Author           : WuJun
+// Created          : 08-19-2020
+//
+// Last Modified By : WuJun
+// Last Modified On : 08-27-2020
+// ***********************************************************************
+// <copyright file="ConvertExtensions.cs" company="EMR.ToolKits">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -6,16 +19,25 @@ using System.Linq;
 
 using EMR.ToolKits.Base;
 
+/// <summary>
+/// The Extensions namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.ToolKits.Extensions
 {
+    /// <summary>
+    /// Class ConvertExtensions.
+    /// </summary>
+    /// <remarks>Will Wu</remarks>
     public static class ConvertExtensions
     {
         /// <summary>
         /// string转int
         /// </summary>
-        /// <param name="input"> 输入 </param>
-        /// <param name="defaultNum"> 转换失败默认 </param>
-        /// <returns> </returns>
+        /// <param name="input">输入</param>
+        /// <param name="defaultNum">转换失败默认</param>
+        /// <returns>System.Int32.</returns>
+        /// <remarks>Will Wu</remarks>
         public static int TryToInt(this object input, int defaultNum = 0)
         {
             if (input == null)
@@ -27,9 +49,10 @@ namespace EMR.ToolKits.Extensions
         /// <summary>
         /// string转long
         /// </summary>
-        /// <param name="input"> 输入 </param>
-        /// <param name="defaultNum"> 转换失败默认 </param>
-        /// <returns> </returns>
+        /// <param name="input">输入</param>
+        /// <param name="defaultNum">转换失败默认</param>
+        /// <returns>System.Int64.</returns>
+        /// <remarks>Will Wu</remarks>
         public static long TryToLong(this object input, long defaultNum = 0)
         {
             if (input == null)
@@ -41,9 +64,10 @@ namespace EMR.ToolKits.Extensions
         /// <summary>
         /// string转double
         /// </summary>
-        /// <param name="input"> 输入 </param>
-        /// <param name="defaultNum"> 转换失败默认值 </param>
-        /// <returns> </returns>
+        /// <param name="input">输入</param>
+        /// <param name="defaultNum">转换失败默认值</param>
+        /// <returns>System.Double.</returns>
+        /// <remarks>Will Wu</remarks>
         public static double TryToDouble(this object input, double defaultNum = 0)
         {
             if (input == null)
@@ -55,9 +79,10 @@ namespace EMR.ToolKits.Extensions
         /// <summary>
         /// string转decimal
         /// </summary>
-        /// <param name="input"> 输入 </param>
-        /// <param name="defaultNum"> 转换失败默认值 </param>
-        /// <returns> </returns>
+        /// <param name="input">输入</param>
+        /// <param name="defaultNum">转换失败默认值</param>
+        /// <returns>System.Decimal.</returns>
+        /// <remarks>Will Wu</remarks>
         public static decimal TryToDecimal(this object input, decimal defaultNum = 0)
         {
             if (input == null)
@@ -69,9 +94,10 @@ namespace EMR.ToolKits.Extensions
         /// <summary>
         /// string转decimal
         /// </summary>
-        /// <param name="input"> 输入 </param>
-        /// <param name="defaultNum"> 转换失败默认值 </param>
-        /// <returns> </returns>
+        /// <param name="input">输入</param>
+        /// <param name="defaultNum">转换失败默认值</param>
+        /// <returns>System.Single.</returns>
+        /// <remarks>Will Wu</remarks>
         public static float TryToFloat(this object input, float defaultNum = 0)
         {
             if (input == null)
@@ -83,11 +109,12 @@ namespace EMR.ToolKits.Extensions
         /// <summary>
         /// string转bool
         /// </summary>
-        /// <param name="input"> 输入 </param>
-        /// <param name="falseVal"> </param>
-        /// <param name="defaultBool"> 转换失败默认值 </param>
-        /// <param name="trueVal"> </param>
-        /// <returns> </returns>
+        /// <param name="input">输入</param>
+        /// <param name="defaultBool">转换失败默认值</param>
+        /// <param name="trueVal">The true value.</param>
+        /// <param name="falseVal">The false value.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <remarks>Will Wu</remarks>
         public static bool TryToBool(this object input, bool defaultBool = false, string trueVal = "1", string falseVal = "0")
         {
             if (input == null)
@@ -110,9 +137,10 @@ namespace EMR.ToolKits.Extensions
         /// <summary>
         /// 值类型转string
         /// </summary>
-        /// <param name="inputObj"> 输入 </param>
-        /// <param name="defaultStr"> 转换失败默认值 </param>
-        /// <returns> </returns>
+        /// <param name="inputObj">输入</param>
+        /// <param name="defaultStr">转换失败默认值</param>
+        /// <returns>System.String.</returns>
+        /// <remarks>Will Wu</remarks>
         public static string TryToString(this ValueType inputObj, string defaultStr = "")
         {
             var output = inputObj.IsNull() ? defaultStr : inputObj.ToString();
@@ -122,9 +150,10 @@ namespace EMR.ToolKits.Extensions
         /// <summary>
         /// 字符串转时间
         /// </summary>
-        /// <param name="inputStr"> 输入 </param>
-        /// <param name="defaultValue"> 默认值 </param>
-        /// <returns> </returns>
+        /// <param name="inputStr">输入</param>
+        /// <param name="defaultValue">默认值</param>
+        /// <returns>DateTime.</returns>
+        /// <remarks>Will Wu</remarks>
         public static DateTime TryToDateTime(this string inputStr, DateTime defaultValue = default)
         {
             if (inputStr.IsNullOrEmpty())
@@ -136,10 +165,11 @@ namespace EMR.ToolKits.Extensions
         /// <summary>
         /// 字符串转时间
         /// </summary>
-        /// <param name="inputStr"> 输入 </param>
-        /// <param name="formater"> </param>
-        /// <param name="defaultValue"> 默认值 </param>
-        /// <returns> </returns>
+        /// <param name="inputStr">输入</param>
+        /// <param name="formater">The formater.</param>
+        /// <param name="defaultValue">默认值</param>
+        /// <returns>DateTime.</returns>
+        /// <remarks>Will Wu</remarks>
         public static DateTime TryToDateTime(this string inputStr, string formater, DateTime defaultValue = default)
         {
             if (inputStr.IsNullOrEmpty())
@@ -151,8 +181,9 @@ namespace EMR.ToolKits.Extensions
         /// <summary>
         /// 时间戳转时间
         /// </summary>
-        /// <param name="timestamp"> </param>
-        /// <returns> </returns>
+        /// <param name="timestamp">The timestamp.</param>
+        /// <returns>DateTime.</returns>
+        /// <remarks>Will Wu</remarks>
         public static DateTime TryToDateTime(this string timestamp)
         {
             var ticks = 621355968000000000 + long.Parse(timestamp) * 10000;
@@ -162,10 +193,11 @@ namespace EMR.ToolKits.Extensions
         /// <summary>
         /// 时间格式转换为字符串
         /// </summary>
-        /// <param name="date"> </param>
-        /// <param name="format"> </param>
-        /// <param name="cultureInfo"> </param>
-        /// <returns> </returns>
+        /// <param name="date">The date.</param>
+        /// <param name="formater">The formater.</param>
+        /// <param name="cultureInfo">The culture information.</param>
+        /// <returns>System.String.</returns>
+        /// <remarks>Will Wu</remarks>
         public static string TryToDateTime(this DateTime date, string formater = "MMMM dd, yyyy HH:mm:ss", string cultureInfo = "en-us")
         {
             return date.ToString(formater, new CultureInfo(cultureInfo));
@@ -174,14 +206,23 @@ namespace EMR.ToolKits.Extensions
         /// <summary>
         /// 字符串去空格
         /// </summary>
-        /// <param name="inputStr"> 输入 </param>
-        /// <returns> </returns>
+        /// <param name="inputStr">输入</param>
+        /// <returns>System.String.</returns>
+        /// <remarks>Will Wu</remarks>
         public static string TryToTrim(this string inputStr)
         {
             var output = inputStr.IsNullOrEmpty() ? inputStr : inputStr.Trim();
             return output;
         }
 
+        /// <summary>
+        /// Tries to enum.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="str">The string.</param>
+        /// <param name="t">The t.</param>
+        /// <returns>T.</returns>
+        /// <remarks>Will Wu</remarks>
         public static T TryToEnum<T>(this string str, T t = default) where T : struct
         {
             return Enum.TryParse<T>(str, out var result) ? result : t;
@@ -190,8 +231,9 @@ namespace EMR.ToolKits.Extensions
         /// <summary>
         /// 将枚举类型转换为List
         /// </summary>
-        /// <param name="type"> </param>
-        /// <returns> </returns>
+        /// <param name="type">The type.</param>
+        /// <returns>IEnumerable&lt;EnumResponse&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public static IEnumerable<EnumResponse> TryToList(this Type type)
         {
             var result = new List<EnumResponse>();

@@ -1,14 +1,16 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.Swagger
+// Author           : WuJun
+// Created          : 08-19-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.Swagger.Filters
-// FileName : SwaggerDocumentFilter
-//
-// Created by : Will.Wu at 2020/8/5 9:07:34
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 08-27-2020
+// ***********************************************************************
+// <copyright file="SwaggerDocumentFilter.cs" company="EMR.Swagger">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -19,13 +21,26 @@ using Microsoft.OpenApi.Models;
 
 using Swashbuckle.AspNetCore.SwaggerGen;
 
+/// <summary>
+/// The Filters namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.Swagger.Filters
 {
     /// <summary>
     /// 对应Controller的API文档描述信息
+    /// Implements the <see cref="Swashbuckle.AspNetCore.SwaggerGen.IDocumentFilter" />
     /// </summary>
+    /// <seealso cref="Swashbuckle.AspNetCore.SwaggerGen.IDocumentFilter" />
+    /// <remarks>Will Wu</remarks>
     public class SwaggerDocumentFilter : IDocumentFilter
     {
+        /// <summary>
+        /// Applies the specified swagger document.
+        /// </summary>
+        /// <param name="swaggerDoc">The swagger document.</param>
+        /// <param name="context">The context.</param>
+        /// <remarks>Will Wu</remarks>
         public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
         {
             var tags = new List<OpenApiTag>

@@ -1,14 +1,16 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.EntityFrameworkCore
+// Author           : WuJun
+// Created          : 08-19-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.EntityFrameworkCore
-// FileName : WQHBlogDbContextModelCreatingExtensions
-//
-// Created by : Will.Wu at 2020/8/4 15:41:03
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 09-08-2020
+// ***********************************************************************
+// <copyright file="EMRDbContextModelCreatingExtensions.cs" company="EMR.EntityFrameworkCore">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 
 using EMR.Domain.Shared;
 using EMR.Domain.TeamBuilding;
@@ -19,10 +21,23 @@ using Volo.Abp;
 
 using static EMR.Domain.Shared.EMRDbConsts;
 
+/// <summary>
+/// The EntityFrameworkCore namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.EntityFrameworkCore
 {
+    /// <summary>
+    /// Class EMRDbContextModelCreatingExtensions.
+    /// </summary>
+    /// <remarks>Will Wu</remarks>
     public static class EMRDbContextModelCreatingExtensions
     {
+        /// <summary>
+        /// Configures the specified builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        /// <remarks>Will Wu</remarks>
         public static void Configure(this ModelBuilder builder)
         {
             Check.NotNull(builder, nameof(builder));
@@ -129,6 +144,7 @@ namespace EMR.EntityFrameworkCore
                 b.Property(x => x.ActivityName).HasMaxLength(500);
                 b.Property(x => x.Start_Time).HasColumnType("datetime");
                 b.Property(x => x.Finish_Time).HasColumnType("datetime");
+                b.Property(x => x.IsStart).HasColumnType("tinyint(1)");
             });
         }
     }

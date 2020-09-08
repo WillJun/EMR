@@ -1,17 +1,27 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.Domain
+// Author           : WuJun
+// Created          : 08-19-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.Domain.Configurations
-// FileName : GitHubConfig
-//
-// Created by : Will.Wu at 2020/8/5 9:24:20
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 08-19-2020
+// ***********************************************************************
+// <copyright file="GitHubConfig.cs" company="EMR.Domain">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 
+/// <summary>
+/// The Configurations namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.Domain.Configurations
 {
+    /// <summary>
+    /// Class GitHubConfig.
+    /// </summary>
+    /// <remarks>Will Wu</remarks>
     public class GitHubConfig
     {
         /// <summary>

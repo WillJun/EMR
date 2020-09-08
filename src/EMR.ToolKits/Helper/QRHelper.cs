@@ -1,14 +1,16 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.ToolKits
+// Author           : WuJun
+// Created          : 09-03-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.ToolKits.Helper
-// FileName : QRHelper
-//
-// Created by : Will.Wu at 2020/9/3 15:01:23
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 09-05-2020
+// ***********************************************************************
+// <copyright file="QRHelper.cs" company="EMR.ToolKits">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -16,15 +18,36 @@ using System.IO;
 
 using QRCoder;
 
+/// <summary>
+/// The Helper namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.ToolKits.Helper
 {
+    /// <summary>
+    /// Class QRHelper.
+    /// </summary>
+    /// <remarks>Will Wu</remarks>
     public static class QRHelper
     {
+        /// <summary>
+        /// Gets the qr code.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        /// <param name="logourl">The logourl.</param>
+        /// <returns>System.String.</returns>
+        /// <remarks>Will Wu</remarks>
         public static string GetQRCode(string content, string logourl)
         {
             return "data:image/png;base64," + ToBase64(GetQRCodeWithLogo(content, 30, logourl));
         }
 
+        /// <summary>
+        /// Converts to base64.
+        /// </summary>
+        /// <param name="bmp">The BMP.</param>
+        /// <returns>System.String.</returns>
+        /// <remarks>Will Wu</remarks>
         private static string ToBase64(Bitmap bmp)
         {
             try
@@ -45,6 +68,12 @@ namespace EMR.ToolKits.Helper
         }
 
         //base64编码的文本转为图片
+        /// <summary>
+        /// Base64s the string to image.
+        /// </summary>
+        /// <param name="inputStr">The input string.</param>
+        /// <returns>Bitmap.</returns>
+        /// <remarks>Will Wu</remarks>
         private static Bitmap Base64StringToImage(string inputStr)
         {
             try
@@ -183,6 +212,14 @@ namespace EMR.ToolKits.Helper
         //    }
         //    return resMatrix;
 
+        /// <summary>
+        /// Gets the qr code with logo.
+        /// </summary>
+        /// <param name="plainText">The plain text.</param>
+        /// <param name="pixel">The pixel.</param>
+        /// <param name="logoPath">The logo path.</param>
+        /// <returns>Bitmap.</returns>
+        /// <remarks>Will Wu</remarks>
         public static Bitmap GetQRCodeWithLogo(string plainText, int pixel = 30, string logoPath = "")
         {
             if (string.IsNullOrWhiteSpace(logoPath))
@@ -212,6 +249,13 @@ namespace EMR.ToolKits.Helper
             return bitmap;
         }
 
+        /// <summary>
+        /// Gets the qr code.
+        /// </summary>
+        /// <param name="plainText">The plain text.</param>
+        /// <param name="pixel">The pixel.</param>
+        /// <returns>Bitmap.</returns>
+        /// <remarks>Will Wu</remarks>
         public static Bitmap GetQRCode(string plainText, int pixel = 30)
         {
             var generator = new QRCodeGenerator();

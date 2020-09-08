@@ -1,23 +1,36 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.ToolKits
+// Author           : WuJun
+// Created          : 08-19-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.ToolKits.Base.Paged
-// FileName : IListResult
-//
-// Created by : Will.Wu at 2020/8/5 8:37:48
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 08-19-2020
+// ***********************************************************************
+// <copyright file="IListResult.cs" company="EMR.ToolKits">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System.Collections.Generic;
 
+/// <summary>
+/// The Paged namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.ToolKits.Base.Paged
 {
+    /// <summary>
+    /// Interface IListResult
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <remarks>Will Wu</remarks>
     public interface IListResult<T>
     {
         /// <summary>
         /// 返回结果
         /// </summary>
+        /// <value>The item.</value>
+        /// <remarks>Will Wu</remarks>
         IReadOnlyList<T> Item { get; set; }
     }
 }

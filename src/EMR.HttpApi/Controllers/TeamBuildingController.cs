@@ -1,14 +1,16 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.HttpApi
+// Author           : WuJun
+// Created          : 08-19-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.HttpApi.Controllers
-// FileName : TeamBuildingController
-//
-// Created by : Will.Wu at 2020/8/20 10:58:36
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 09-08-2020
+// ***********************************************************************
+// <copyright file="TeamBuildingController.cs" company="EMR.HttpApi">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,16 +28,38 @@ using Volo.Abp.AspNetCore.Mvc;
 
 using static EMR.Domain.Shared.EMRConsts;
 
+/// <summary>
+/// The Controllers namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.HttpApi.Controllers
 {
+    /// <summary>
+    /// Class TeamBuildingController.
+    /// Implements the <see cref="Volo.Abp.AspNetCore.Mvc.AbpController" />
+    /// </summary>
+    /// <seealso cref="Volo.Abp.AspNetCore.Mvc.AbpController" />
+    /// <remarks>Will Wu</remarks>
     [ApiController]
     [Route("[controller]")]
     [ApiExplorerSettings(GroupName = Grouping.GroupName_v2)]
     public partial class TeamBuildingController : AbpController
     {
+        /// <summary>
+        /// The tb service
+        /// </summary>
         private readonly ITeamBuildingService _tbService;
+        /// <summary>
+        /// The hosting environment
+        /// </summary>
         private readonly IHostingEnvironment _hostingEnvironment;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TeamBuildingController" /> class.
+        /// </summary>
+        /// <param name="tbService">The tb service.</param>
+        /// <param name="hostingEnvironment">The hosting environment.</param>
+        /// <remarks>Will Wu</remarks>
         public TeamBuildingController(ITeamBuildingService tbService, IHostingEnvironment hostingEnvironment)
         {
             _tbService = tbService;
@@ -45,7 +69,9 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 查询User信息
         /// </summary>
-        /// <returns> </returns>
+        /// <param name="account">The account.</param>
+        /// <returns>Task&lt;ServiceResult&lt;UserDetailDto&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("user/info")]
         public async Task<ServiceResult<UserDetailDto>> GetUserDetailAsync(string account)
@@ -56,7 +82,8 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 查询Teams列表
         /// </summary>
-        /// <returns> </returns>
+        /// <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;TeamDto&gt;&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("teams")]
         public async Task<ServiceResult<IEnumerable<TeamDto>>> QueryTeamsAsync()
@@ -67,8 +94,9 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 根据团队id获取成员
         /// </summary>
-        /// <param name="id"> 团队id </param>
-        /// <returns> </returns>
+        /// <param name="id">团队id</param>
+        /// <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;QueryUserDto&gt;&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("users/team")]
         public async Task<ServiceResult<IEnumerable<QueryUserDto>>> QueryUsersByTeamAsync([Required] Guid id)
@@ -79,7 +107,8 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 获取全部点赞数.
         /// </summary>
-        /// <returns> </returns>
+        /// <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;TeamWowCountDto&gt;&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("wows")]
         public async Task<ServiceResult<IEnumerable<TeamWowCountDto>>> QueryTeamWowCountsAsync()
@@ -90,8 +119,9 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 根据团队id获取点赞数.
         /// </summary>
-        /// <param name="id"> The 团队id. </param>
-        /// <returns> </returns>
+        /// <param name="id">The 团队id.</param>
+        /// <returns>Task&lt;ServiceResult&lt;TeamWowCountDto&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("wow/team")]
         public async Task<ServiceResult<TeamWowCountDto>> QueryTeamWowCountsByTeamAsync([Required] Guid id)
@@ -102,8 +132,9 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 根据员工id获取点赞数
         /// </summary>
-        /// <param name="id"> The account. </param>
-        /// <returns> </returns>
+        /// <param name="id">The account.</param>
+        /// <returns>Task&lt;ServiceResult&lt;UserWowCountDto&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("wow/user")]
         public async Task<ServiceResult<UserWowCountDto>> QueryUserWowCountsByUserAsync([Required] Guid id)
@@ -114,8 +145,9 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 根据员工id获取消费清单
         /// </summary>
-        /// <param name="id"> </param>
-        /// <returns> </returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;PersonalExpenditureDto&gt;&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("personalexpend/user")]
         public async Task<ServiceResult<IEnumerable<PersonalExpenditureDto>>> QueryPersonalExpendituresByUserAsync([Required] Guid id)
@@ -126,8 +158,9 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 根据员工id获取充值记录
         /// </summary>
-        /// <param name="id"> </param>
-        /// <returns> </returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;PersonalRechargeDto&gt;&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("personalrecharge/user")]
         public async Task<ServiceResult<IEnumerable<PersonalRechargeDto>>> QueryPersonalRechargesByUserAsync([Required] Guid id)
@@ -138,8 +171,9 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 根据团队id获取流水
         /// </summary>
-        /// <param name="id"> </param>
-        /// <returns> </returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;SalesQuotaWithUserDto&gt;&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("salesquotas/team")]
         public async Task<ServiceResult<IEnumerable<SalesQuotaWithUserDto>>> QuerySalesQuotasByTeamAsync([Required] Guid id)
@@ -150,8 +184,9 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 根据员工id获取流水
         /// </summary>
-        /// <param name="id"> </param>
-        /// <returns> </returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;SalesQuotaWithUserDto&gt;&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("salesquotas/user")]
         public async Task<ServiceResult<IEnumerable<SalesQuotaWithUserDto>>> QuerySalesQuotasByUserAsync([Required] Guid id)
@@ -162,8 +197,9 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 根据团队id获取流水总额
         /// </summary>
-        /// <param name="id"> </param>
-        /// <returns> </returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;ServiceResult&lt;TeamSalesQuotaTotalDto&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("salesquota/team")]
         public async Task<ServiceResult<TeamSalesQuotaTotalDto>> QueryTeamSalesQuotasAsync([Required] Guid id)
@@ -174,8 +210,9 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 根据员工id获取流水总额
         /// </summary>
-        /// <param name="id"> </param>
-        /// <returns> </returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;ServiceResult&lt;UserSalesQuotaTotalDto&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("salesquota/user")]
         public async Task<ServiceResult<UserSalesQuotaTotalDto>> QueryUserSalesQuotasByUserAsync([Required] Guid id)
@@ -186,7 +223,8 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 获取所有团队流水总额
         /// </summary>
-        /// <returns> </returns>
+        /// <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;TeamSalesQuotaTotalDto&gt;&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("salesquotas")]
         public async Task<ServiceResult<IEnumerable<TeamSalesQuotaTotalDto>>> QueryTeamSalesQuotasAsync()
@@ -197,7 +235,8 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// 获取所有团队消费总额
         /// </summary>
-        /// <returns> </returns>
+        /// <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;TeamExpenditureTotalDto&gt;&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("teamexpends")]
         public async Task<ServiceResult<IEnumerable<TeamExpenditureTotalDto>>> QueryTeamExpendituresAsync()
@@ -208,7 +247,9 @@ namespace EMR.HttpApi.Controllers
         /// <summary>
         /// Generate QRCode
         /// </summary>
-        /// <returns> </returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;ServiceResult&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         [HttpGet]
         [Route("team/generateqr")]
         [ApiExplorerSettings(GroupName = Grouping.GroupName_v3)]
@@ -238,5 +279,18 @@ namespace EMR.HttpApi.Controllers
             result.IsFailed("团队不存在");
             return result;
         }
+
+        /// <summary>
+        /// get activity as an asynchronous operation.
+        /// </summary>
+        /// <returns>Task&lt;ServiceResult&lt;ActivityDto&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
+        [HttpGet]
+        [Route("activity")]
+        public async Task<ServiceResult<ActivityDto>> GetActivityAsync()
+        {
+            return await _tbService.GetActivityAsync();
+        }
+
     }
 }

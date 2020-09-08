@@ -1,20 +1,27 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.ToolKits
+// Author           : WuJun
+// Created          : 08-19-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.ToolKits.Base.Enum
-// FileName : ServiceResultCode
-//
-// Created by : Will.Wu at 2020/8/5 8:35:25
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 08-19-2020
+// ***********************************************************************
+// <copyright file="ServiceResultCode.cs" company="EMR.ToolKits">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 
+/// <summary>
+/// The Enum namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.ToolKits.Base.Enum
 {
     /// <summary>
     /// 服务层响应码枚举
     /// </summary>
+    /// <remarks>Will Wu</remarks>
     public enum ServiceResultCode
     {
         /// <summary>

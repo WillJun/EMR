@@ -15,6 +15,7 @@
                 <a class="menu-item" href="/expend/index">个人消费记录</a>
                 <a class="menu-item leader" href="/myteam/index">团队分账</a>
                 <a class="menu-item org" href="/team/giveout">发改委金钱奖励</a>
+                <a class="menu-item activity" style="display:none" href="/activity/index">活动设置</a>
             </div>
         </div>
     </nav>
@@ -37,6 +38,7 @@
                 <a class="menu-item" href="/expend/index">个人消费记录</a>
                 <a class="menu-item leader" style="display:none" href="/myteam/index">团队分账</a>
                 <a class="menu-item org" style="display:none" href="/team/giveout">发改委金钱奖励</a>
+                <a class="menu-item activity" style="display:none" href="/activity/index">活动设置</a>
             </div>
         </div>
     </nav>
@@ -71,16 +73,23 @@
                 } else {
                     $(".leader").hide();
                 }
-                if (response.data.result.teamInfo.teamName == "发改委"||response.data.result.teamInfo.teamName == "评委") {
-                     $(".shop").hide();
+                if (response.data.result.teamInfo.teamName == "发改委" || response.data.result.teamInfo.teamName == "评委") {
+                    $(".shop").hide();
                 } else {
-                   $(".org").show();
+                    $(".org").show();
                 }
 
-                 if (account=="295420"||account=="295789") {
+                if (account == "295420" || account == "295789") {
                     $(".org").show();
                 } else {
                     $(".org").hide();
+                }
+
+
+                if (account == "295420" || account == "295789" || account == "363099") {
+                    $(".activity").show();
+                } else {
+                    $(".activity").hide();
                 }
             }
 

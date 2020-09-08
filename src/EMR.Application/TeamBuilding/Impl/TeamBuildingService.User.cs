@@ -1,14 +1,16 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.Application
+// Author           : WuJun
+// Created          : 08-19-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.Application.TeamBuilding.Impl
-// FileName : TeamBuildingService
-//
-// Created by : Will.Wu at 2020/8/19 13:57:28
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 09-08-2020
+// ***********************************************************************
+// <copyright file="TeamBuildingService.User.cs" company="EMR.Application">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,15 +23,28 @@ using EMR.ToolKits.Extensions;
 
 using static EMR.Domain.Shared.EMRConsts;
 
+/// <summary>
+/// The Impl namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.Application.TeamBuilding.Impl
 {
+    /// <summary>
+    /// Class TeamBuildingService.
+    /// Implements the <see cref="EMR.Application.ServiceBase" />
+    /// Implements the <see cref="EMR.Application.TeamBuilding.ITeamBuildingService" />
+    /// </summary>
+    /// <seealso cref="EMR.Application.ServiceBase" />
+    /// <seealso cref="EMR.Application.TeamBuilding.ITeamBuildingService" />
+    /// <remarks>Will Wu</remarks>
     public partial class TeamBuildingService
     {
         /// <summary>
         /// Gets the user detail asynchronous.
         /// </summary>
-        /// <param name="account"> The account. </param>
-        /// <returns> </returns>
+        /// <param name="account">The account.</param>
+        /// <returns>Task&lt;ServiceResult&lt;UserDetailDto&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult<UserDetailDto>> GetUserDetailAsync(string account)
         {
             var result = new ServiceResult<UserDetailDto>();
@@ -99,8 +114,9 @@ namespace EMR.Application.TeamBuilding.Impl
         /// <summary>
         /// Queries the users by team asynchronous.
         /// </summary>
-        /// <param name="teamname"> The teamname. </param>
-        /// <returns> </returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;QueryUserDto&gt;&gt;&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task<ServiceResult<IEnumerable<QueryUserDto>>> QueryUsersByTeamAsync(Guid
             id)
         {
@@ -125,6 +141,12 @@ namespace EMR.Application.TeamBuilding.Impl
             return result;
         }
 
+        /// <summary>
+        /// user bulk insert as an asynchronous operation.
+        /// </summary>
+        /// <param name="users">The users.</param>
+        /// <returns>Task.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task UserBulkInsertAsync(IEnumerable<User> users)
         {
             await _userRepository.BulkInsertAsync(users);

@@ -1,25 +1,78 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : EMR.ToolKits
+// Author           : WuJun
+// Created          : 08-19-2020
+//
+// Last Modified By : WuJun
+// Last Modified On : 08-19-2020
+// ***********************************************************************
+// <copyright file="ExcelObject.cs" company="EMR.ToolKits">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// The Helper namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.ToolKits.Helper
 {
     using System.Data;
     using System.Data.OleDb;
     using System.IO;
     using System.Text;
+    /// <summary>
+    /// Class ExcelObject.
+    /// Implements the <see cref="System.IDisposable" />
+    /// </summary>
+    /// <seealso cref="System.IDisposable" />
+    /// <remarks>Will Wu</remarks>
     public class ExcelObject : IDisposable
     {
 
+        /// <summary>
+        /// The excel object
+        /// </summary>
         private string excelObject = "Provider=Microsoft.{0}.OLEDB.{1};Data Source={2};Extended Properties=\"Excel {3};HDR=YES\"";
+        /// <summary>
+        /// The filepath
+        /// </summary>
         private string filepath = string.Empty;
+        /// <summary>
+        /// The con
+        /// </summary>
         private OleDbConnection con = null;
 
+        /// <summary>
+        /// Delegate ProgressWork
+        /// </summary>
+        /// <param name="percentage">The percentage.</param>
+        /// <remarks>Will Wu</remarks>
         public delegate void ProgressWork(float percentage);
+        /// <summary>
+        /// Occurs when [reading].
+        /// </summary>
+        /// <remarks>Will Wu</remarks>
         private event ProgressWork Reading;
+        /// <summary>
+        /// Occurs when [writeing].
+        /// </summary>
+        /// <remarks>Will Wu</remarks>
         private event ProgressWork Writeing;
+        /// <summary>
+        /// Occurs when [connection string change].
+        /// </summary>
+        /// <remarks>Will Wu</remarks>
         private event EventHandler connectionStringChange;
 
+        /// <summary>
+        /// Occurs when [read progress].
+        /// </summary>
+        /// <remarks>Will Wu</remarks>
         public event ProgressWork ReadProgress
         {
             add
@@ -32,6 +85,11 @@ namespace EMR.ToolKits.Helper
             }
         }
 
+        /// <summary>
+        /// Ons the read progress.
+        /// </summary>
+        /// <param name="percentage">The percentage.</param>
+        /// <remarks>Will Wu</remarks>
         public virtual void onReadProgress(float percentage)
         {
             if (Reading != null)
@@ -39,6 +97,10 @@ namespace EMR.ToolKits.Helper
         }
 
 
+        /// <summary>
+        /// Occurs when [write progress].
+        /// </summary>
+        /// <remarks>Will Wu</remarks>
         public event ProgressWork WriteProgress
         {
             add
@@ -56,6 +118,11 @@ namespace EMR.ToolKits.Helper
             }
         }
 
+        /// <summary>
+        /// Ons the write progress.
+        /// </summary>
+        /// <param name="percentage">The percentage.</param>
+        /// <remarks>Will Wu</remarks>
         public virtual void onWriteProgress(float percentage)
         {
             if (Writeing != null)
@@ -63,6 +130,10 @@ namespace EMR.ToolKits.Helper
         }
 
 
+        /// <summary>
+        /// Occurs when [connection string changed].
+        /// </summary>
+        /// <remarks>Will Wu</remarks>
         public event EventHandler ConnectionStringChanged
         {
             add
@@ -76,6 +147,10 @@ namespace EMR.ToolKits.Helper
             }
         }
 
+        /// <summary>
+        /// Ons the connection string changed.
+        /// </summary>
+        /// <remarks>Will Wu</remarks>
         public virtual void onConnectionStringChanged()
         {
             if (this.Connection != null && !this.Connection.ConnectionString.Equals(this.ConnectionString))
@@ -92,6 +167,11 @@ namespace EMR.ToolKits.Helper
             }
         }
 
+        /// <summary>
+        /// Gets the connection string.
+        /// </summary>
+        /// <value>The connection string.</value>
+        /// <remarks>Will Wu</remarks>
         public string ConnectionString
         {
             get
@@ -113,6 +193,11 @@ namespace EMR.ToolKits.Helper
             }
         }
 
+        /// <summary>
+        /// Gets the connection.
+        /// </summary>
+        /// <value>The connection.</value>
+        /// <remarks>Will Wu</remarks>
         public OleDbConnection Connection
         {
             get
@@ -127,6 +212,11 @@ namespace EMR.ToolKits.Helper
         }
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExcelObject"/> class.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <remarks>Will Wu</remarks>
         public ExcelObject(string path)
         {
 
@@ -134,6 +224,11 @@ namespace EMR.ToolKits.Helper
             this.onConnectionStringChanged();
         }
 
+        /// <summary>
+        /// Gets the schema.
+        /// </summary>
+        /// <returns>DataTable.</returns>
+        /// <remarks>Will Wu</remarks>
         public DataTable GetSchema()
         {
             DataTable dtSchema = null;
@@ -145,12 +240,25 @@ namespace EMR.ToolKits.Helper
         }
 
 
+        /// <summary>
+        /// Reads the table.
+        /// </summary>
+        /// <param name="tableName">Name of the table.</param>
+        /// <returns>DataTable.</returns>
+        /// <remarks>Will Wu</remarks>
         public DataTable ReadTable(string tableName)
         {
             return this.ReadTable(tableName, "");
         }
 
 
+        /// <summary>
+        /// Reads the table.
+        /// </summary>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>DataTable.</returns>
+        /// <remarks>Will Wu</remarks>
         public DataTable ReadTable(string tableName, string criteria)
         {
 
@@ -194,6 +302,12 @@ namespace EMR.ToolKits.Helper
             }
         }
 
+        /// <summary>
+        /// Drops the table.
+        /// </summary>
+        /// <param name="tablename">The tablename.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <remarks>Will Wu</remarks>
         public bool DropTable(string tablename)
         {
 
@@ -227,6 +341,13 @@ namespace EMR.ToolKits.Helper
             }
         }
 
+        /// <summary>
+        /// Writes the table.
+        /// </summary>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="tableDefination">The table defination.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <remarks>Will Wu</remarks>
         public bool WriteTable(string tableName, Dictionary<string, string> tableDefination)
         {
             using (OleDbCommand cmd = new OleDbCommand(this.GenerateCreateTable(tableName, tableDefination), this.Connection))
@@ -237,6 +358,12 @@ namespace EMR.ToolKits.Helper
             }
         }
 
+        /// <summary>
+        /// Adds the new row.
+        /// </summary>
+        /// <param name="dr">The dr.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <remarks>Will Wu</remarks>
         public bool AddNewRow(DataRow dr)
         {
 
@@ -252,10 +379,10 @@ namespace EMR.ToolKits.Helper
         /// <summary>
         /// Generates Create Table Script
         /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="tableDefination"></param>
-        /// <returns></returns>
-        /// <remarks></remarks>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="tableDefination">The table defination.</param>
+        /// <returns>System.String.</returns>
+        /// <remarks>Will Wu</remarks>
         private string GenerateCreateTable(string tableName, Dictionary<string, string> tableDefination)
         {
 
@@ -277,6 +404,12 @@ namespace EMR.ToolKits.Helper
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Generates the insert statement.
+        /// </summary>
+        /// <param name="dr">The dr.</param>
+        /// <returns>System.String.</returns>
+        /// <remarks>Will Wu</remarks>
         private string GenerateInsertStatement(DataRow dr)
         {
             StringBuilder sb = new StringBuilder();
@@ -323,6 +456,10 @@ namespace EMR.ToolKits.Helper
 
         #region IDisposable Members
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <remarks>Will Wu</remarks>
         public void Dispose()
         {
             if (this.con != null && this.con.State == ConnectionState.Open)
@@ -337,11 +474,21 @@ namespace EMR.ToolKits.Helper
 
         #region  Function add by machao
 
+        /// <summary>
+        /// Reads the first table.
+        /// </summary>
+        /// <returns>DataTable.</returns>
+        /// <remarks>Will Wu</remarks>
         public DataTable ReadFirstTable()
         {
             return this.ReadTable(GetSchema().Rows[0]["TABLE_NAME"].ToString(), "");
         }
 
+        /// <summary>
+        /// Writes the new table.
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <remarks>Will Wu</remarks>
         public void WriteNewTable(DataTable dt)
         {
             //创建表

@@ -4,164 +4,384 @@
         <name>EMR.HttpApi</name>
     </assembly>
     <members>
+        <member name="T:EMR.HttpApi.Controllers.TeamBuildingController">
+            <summary>
+            Class TeamBuildingController.
+            Implements the <see cref="T:Volo.Abp.AspNetCore.Mvc.AbpController" />
+            </summary>
+            <seealso cref="T:Volo.Abp.AspNetCore.Mvc.AbpController" />
+            <remarks>Will Wu</remarks>
+            <summary>
+            Class TeamBuildingController.
+            Implements the <see cref="T:Volo.Abp.AspNetCore.Mvc.AbpController" />
+            </summary>
+            <seealso cref="T:Volo.Abp.AspNetCore.Mvc.AbpController" />
+            <remarks>Will Wu</remarks>
+        </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertWowAsync(EMR.Application.Contracts.TeamBuilding.Input.EditTeamWowInput)">
             <summary>
             点赞
             </summary>
-            <returns> </returns>
+            <param name="input">The input.</param>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.DeleteWowAsync(System.Guid)">
             <summary>
             取消点赞
             </summary>
-            <returns> </returns>
+            <param name="id">The identifier.</param>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertPersonalRechargeAsync(EMR.Application.Contracts.TeamBuilding.Input.EditPersonalRechargeInput)">
             <summary>
             充值
             </summary>
-            <returns> </returns>
+            <param name="input">The input.</param>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertPersonalExpenditureAsync(EMR.Application.Contracts.TeamBuilding.Input.EditPersonalExpenditureInput)">
             <summary>
             新增消费
             </summary>
-            <returns> </returns>
+            <param name="input">The input.</param>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertSalesQuotaAsync(EMR.Application.Contracts.TeamBuilding.Input.EditSalesQuotaInput)">
             <summary>
             新增店铺流水
             </summary>
-            <returns> </returns>
+            <param name="input">The input.</param>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertCostAsync(EMR.Application.Contracts.TeamBuilding.Input.EditCostInput)">
             <summary>
             新增交易
             </summary>
-            <returns> </returns>
+            <param name="input">The input.</param>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.TeamExpendToUserAsync(EMR.Application.Contracts.TeamBuilding.Input.EditTeamExpendInput)">
             <summary>
             分钱
             </summary>
-            <returns> </returns>
+            <param name="input">The input.</param>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertFGWMoneyAsync(EMR.Application.Contracts.TeamBuilding.Input.EditFGWMoneyInput)">
             <summary>
             发改委发钱
             </summary>
-            <returns> </returns>
+            <param name="input">The input.</param>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InsertCustomPaymentAsync(EMR.Application.Contracts.TeamBuilding.Input.EditCustomPaymentInput)">
             <summary>
             客户自助在线支付
             </summary>
-            <returns> </returns>
+            <param name="input">The input.</param>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.UpdateTeamDiscountAsync(EMR.Application.Contracts.TeamBuilding.Input.EditTeamDiscountInput)">
             <summary>
             折扣
             </summary>
-            <returns> </returns>
+            <param name="input">The input.</param>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.InitActivityAsync">
+            <summary>
+            Init Activity
+            </summary>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.StartActivityAsync">
+            <summary>
+            Start Activity
+            </summary>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.StopActivityAsync">
+            <summary>
+            Stop Activity
+            </summary>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="F:EMR.HttpApi.Controllers.TeamBuildingController._tbService">
+            <summary>
+            The tb service
+            </summary>
+        </member>
+        <member name="F:EMR.HttpApi.Controllers.TeamBuildingController._hostingEnvironment">
+            <summary>
+            The hosting environment
+            </summary>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.#ctor(EMR.Application.TeamBuilding.ITeamBuildingService,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EMR.HttpApi.Controllers.TeamBuildingController"/> class.
+            </summary>
+            <param name="tbService">The tb service.</param>
+            <param name="hostingEnvironment">The hosting environment.</param>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.GetUserDetailAsync(System.String)">
             <summary>
             查询User信息
             </summary>
-            <returns> </returns>
+            <param name="account">The account.</param>
+            <returns>Task&lt;ServiceResult&lt;UserDetailDto&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryTeamsAsync">
             <summary>
             查询Teams列表
             </summary>
-            <returns> </returns>
+            <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;TeamDto&gt;&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryUsersByTeamAsync(System.Guid)">
             <summary>
             根据团队id获取成员
             </summary>
-            <param name="id"> 团队id </param>
-            <returns> </returns>
+            <param name="id">团队id</param>
+            <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;QueryUserDto&gt;&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryTeamWowCountsAsync">
             <summary>
             获取全部点赞数.
             </summary>
-            <returns> </returns>
+            <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;TeamWowCountDto&gt;&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryTeamWowCountsByTeamAsync(System.Guid)">
             <summary>
             根据团队id获取点赞数.
             </summary>
-            <param name="id"> The 团队id. </param>
-            <returns> </returns>
+            <param name="id">The 团队id.</param>
+            <returns>Task&lt;ServiceResult&lt;TeamWowCountDto&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryUserWowCountsByUserAsync(System.Guid)">
             <summary>
             根据员工id获取点赞数
             </summary>
-            <param name="id"> The account. </param>
-            <returns> </returns>
+            <param name="id">The account.</param>
+            <returns>Task&lt;ServiceResult&lt;UserWowCountDto&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryPersonalExpendituresByUserAsync(System.Guid)">
             <summary>
             根据员工id获取消费清单
             </summary>
-            <param name="id"> </param>
-            <returns> </returns>
+            <param name="id">The identifier.</param>
+            <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;PersonalExpenditureDto&gt;&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryPersonalRechargesByUserAsync(System.Guid)">
             <summary>
             根据员工id获取充值记录
             </summary>
-            <param name="id"> </param>
-            <returns> </returns>
+            <param name="id">The identifier.</param>
+            <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;PersonalRechargeDto&gt;&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QuerySalesQuotasByTeamAsync(System.Guid)">
             <summary>
             根据团队id获取流水
             </summary>
-            <param name="id"> </param>
-            <returns> </returns>
+            <param name="id">The identifier.</param>
+            <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;SalesQuotaWithUserDto&gt;&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QuerySalesQuotasByUserAsync(System.Guid)">
             <summary>
             根据员工id获取流水
             </summary>
-            <param name="id"> </param>
-            <returns> </returns>
+            <param name="id">The identifier.</param>
+            <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;SalesQuotaWithUserDto&gt;&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryTeamSalesQuotasAsync(System.Guid)">
             <summary>
             根据团队id获取流水总额
             </summary>
-            <param name="id"> </param>
-            <returns> </returns>
+            <param name="id">The identifier.</param>
+            <returns>Task&lt;ServiceResult&lt;TeamSalesQuotaTotalDto&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryUserSalesQuotasByUserAsync(System.Guid)">
             <summary>
             根据员工id获取流水总额
             </summary>
-            <param name="id"> </param>
-            <returns> </returns>
+            <param name="id">The identifier.</param>
+            <returns>Task&lt;ServiceResult&lt;UserSalesQuotaTotalDto&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryTeamSalesQuotasAsync">
             <summary>
             获取所有团队流水总额
             </summary>
-            <returns> </returns>
+            <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;TeamSalesQuotaTotalDto&gt;&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.QueryTeamExpendituresAsync">
             <summary>
             获取所有团队消费总额
             </summary>
-            <returns> </returns>
+            <returns>Task&lt;ServiceResult&lt;IEnumerable&lt;TeamExpenditureTotalDto&gt;&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
         </member>
         <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.GenerateQRCodeAsync(System.Guid)">
             <summary>
             Generate QRCode
             </summary>
-            <returns> </returns>
+            <param name="id">The identifier.</param>
+            <returns>Task&lt;ServiceResult&gt;.</returns>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingController.GetActivityAsync">
+            <summary>
+            get activity as an asynchronous operation.
+            </summary>
+            <returns>Task&lt;ServiceResult&lt;ActivityDto&gt;&gt;.</returns>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="T:EMR.HttpApi.Controllers.TeamBuildingInitController">
+            <summary>
+            Class TeamBuildingInitController.
+            Implements the <see cref="T:Volo.Abp.AspNetCore.Mvc.AbpController" />
+            </summary>
+            <seealso cref="T:Volo.Abp.AspNetCore.Mvc.AbpController" />
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="F:EMR.HttpApi.Controllers.TeamBuildingInitController._tbService">
+            <summary>
+            The tb service
+            </summary>
+        </member>
+        <member name="F:EMR.HttpApi.Controllers.TeamBuildingInitController._guidGenerator">
+            <summary>
+            The unique identifier generator
+            </summary>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingInitController.#ctor(EMR.Application.TeamBuilding.ITeamBuildingService,Volo.Abp.Guids.IGuidGenerator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EMR.HttpApi.Controllers.TeamBuildingInitController"/> class.
+            </summary>
+            <param name="tbService">The tb service.</param>
+            <param name="guidGenerator">The unique identifier generator.</param>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="M:EMR.HttpApi.Controllers.TeamBuildingInitController.InsertAsync">
+            <summary>
+            insert as an asynchronous operation.
+            </summary>
+            <returns>Task.</returns>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="T:EMR.HttpApi.Controllers.Tempuser">
+            <summary>
+            Class Tempuser.
+            </summary>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="P:EMR.HttpApi.Controllers.Tempuser.Group">
+            <summary>
+            Gets or sets the group.
+            </summary>
+            <value>The group.</value>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="P:EMR.HttpApi.Controllers.Tempuser.Dept">
+            <summary>
+            Gets or sets the dept.
+            </summary>
+            <value>The dept.</value>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="P:EMR.HttpApi.Controllers.Tempuser.Account">
+            <summary>
+            Gets or sets the account.
+            </summary>
+            <value>The account.</value>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="P:EMR.HttpApi.Controllers.Tempuser.UserEnName">
+            <summary>
+            Gets or sets the name of the user en.
+            </summary>
+            <value>The name of the user en.</value>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="P:EMR.HttpApi.Controllers.Tempuser.UserName">
+            <summary>
+            Gets or sets the name of the user.
+            </summary>
+            <value>The name of the user.</value>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="P:EMR.HttpApi.Controllers.Tempuser.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>The email.</value>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="P:EMR.HttpApi.Controllers.Tempuser.IsLeader">
+            <summary>
+            Gets or sets the is leader.
+            </summary>
+            <value>The is leader.</value>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="T:EMR.HttpApi.Controllers.Tempteam">
+            <summary>
+            Class Tempteam.
+            </summary>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="P:EMR.HttpApi.Controllers.Tempteam.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="P:EMR.HttpApi.Controllers.Tempteam.Leader">
+            <summary>
+            Gets or sets the leader.
+            </summary>
+            <value>The leader.</value>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="P:EMR.HttpApi.Controllers.Tempteam.IsOraganiser">
+            <summary>
+            Gets or sets the is oraganiser.
+            </summary>
+            <value>The is oraganiser.</value>
+            <remarks>Will Wu</remarks>
+        </member>
+        <member name="T:EMR.HttpApi.EMRHttpApiModule">
+            <summary>
+            Class EMRHttpApiModule.
+            Implements the <see cref="T:Volo.Abp.Modularity.AbpModule" />
+            </summary>
+            <seealso cref="T:Volo.Abp.Modularity.AbpModule" />
+            <remarks>Will Wu</remarks>
         </member>
     </members>
 </doc>

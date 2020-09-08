@@ -1,14 +1,16 @@
-﻿//========================================================================
-// Copyright(C): Emerson AFTC
+﻿// ***********************************************************************
+// Assembly         : EMR.ToolKits
+// Author           : WuJun
+// Created          : 08-27-2020
 //
-// CLR Version : 4.0.30319.42000
-// NameSpace : EMR.ToolKits.Helper
-// FileName : NPOIHelper
-//
-// Created by : Will.Wu at 2020/8/20 9:42:03
-//
-//
-//========================================================================
+// Last Modified By : WuJun
+// Last Modified On : 08-27-2020
+// ***********************************************************************
+// <copyright file="NPOIHelper.cs" company="EMR.ToolKits">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,18 +20,32 @@ using Microsoft.AspNetCore.Http;
 
 using NPOI.SS.UserModel;
 
+/// <summary>
+/// The Helper namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.ToolKits.Helper
 {
     /// <summary>
     /// Excel导入帮助类
     /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <remarks>Will Wu</remarks>
     public class ImportExcelUtil<T> where T : new()
     {
         //合法文件扩展名
+        /// <summary>
+        /// The ext name
+        /// </summary>
         private static List<string> extName = new List<string>() { ".xls", ".xlsx" };
 
-        /// <summary> 导入Excel内容读取到List<T>中 </summary> <param name="file">导入Execl文件</param> <param
-        /// name="sheetName">指定读取excel工作薄sheet的名称</param> <returns>List<T></returns>
+        /// <summary>
+        /// Inputs the excel.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="sheetName">Name of the sheet.</param>
+        /// <returns>List&lt;T&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public static List<T> InputExcel(IFormFile file, string sheetName = null)
         {
             //获取文件后缀名
@@ -50,9 +66,13 @@ namespace EMR.ToolKits.Helper
             return list;
         }
 
-        /// <summary> 将Excel文件内容读取到List<T>中 </summary> <param name="fileName">文件完整路径名</param> <param
-        /// name="sheetName">指定读取excel工作薄sheet的名称</param> <param
-        /// name="isFirstRowColumn">第一行是否是DataTable的列名：true=是，false=否</param> <returns>List<T></returns>
+        /// <summary>
+        /// Inputs the excel.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="sheetName">Name of the sheet.</param>
+        /// <returns>List&lt;T&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         public static List<T> InputExcel(string fileName, string sheetName = null)
         {
             if (!File.Exists(fileName))
@@ -69,8 +89,13 @@ namespace EMR.ToolKits.Helper
             return list;
         }
 
-        /// <summary> 将Excel文件内容读取到List<T>中 </summary> <param name="fileStream">文件流</param> <param
-        /// name="sheetName">指定读取excel工作薄sheet的名称</param> <returns>List<T></returns>
+        /// <summary>
+        /// Inputs the excel.
+        /// </summary>
+        /// <param name="fileStream">The file stream.</param>
+        /// <param name="sheetName">Name of the sheet.</param>
+        /// <returns>List&lt;T&gt;.</returns>
+        /// <remarks>Will Wu</remarks>
         private static List<T> InputExcel(Stream fileStream, string sheetName = null)
         {
             //创建Excel数据结构

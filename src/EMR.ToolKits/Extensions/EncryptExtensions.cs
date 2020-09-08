@@ -1,19 +1,41 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : EMR.ToolKits
+// Author           : WuJun
+// Created          : 08-19-2020
+//
+// Last Modified By : WuJun
+// Last Modified On : 08-19-2020
+// ***********************************************************************
+// <copyright file="EncryptExtensions.cs" company="EMR.ToolKits">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
+/// <summary>
+/// The Extensions namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.ToolKits.Extensions
 {
+    /// <summary>
+    /// Class EncryptExtensions.
+    /// </summary>
+    /// <remarks>Will Wu</remarks>
     public static class EncryptExtensions
     {
         #region Base64
 
         /// <summary>
-        /// 将字符串使用base64算法编码 
+        /// 将字符串使用base64算法编码
         /// </summary>
-        /// <param name="encodingName">编码类型（编码名称）</param>
         /// <param name="inputStr">待加密的字符串</param>
-        /// <returns>加密后的字符串</returns> 
+        /// <param name="encodingName">编码类型（编码名称）</param>
+        /// <returns>加密后的字符串</returns>
+        /// <remarks>Will Wu</remarks>
         public static string EncodeBase64String(this string inputStr, string encodingName = "UTF-8")
         {
             if (inputStr.IsNull())
@@ -23,12 +45,13 @@ namespace EMR.ToolKits.Extensions
             return Convert.ToBase64String(bytes);
         }
 
-        /// <summary> 
+        /// <summary>
         /// 将字符串使用base64算法解码
-        /// </summary> 
-        /// <param name="encodingName">编码类型</param> 
-        /// <param name="base64String">已用base64算法加密的字符串</param> 
-        /// <returns>解密后的字符串</returns> 
+        /// </summary>
+        /// <param name="base64String">已用base64算法加密的字符串</param>
+        /// <param name="encodingName">编码类型</param>
+        /// <returns>解密后的字符串</returns>
+        /// <remarks>Will Wu</remarks>
         public static string DecodeBase64String(this string base64String, string encodingName = "UTF-8")
         {
             if (base64String.IsNull())

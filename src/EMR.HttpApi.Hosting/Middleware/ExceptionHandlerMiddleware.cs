@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : EMR.HttpApi.Hosting
+// Author           : WuJun
+// Created          : 08-27-2020
+//
+// Last Modified By : WuJun
+// Last Modified On : 08-27-2020
+// ***********************************************************************
+// <copyright file="ExceptionHandlerMiddleware.cs" company="EMR.HttpApi.Hosting">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -7,12 +20,28 @@ using EMR.ToolKits.Extensions;
 
 using Microsoft.AspNetCore.Http;
 
+/// <summary>
+/// The Middleware namespace.
+/// </summary>
+/// <remarks>Will Wu</remarks>
 namespace EMR.HttpApi.Hosting.Middleware
 {
+    /// <summary>
+    /// Class ExceptionHandlerMiddleware.
+    /// </summary>
+    /// <remarks>Will Wu</remarks>
     public class ExceptionHandlerMiddleware
     {
+        /// <summary>
+        /// The next
+        /// </summary>
         private readonly RequestDelegate next;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExceptionHandlerMiddleware"/> class.
+        /// </summary>
+        /// <param name="next">The next.</param>
+        /// <remarks>Will Wu</remarks>
         public ExceptionHandlerMiddleware(RequestDelegate next)
         {
             this.next = next;
@@ -21,8 +50,9 @@ namespace EMR.HttpApi.Hosting.Middleware
         /// <summary>
         /// Invoke
         /// </summary>
-        /// <param name="context"> </param>
-        /// <returns> </returns>
+        /// <param name="context">The context.</param>
+        /// <returns>Task.</returns>
+        /// <remarks>Will Wu</remarks>
         public async Task Invoke(HttpContext context)
         {
             try
@@ -47,9 +77,10 @@ namespace EMR.HttpApi.Hosting.Middleware
         /// <summary>
         /// 异常处理，返回JSON
         /// </summary>
-        /// <param name="context"> </param>
-        /// <param name="message"> </param>
-        /// <returns> </returns>
+        /// <param name="context">The context.</param>
+        /// <param name="message">The message.</param>
+        /// <returns>Task.</returns>
+        /// <remarks>Will Wu</remarks>
         private async Task ExceptionHandlerAsync(HttpContext context, string message)
         {
             context.Response.ContentType = "application/json;charset=utf-8";
